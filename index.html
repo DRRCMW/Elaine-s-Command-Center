@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#1c0f3a">
@@ -15,32 +15,76 @@
   --green:#0a5c3a;--card:rgba(50,23,96,.45);
   --border:rgba(200,132,42,.22);--muted:rgba(240,235,224,.45);
   --sub:rgba(240,235,224,.7);--input:rgba(28,15,58,.85);
-  --nav:72px;--safe:env(safe-area-inset-bottom,0px);
+  --nav:72px;
 }
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;background:var(--night);color:var(--cream);font-family:'DM Sans',sans-serif;overflow:hidden}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;}
+html{height:100%;height:-webkit-fill-available;}
+body{
+  height:100vh;height:-webkit-fill-available;
+  background:var(--night);color:var(--cream);
+  font-family:'DM Sans',sans-serif;
+  overflow:hidden;
+  position:fixed;width:100%;
+}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 60% at 15% 10%,rgba(74,36,144,.7) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 85% 90%,rgba(10,92,58,.35) 0%,transparent 55%),radial-gradient(ellipse 80% 80% at 50% 50%,rgba(28,15,58,1) 40%,transparent 100%);z-index:0;pointer-events:none}
-#app{position:relative;z-index:1;height:100vh;display:flex;flex-direction:column;max-width:500px;margin:0 auto}
-.tab{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 14px calc(var(--nav) + var(--safe) + 14px);display:none;scrollbar-width:thin;scrollbar-color:rgba(200,132,42,.25) transparent}
-.tab::-webkit-scrollbar{width:3px}.tab::-webkit-scrollbar-thumb{background:rgba(200,132,42,.25);border-radius:3px}
+#app{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;max-width:500px;margin:0 auto;}
+.tab{
+  flex:1;
+  overflow-y:scroll;
+  -webkit-overflow-scrolling:touch;
+  padding:14px 14px calc(var(--nav) + env(safe-area-inset-bottom,16px) + 14px);
+  display:none;
+}
 .tab.active{display:block}
-.bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:500px;height:calc(var(--nav) + var(--safe));padding-bottom:var(--safe);background:rgba(20,10,45,.96);backdrop-filter:blur(24px);border-top:1px solid var(--border);display:flex;align-items:flex-start;padding-top:6px;z-index:100}
-.nbtn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;cursor:pointer;padding:6px 2px;color:var(--muted);transition:all .2s}
-.nbtn .ni{font-size:21px;line-height:1.1;transition:transform .2s}
+.bnav{
+  position:fixed;bottom:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:500px;
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  background:rgba(20,10,45,.97);backdrop-filter:blur(24px);
+  border-top:1px solid var(--border);
+  display:flex;align-items:flex-start;padding-top:8px;
+  z-index:1000;
+}
+button,.btn{
+  touch-action:manipulation;
+  -webkit-appearance:none;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+  -webkit-user-select:none;
+}
+.nbtn{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;
+  background:transparent;border:none;padding:6px 2px;
+  color:var(--muted);transition:color .2s;
+  min-height:44px;
+  touch-action:manipulation;cursor:pointer;
+}
+.nbtn .ni{font-size:22px;line-height:1.1;}
 .nbtn .nl{font-size:9px;font-weight:500;letter-spacing:.4px;text-transform:uppercase}
-.nbtn.active{color:var(--amber)}.nbtn.active .ni{transform:translateY(-2px)}
+.nbtn.active{color:var(--amber);}
 .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:12px;backdrop-filter:blur(12px)}
 .card-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:500;color:var(--amber);margin-bottom:10px;display:flex;align-items:center;gap:7px}
 h1{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;line-height:1.2}
 h2{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400}
 p{font-size:13px;line-height:1.65;color:var(--sub)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 18px;border-radius:10px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;transition:all .2s;text-decoration:none}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  padding:11px 18px;border-radius:10px;border:none;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
+  transition:all .2s;text-decoration:none;
+  min-height:44px;
+}
 .bg{background:linear-gradient(135deg,var(--gold),var(--amber));color:var(--night)}
-.bg:hover{transform:translateY(-1px);box-shadow:0 4px 18px rgba(240,164,40,.35)}
 .bo{background:transparent;border:1px solid var(--border);color:var(--cream)}
-.bs{padding:8px 13px;font-size:12px}
+.bs{padding:10px 13px;font-size:12px;min-height:40px}
 .bw{width:100%}
-input,textarea,select{width:100%;background:var(--input);border:1px solid var(--border);border-radius:10px;color:var(--cream);font-family:'DM Sans',sans-serif;font-size:16px;padding:11px 13px;outline:none;transition:border-color .2s}
+input,textarea,select{
+  width:100%;background:var(--input);border:1px solid var(--border);
+  border-radius:10px;color:var(--cream);font-family:'DM Sans',sans-serif;
+  font-size:16px;padding:11px 13px;outline:none;transition:border-color .2s;
+  -webkit-appearance:none;
+}
 input:focus,textarea:focus,select:focus{border-color:var(--gold)}
 textarea{resize:vertical;min-height:90px}
 select option{background:var(--night)}
@@ -56,32 +100,56 @@ label{font-size:12px;color:var(--muted);margin-bottom:5px;display:block}
 .bp{background:rgba(74,36,144,.38);color:#c4b5fd;border:1px solid rgba(196,181,253,.25)}
 .pbar{height:7px;background:rgba(240,235,224,.1);border-radius:4px;overflow:hidden}
 .pfill{height:100%;background:linear-gradient(90deg,var(--gold),var(--amber));border-radius:4px;transition:width .6s ease}
-.citem{display:flex;align-items:center;gap:11px;padding:11px;background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:7px;cursor:pointer;transition:border-color .2s}
-.citem:hover{border-color:var(--gold)}
-.cav{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--royal),var(--royal2));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:var(--amber);flex-shrink:0}
+.citem{
+  display:flex;align-items:center;gap:11px;padding:11px;
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  margin-bottom:0;width:100%;text-align:left;
+  touch-action:manipulation;cursor:pointer;
+  -webkit-appearance:none;font-family:'DM Sans',sans-serif;color:var(--cream);
+  transition:border-color .2s;
+}
+.citem:active{border-color:var(--gold);opacity:.85}
+.cav{
+  width:42px;height:42px;flex-shrink:0;border-radius:50%;
+  background:linear-gradient(135deg,var(--royal),var(--royal2));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:var(--amber);
+}
 .cinfo{flex:1;min-width:0}
 .cname{font-size:14px;font-weight:500;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cmeta{font-size:11px;color:var(--muted)}
 .egrid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-top:6px}
-.ebtn{aspect-ratio:1;border:1px solid var(--border);border-radius:7px;background:transparent;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:all .15s}
-.ebtn.sel{background:rgba(240,164,40,.2);border-color:var(--amber);transform:scale(1.05)}
-.ebtn:active{transform:scale(.88)}
-.chatbox{max-height:260px;overflow-y:auto;margin-bottom:10px;display:flex;flex-direction:column;gap:9px;padding:4px 0}
+.ebtn{
+  aspect-ratio:1;border:1px solid var(--border);border-radius:7px;
+  background:transparent;font-size:15px;
+  display:flex;align-items:center;justify-content:center;
+  touch-action:manipulation;cursor:pointer;
+  -webkit-appearance:none;
+  transition:all .1s;
+}
+.ebtn.sel{background:rgba(240,164,40,.2);border-color:var(--amber);}
+.ebtn:active{transform:scale(.88);opacity:.7}
+.chatbox{max-height:260px;overflow-y:auto;-webkit-overflow-scrolling:touch;margin-bottom:10px;display:flex;flex-direction:column;gap:9px;padding:4px 0}
 .cmsg{padding:9px 13px;border-radius:12px;font-size:13px;line-height:1.55;max-width:86%}
 .cmsg.user{background:rgba(200,132,42,.18);border:1px solid rgba(200,132,42,.28);align-self:flex-end;color:var(--cream)}
 .cmsg.ai{background:rgba(50,23,96,.55);border:1px solid var(--border);align-self:flex-start}
 .ptext{font-family:'Cormorant Garamond',serif;font-size:17px;line-height:1.85;color:var(--cream);font-style:italic;white-space:pre-wrap}
-.mover{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:200;display:none;align-items:flex-end}
-.mover.active{display:flex}
-.msheet{background:#160c31;border:1px solid var(--border);border-radius:22px 22px 0 0;padding:22px;width:100%;max-height:88vh;overflow-y:auto;animation:sup .3s ease}
+.mover{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:2000;display:none;align-items:flex-end;touch-action:manipulation;cursor:pointer}
+.mover.active{display:flex;cursor:pointer}
+.msheet{
+  cursor:default;
+  background:#160c31;border:1px solid var(--border);border-radius:22px 22px 0 0;
+  padding:22px;padding-bottom:calc(22px + env(safe-area-inset-bottom,0px));
+  width:100%;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  animation:sup .3s ease;
+}
 @keyframes sup{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.mhandle{width:38px;height:3px;background:var(--border);border-radius:2px;margin:0 auto 18px}
+.mhandle{width:38px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 18px}
 .revdisp{text-align:center;padding:18px 0}
 .revamt{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:var(--amber);line-height:1}
 .revlbl{font-size:12px;color:var(--muted);margin-top:3px}
 .sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.st{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:500;color:var(--amber)}
-.div{height:1px;background:var(--border);margin:14px 0}
+.divider{height:1px;background:var(--border);margin:14px 0}
 .spin{width:18px;height:18px;border:2px solid rgba(240,164,40,.28);border-top-color:var(--amber);border-radius:50%;animation:rot .75s linear infinite;display:inline-block}
 @keyframes rot{to{transform:rotate(360deg)}}
 .alert{padding:11px 13px;border-radius:10px;font-size:13px;margin-bottom:9px}
@@ -89,7 +157,13 @@ label{font-size:12px;color:var(--muted);margin-bottom:5px;display:block}
 .ai2{background:rgba(59,130,246,.13);border:1px solid rgba(59,130,246,.28);color:#93c5fd}
 .as{background:rgba(10,92,58,.28);border:1px solid rgba(74,222,128,.28);color:#4ade80}
 .titem{display:flex;align-items:flex-start;gap:11px;padding:13px;background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:7px}
-.tcheck{width:23px;height:23px;border-radius:6px;border:2px solid var(--gold);cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:13px;margin-top:1px}
+.tcheck{
+  width:28px;height:28px;min-width:28px;border-radius:6px;border:2px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;font-size:14px;
+  background:transparent;color:transparent;
+  touch-action:manipulation;cursor:pointer;-webkit-appearance:none;
+  transition:all .2s;margin-top:1px;
+}
 .tcheck.done{background:var(--gold);border-color:var(--gold);color:var(--night)}
 .ttitle{font-size:14px;font-weight:500;margin-bottom:3px}
 .tdesc{font-size:12px;color:var(--muted)}
@@ -117,43 +191,49 @@ label{font-size:12px;color:var(--muted);margin-bottom:5px;display:block}
 .srch{position:relative;margin-bottom:13px}
 .srch input{padding-left:36px}
 .sico{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:15px;pointer-events:none}
-#settingsbtn{position:fixed;top:14px;right:14px;width:38px;height:38px;border-radius:50%;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:50;font-size:17px;backdrop-filter:blur(10px)}
-#toast{position:fixed;top:18px;left:50%;transform:translateX(-50%) translateY(-80px);background:var(--green);color:#fff;padding:10px 22px;border-radius:28px;font-size:13px;font-weight:500;z-index:400;transition:transform .3s ease;white-space:nowrap;border:1px solid rgba(74,222,128,.3)}
+#settingsbtn{
+  position:fixed;top:env(safe-area-inset-top,14px);right:14px;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--card);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  z-index:500;font-size:18px;backdrop-filter:blur(10px);
+  touch-action:manipulation;cursor:pointer;-webkit-appearance:none;
+  color:var(--cream);
+}
+#toast{position:fixed;top:60px;left:50%;transform:translateX(-50%) translateY(-120px);background:var(--green);color:#fff;padding:10px 22px;border-radius:28px;font-size:13px;font-weight:500;z-index:3000;transition:transform .3s ease;white-space:nowrap;border:1px solid rgba(74,222,128,.3);pointer-events:none}
 #toast.show{transform:translateX(-50%) translateY(0)}
 .pitch{background:rgba(10,92,58,.14);border:1px solid rgba(74,222,128,.18);border-radius:11px;padding:14px;margin-bottom:10px}
 .pitch p{font-style:italic;font-size:13px;line-height:1.7}
-.row{display:flex;gap:8px}.gap10{gap:10px}.mt8{margin-top:8px}.mt12{margin-top:12px}.mb0{margin-bottom:0}
-.flex1{flex:1}.center{text-align:center}
+.row{display:flex;gap:8px}
+.gap10{gap:10px}.mt8{margin-top:8px}.mt12{margin-top:12px}.mb0{margin-bottom:0}
+.flex1{flex:1}
 .ptag{display:inline-flex;padding:2px 9px;border-radius:5px;font-size:10px;background:rgba(50,23,96,.6);border:1px solid var(--border);color:var(--sub);margin-right:4px;margin-top:3px}
 .brand-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
 .brand-card{background:rgba(50,23,96,.3);border:1px solid var(--border);border-radius:10px;padding:10px;font-size:12px}
 .brand-cat{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
 .brand-name{font-size:13px;font-weight:500;color:var(--cream)}
 .brand-val{font-size:11px;color:var(--amber);margin-top:2px}
-[onclick]{cursor:pointer;-webkit-tap-highlight-color:rgba(200,132,42,.15);}
-button{touch-action:manipulation;}
-.tcheck,.citem,.ebtn,.nbtn{touch-action:manipulation;}
 </style>
 </head>
-<body>
+<!-- ontouchstart on body: iOS fix that enables :active states and immediate clicks -->
+<body ontouchstart="">
 <div id="app">
-<button id="settingsbtn" onclick="openSettings()">⚙️</button>
-
-<!-- HOME -->
+<button id="settingsbtn" onclick="openSettings()" aria-label="Settings">⚙️</button>
+<!-- HOME TAB -->
 <div class="tab active" id="tab-home">
   <div class="greet">
     <div class="gname">🕊️ Sister Elaine Gary</div>
     <div class="gsub" id="daycount">Faithfully blessing lives since 2018</div>
   </div>
-  <div class="streak" id="streakbar">
+  <div class="streak">
     <span style="font-size:20px">🔥</span>
     <span class="snum2" id="streaknum">0</span>
-    <span class="stxt">day streak &nbsp;·&nbsp; keep it going, Sister Elaine!</span>
+    <span class="stxt">day streak · keep it going, Sister Elaine!</span>
   </div>
   <div class="stats3">
-    <div class="scard"><div class="snum" id="stat-circle">180+</div><div class="slbl">Circle</div></div>
-    <div class="scard"><div class="snum" id="stat-prayers">0</div><div class="slbl">Prayers Sent</div></div>
-    <div class="scard"><div class="snum" id="stat-engage">—</div><div class="slbl">Engagement</div></div>
+    <div class="scard"><div class="snum" id="stat-circle">0</div><div class="slbl">Circle</div></div>
+    <div class="scard"><div class="snum" id="stat-prayers">0</div><div class="slbl">Prayers</div></div>
+    <div class="scard"><div class="snum" id="stat-engage">—</div><div class="slbl">Engaged</div></div>
   </div>
   <div class="card">
     <div class="card-title">📅 Today's Briefing</div>
@@ -163,8 +243,8 @@ button{touch-action:manipulation;}
     <div class="card-title">🤖 Ministry Assistant</div>
     <div class="chatbox" id="home-chat"></div>
     <div class="row gap10">
-      <input id="home-input" type="text" placeholder="Ask me anything about your ministry..." style="font-size:15px" onkeydown="if(event.key==='Enter')homeChat()">
-      <button class="btn bg bs" onclick="homeChat()" id="home-send" style="min-width:44px;padding:11px 13px">➤</button>
+      <input id="home-input" type="text" placeholder="Ask me anything..." style="font-size:15px" onkeydown="if(event.key==='Enter')homeChat()">
+      <button class="btn bg bs" onclick="homeChat()" id="home-send" style="min-width:44px">➤</button>
     </div>
     <div class="row gap10 mt8" style="flex-wrap:wrap">
       <button class="btn bo bs" onclick="homeQuick('What should I focus on today?')">Today's focus</button>
@@ -185,7 +265,7 @@ button{touch-action:manipulation;}
   </div>
 </div>
 
-<!-- PRAYERS -->
+<!-- PRAYERS TAB -->
 <div class="tab" id="tab-prayers">
   <div class="sh mt8"><h2 style="color:var(--amber)">📖 Prayer Generator</h2></div>
   <div class="card">
@@ -202,13 +282,13 @@ button{touch-action:manipulation;}
       <option value="Wisdom &amp; Guidance">🕊️ Wisdom &amp; Guidance</option>
     </select>
     <label>Additional Context (optional)</label>
-    <input id="prayer-context" type="text" placeholder="e.g. Mothers, Monday encouragement, a member going through loss..." style="margin-bottom:12px">
+    <input id="prayer-context" type="text" placeholder="e.g. Mothers, Monday encouragement..." style="margin-bottom:12px">
     <button class="btn bg bw" onclick="generatePrayer()" id="genpray-btn">✨ Generate Today's Prayer</button>
   </div>
   <div class="card" id="prayer-output-card" style="display:none">
     <div class="card-title">🕊️ Today's Prayer</div>
     <div class="ptext" id="prayer-output"></div>
-    <div class="div"></div>
+    <div class="divider"></div>
     <div class="row gap10" style="flex-wrap:wrap">
       <button class="btn bg bs flex1" onclick="copyPrayer()">📋 Copy</button>
       <button class="btn bo bs flex1" onclick="sendWhatsApp()">📱 WhatsApp</button>
@@ -227,16 +307,13 @@ button{touch-action:manipulation;}
   <div class="card">
     <div class="sh mb0"><div class="card-title" style="margin-bottom:0">📚 Saved Prayers</div><span id="prayer-count" class="badge ba">0 saved</span></div>
     <div style="height:8px"></div>
-    <div id="prayer-archive"><div style="font-size:13px;color:var(--muted);text-align:center;padding:20px 0">No prayers saved yet. Generate or write one above and tap Save. ✨</div></div>
+    <div id="prayer-archive"><div style="font-size:13px;color:var(--muted);text-align:center;padding:20px 0">No prayers saved yet. ✨</div></div>
   </div>
 </div>
 
-<!-- CIRCLE -->
+<!-- CIRCLE TAB -->
 <div class="tab" id="tab-circle">
-  <div class="sh mt8">
-    <h2 style="color:var(--amber)">👥 Prayer Circle</h2>
-    <button class="btn bg bs" onclick="openAddContact()">+ Add</button>
-  </div>
+  <div class="sh mt8"><h2 style="color:var(--amber)">👥 Prayer Circle</h2><button class="btn bg bs" onclick="openAddContact()">+ Add</button></div>
   <div class="stats3">
     <div class="scard"><div class="snum" id="c-total">0</div><div class="slbl">Members</div></div>
     <div class="scard"><div class="snum" id="c-active">0</div><div class="slbl">Active</div></div>
@@ -246,85 +323,56 @@ button{touch-action:manipulation;}
   <div id="circle-list"></div>
 </div>
 
-<!-- ENGAGE -->
+<!-- ENGAGE TAB -->
 <div class="tab" id="tab-engage">
-  <div class="sh mt8">
-    <h2 style="color:var(--amber)">📊 Engagement</h2>
-    <span id="today-date-badge" class="badge ba"></span>
-  </div>
+  <div class="sh mt8"><h2 style="color:var(--amber)">📊 Engagement</h2><span id="today-date-badge" class="badge ba"></span></div>
   <div class="stats3">
-    <div class="scard"><div class="snum" id="e-today">0</div><div class="slbl">Logged Today</div></div>
-    <div class="scard"><div class="snum" id="e-rate">—</div><div class="slbl">Response Rate</div></div>
+    <div class="scard"><div class="snum" id="e-today">0</div><div class="slbl">Logged</div></div>
+    <div class="scard"><div class="snum" id="e-rate">—</div><div class="slbl">Response %</div></div>
     <div class="scard"><div class="snum" id="e-silent">0</div><div class="slbl">Need Care</div></div>
   </div>
   <div id="silent-alerts-section"></div>
   <div class="card">
     <div class="card-title">📝 Log Today's Responses</div>
-    <p style="margin-bottom:10px">Tap an emoji for each person to log how they responded to today's prayer.</p>
-    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:10px;text-align:center">
-      <div style="font-size:16px">🙏</div><div style="font-size:16px">❤️</div><div style="font-size:16px">🔥</div>
-      <div style="font-size:16px">🙌</div><div style="font-size:16px">💬</div><div style="font-size:16px">👁️</div><div style="font-size:16px">⬜</div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:12px;text-align:center">
-      <div style="font-size:9px;color:var(--muted)">Praying</div><div style="font-size:9px;color:var(--muted)">Heart</div>
-      <div style="font-size:9px;color:var(--muted)">Fire</div><div style="font-size:9px;color:var(--muted)">Amen</div>
-      <div style="font-size:9px;color:var(--muted)">Replied</div><div style="font-size:9px;color:var(--muted)">Read</div>
-      <div style="font-size:9px;color:var(--muted)">None</div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:6px;text-align:center">
+      <div>🙏</div><div>❤️</div><div>🔥</div><div>🙌</div><div>💬</div><div>👁️</div><div>⬜</div>
     </div>
     <div id="engage-list"></div>
   </div>
 </div>
-<!-- GROW -->
+
+<!-- GROW TAB -->
 <div class="tab" id="tab-grow">
   <div class="sh mt8"><h2 style="color:var(--amber)">📱 Grow Your Ministry</h2></div>
   <div class="card">
-    <div class="card-title">📈 Growth at a Glance</div>
-    <div class="stats3" style="margin-bottom:0">
-      <div class="scard"><div class="snum">180+</div><div class="slbl">WhatsApp</div></div>
-      <div class="scard"><div class="snum">7yr</div><div class="slbl">Faithful</div></div>
-      <div class="scard"><div class="snum">∞</div><div class="slbl">Impact</div></div>
-    </div>
-  </div>
-  <div class="card">
     <div class="card-title">🌐 Platforms to Expand To</div>
     <div id="platform-checklist">
-      <div class="titem"><div class="tcheck done" id="plt-whatsapp" onclick="togglePlatform('whatsapp')">✓</div><div><div class="ttitle">WhatsApp</div><div class="tdesc">Your current base. 180+ members strong.</div></div></div>
-      <div class="titem"><div class="tcheck" id="plt-facebook" onclick="togglePlatform('facebook')"></div><div><div class="ttitle">Facebook Groups</div><div class="tdesc">Create a private "Prayer Circle" group. Invite your WhatsApp members first.</div></div></div>
-      <div class="titem"><div class="tcheck" id="plt-instagram" onclick="togglePlatform('instagram')"></div><div><div class="ttitle">Instagram</div><div class="tdesc">Post daily prayer as a graphic. Story + Reel = massive organic reach.</div></div></div>
-      <div class="titem"><div class="tcheck" id="plt-youtube" onclick="togglePlatform('youtube')"></div><div><div class="ttitle">YouTube</div><div class="tdesc">Record a 60-second morning prayer video every weekday. Brands love YouTube presence.</div></div></div>
-      <div class="titem"><div class="tcheck" id="plt-podcast" onclick="togglePlatform('podcast')"></div><div><div class="ttitle">Podcast / Audio</div><div class="tdesc">Anchor.fm (free). Post the audio version of your daily prayer. Podcast ads pay $25–$50 per 1,000 listeners.</div></div></div>
-      <div class="titem"><div class="tcheck" id="plt-email" onclick="togglePlatform('email')"></div><div><div class="ttitle">Email Newsletter</div><div class="tdesc">Mailchimp free plan. Email newsletters command premium sponsorship rates.</div></div></div>
+      <div class="titem"><button class="tcheck done" id="plt-whatsapp" onclick="togglePlatform('whatsapp')">✓</button><div><div class="ttitle">WhatsApp</div><div class="tdesc">Your current base. 180+ members strong.</div></div></div>
+      <div class="titem"><button class="tcheck" id="plt-facebook" onclick="togglePlatform('facebook')"></button><div><div class="ttitle">Facebook Groups</div><div class="tdesc">Create a private Prayer Circle group.</div></div></div>
+      <div class="titem"><button class="tcheck" id="plt-instagram" onclick="togglePlatform('instagram')"></button><div><div class="ttitle">Instagram</div><div class="tdesc">Post daily prayer as a graphic. Story + Reel = massive organic reach.</div></div></div>
+      <div class="titem"><button class="tcheck" id="plt-youtube" onclick="togglePlatform('youtube')"></button><div><div class="ttitle">YouTube</div><div class="tdesc">60-second prayer video every weekday. Brands love YouTube.</div></div></div>
+      <div class="titem"><button class="tcheck" id="plt-podcast" onclick="togglePlatform('podcast')"></button><div><div class="ttitle">Podcast / Audio</div><div class="tdesc">Anchor.fm (free). Podcast ads pay $25–$50 per 1K listeners.</div></div></div>
+      <div class="titem"><button class="tcheck" id="plt-email" onclick="togglePlatform('email')"></button><div><div class="ttitle">Email Newsletter</div><div class="tdesc">Mailchimp free. Premium sponsorship rates.</div></div></div>
     </div>
   </div>
   <div class="card">
     <div class="card-title">✨ AI Social Post Generator</div>
-    <label>What's today's prayer theme?</label>
-    <input id="social-theme" type="text" placeholder="e.g. Healing, Gratitude, Monday Strength..." style="margin-bottom:10px">
+    <label>Prayer theme</label><input id="social-theme" type="text" placeholder="e.g. Healing, Gratitude..." style="margin-bottom:10px">
     <label>Platform</label>
-    <select id="social-platform" style="margin-bottom:12px">
-      <option value="Instagram">Instagram</option>
-      <option value="Facebook">Facebook</option>
-      <option value="Twitter/X">Twitter/X</option>
-      <option value="YouTube description">YouTube description</option>
-    </select>
+    <select id="social-platform" style="margin-bottom:12px"><option>Instagram</option><option>Facebook</option><option>Twitter/X</option><option>YouTube description</option></select>
     <button class="btn bg bw" onclick="genSocialPost()" id="social-btn">✨ Generate Post</button>
-    <div id="social-output" style="display:none;margin-top:12px">
-      <div class="div"></div>
-      <div style="font-size:13px;white-space:pre-wrap;line-height:1.7;color:var(--cream)" id="social-text"></div>
-      <button class="btn bo bs mt8" onclick="copySocial()">📋 Copy Post</button>
-    </div>
+    <div id="social-output" style="display:none;margin-top:12px"><div class="divider"></div><div style="font-size:13px;white-space:pre-wrap;line-height:1.7;color:var(--cream)" id="social-text"></div><button class="btn bo bs mt8" onclick="copySocial()">📋 Copy Post</button></div>
   </div>
   <div class="card">
     <div class="card-title">🔴 Live Prayer Planning</div>
-    <div class="titem" style="margin-bottom:7px"><div style="font-size:28px">📅</div><div><div class="ttitle">Friday Live Prayer Sessions</div><div class="tdesc">Every Friday is your day for a live session. Keep it 20–30 minutes. This is what brand sponsors pay to be associated with.</div></div></div>
-    <div class="alert ai2">💡 Tip: Brands pay premium rates to sponsor LIVE events. Your live sessions are your most valuable sponsorship inventory.</div>
+    <div class="alert ai2">💡 Brands pay premium to sponsor LIVE events.</div>
     <div class="row gap10 mt8"><input id="live-date" type="date" style="flex:1"><button class="btn bg bs" onclick="planLive()">Plan It</button></div>
     <div id="live-plan-list" style="margin-top:10px"></div>
   </div>
-  <div class="card"><div class="card-title">📊 Hashtag Strategy</div><div style="font-size:13px;color:var(--sub);line-height:1.8">#SisterElaineGary #PrayerMinistry #MorningPrayer #PrayerWarrior #NewOrleans #FaithfulPrayer #PrayCircle #DailyPrayer #GodIsGood #PrayerWorks #Intercession #WomenOfFaith #BlackChurch #SundayPrayer #PrayerChangesThings #FaithContent #SpiritualWellness</div></div>
-</div><div class="tab" id="tab-business">
+</div>
+<!-- BUSINESS TAB -->
+<div class="tab" id="tab-business">
   <div class="sh mt8"><h2 style="color:var(--amber)">💼 Business &amp; Revenue</h2></div>
-
   <div class="card">
     <div class="card-title">🎯 Revenue Goal</div>
     <div class="revdisp"><div class="revamt" id="biz-revenue">$0</div><div class="revlbl">earned toward <strong style="color:var(--amber)">$1,000,000</strong> Year 1 Goal</div></div>
@@ -332,110 +380,84 @@ button{touch-action:manipulation;}
     <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted)"><span>$0</span><span id="biz-pct">0% of $1M</span><span>$1,000,000</span></div>
   </div>
   <div class="card">
-    <div class="card-title">🌟 Your Sponsorship Value Proposition</div>
-    <div class="alert as" style="margin-bottom:12px">📊 You have a documented, loyal, faith-motivated audience of 180+ people who open and read your message <strong>every single weekday morning</strong>. That is one of the highest engagement rates in media — 5× weekly direct touchpoints. Brands pay a premium for this.</div>
-    <p style="margin-bottom:10px">Your audience profile for brand sponsors:</p>
-    <div style="font-size:13px;color:var(--sub);line-height:1.9">✅ <strong style="color:var(--cream)">Age 30–75+</strong> — multi-generational reach<br>✅ <strong style="color:var(--cream)">Faith-motivated</strong> — highly values-aligned purchasing behavior<br>✅ <strong style="color:var(--cream)">Predominantly women</strong> — controls 85% of household purchasing decisions<br>✅ <strong style="color:var(--cream)">New Orleans + national</strong> — diverse geographic reach<br>✅ <strong style="color:var(--cream)">5× per week touchpoint</strong> — morning routine, high attention window<br>✅ <strong style="color:var(--cream)">7 years of loyalty</strong> — not a trend, a relationship</div>
-  </div>
-  <div class="card">
     <div class="card-title">💎 Sponsorship Packages</div>
-    <div class="tier" style="border-color:rgba(240,164,40,.5)"><div class="tn">👑 Title Sponsor</div><div class="tp">$25,000 / year</div><div class="tper">✓ "Today's prayer is brought to you by [Brand]" — in every weekday message<br>✓ Named sponsor of all Friday live prayer sessions<br>✓ Monthly co-created content post on all platforms<br>✓ Exclusive — only ONE Title Sponsor at a time<br>✓ Featured in all press and media materials<br>✓ Monthly impact call with Sister Elaine</div></div>
-    <div class="tier"><div class="tn">🌟 Presenting Partner</div><div class="tp">$10,000 / year</div><div class="tper">✓ Brand mention in weekly prayer round-up to full circle<br>✓ Quarterly sponsored social media post<br>✓ Logo and link in email newsletter footer<br>✓ Named in all ministry media kit materials<br>✓ Bi-annual strategy call</div></div>
-    <div class="tier"><div class="tn">🤝 Community Brand Partner</div><div class="tp">$5,000 / year</div><div class="tper">✓ Monthly brand mention to prayer circle<br>✓ 2 sponsored social posts per year<br>✓ Newsletter feature once per quarter<br>✓ Certificate of partnership + logo placement</div></div>
-    <div class="tier"><div class="tn">✨ Digital Sponsor</div><div class="tp">$2,500 / year</div><div class="tper">✓ Bi-monthly mention to prayer circle<br>✓ 1 sponsored social post per year<br>✓ Listed in ministry supporter directory</div></div>
-    <div class="tier" style="margin-bottom:0"><div class="tn">💝 Ministry Supporter</div><div class="tp">$1,000 / year</div><div class="tper">✓ Annual thank-you shoutout<br>✓ Logo on ministry website<br>✓ Listed in supporter wall</div></div>
+    <div class="tier" style="border-color:rgba(240,164,40,.5)"><div class="tn">👑 Title Sponsor</div><div class="tp">$25,000 / year</div><div class="tper">✓ "Today's prayer is brought to you by [Brand]" in every weekday message<br>✓ Named sponsor of all Friday live sessions<br>✓ Monthly co-created content post<br>✓ Exclusive — only ONE Title Sponsor at a time</div></div>
+    <div class="tier"><div class="tn">🌟 Presenting Partner</div><div class="tp">$10,000 / year</div><div class="tper">✓ Brand mention in weekly prayer round-up<br>✓ Quarterly sponsored social post<br>✓ Newsletter footer placement</div></div>
+    <div class="tier"><div class="tn">🤝 Community Brand Partner</div><div class="tp">$5,000 / year</div><div class="tper">✓ Monthly brand mention to prayer circle<br>✓ 2 sponsored social posts per year</div></div>
+    <div class="tier"><div class="tn">✨ Digital Sponsor</div><div class="tp">$2,500 / year</div><div class="tper">✓ Bi-monthly mention · 1 sponsored post/year</div></div>
+    <div class="tier" style="margin-bottom:0"><div class="tn">💝 Ministry Supporter</div><div class="tp">$1,000 / year</div><div class="tper">✓ Annual shoutout · Logo on ministry website</div></div>
   </div>
   <div class="card">
     <div class="card-title">🎯 30 Target For-Profit Brands</div>
     <div class="brand-grid">
-      <div class="brand-card"><div class="brand-cat">Health &amp; Insurance</div><div class="brand-name">Humana</div><div class="brand-val">Presenting Partner</div></div>
-      <div class="brand-card"><div class="brand-cat">Health &amp; Insurance</div><div class="brand-name">AARP Services</div><div class="brand-val">Title Sponsor</div></div>
-      <div class="brand-card"><div class="brand-cat">Wellness App</div><div class="brand-name">Calm</div><div class="brand-val">Digital Sponsor</div></div>
-      <div class="brand-card"><div class="brand-cat">Wellness App</div><div class="brand-name">Headspace</div><div class="brand-val">Digital Sponsor</div></div>
-      <div class="brand-card"><div class="brand-cat">Home Care</div><div class="brand-name">Care.com</div><div class="brand-val">Community Partner</div></div>
+      <div class="brand-card"><div class="brand-cat">Health</div><div class="brand-name">AARP Services</div><div class="brand-val">Title Sponsor</div></div>
+      <div class="brand-card"><div class="brand-cat">Health</div><div class="brand-name">Humana</div><div class="brand-val">Presenting Partner</div></div>
+      <div class="brand-card"><div class="brand-cat">Wellness</div><div class="brand-name">Calm</div><div class="brand-val">Digital Sponsor</div></div>
+      <div class="brand-card"><div class="brand-cat">Wellness</div><div class="brand-name">Headspace</div><div class="brand-val">Digital Sponsor</div></div>
       <div class="brand-card"><div class="brand-cat">Insurance</div><div class="brand-name">MetLife</div><div class="brand-val">Presenting Partner</div></div>
       <div class="brand-card"><div class="brand-cat">Insurance</div><div class="brand-name">Aflac</div><div class="brand-val">Community Partner</div></div>
       <div class="brand-card"><div class="brand-cat">Financial</div><div class="brand-name">Edward Jones</div><div class="brand-val">Presenting Partner</div></div>
       <div class="brand-card"><div class="brand-cat">Financial</div><div class="brand-name">Northwestern Mutual</div><div class="brand-val">Community Partner</div></div>
-      <div class="brand-card"><div class="brand-cat">Banking</div><div class="brand-name">Navy Federal C.U.</div><div class="brand-val">Community Partner</div></div>
       <div class="brand-card"><div class="brand-cat">Beauty</div><div class="brand-name">Dove / Unilever</div><div class="brand-val">Presenting Partner</div></div>
       <div class="brand-card"><div class="brand-cat">Beauty</div><div class="brand-name">SheaMoisture</div><div class="brand-val">Community Partner</div></div>
-      <div class="brand-card"><div class="brand-cat">Beauty</div><div class="brand-name">Mary Kay</div><div class="brand-val">Community Partner</div></div>
       <div class="brand-card"><div class="brand-cat">Retail</div><div class="brand-name">Target</div><div class="brand-val">Title Sponsor</div></div>
       <div class="brand-card"><div class="brand-cat">Retail</div><div class="brand-name">Walmart</div><div class="brand-val">Presenting Partner</div></div>
       <div class="brand-card"><div class="brand-cat">Media</div><div class="brand-name">OWN Network</div><div class="brand-val">Presenting Partner</div></div>
       <div class="brand-card"><div class="brand-cat">Media</div><div class="brand-name">Essence Comm.</div><div class="brand-val">Community Partner</div></div>
-      <div class="brand-card"><div class="brand-cat">Media</div><div class="brand-name">TV One</div><div class="brand-val">Community Partner</div></div>
       <div class="brand-card"><div class="brand-cat">Pharmacy</div><div class="brand-name">Walgreens</div><div class="brand-val">Community Partner</div></div>
       <div class="brand-card"><div class="brand-cat">Pharmacy</div><div class="brand-name">CVS Health</div><div class="brand-val">Digital Sponsor</div></div>
-      <div class="brand-card"><div class="brand-cat">Food / Grocery</div><div class="brand-name">Whole Foods</div><div class="brand-val">Digital Sponsor</div></div>
       <div class="brand-card"><div class="brand-cat">Telecom</div><div class="brand-name">T-Mobile</div><div class="brand-val">Community Partner</div></div>
       <div class="brand-card"><div class="brand-cat">Telecom</div><div class="brand-name">Verizon</div><div class="brand-val">Community Partner</div></div>
-      <div class="brand-card"><div class="brand-cat">Lifestyle</div><div class="brand-name">Hallmark Channel</div><div class="brand-val">Presenting Partner</div></div>
-      <div class="brand-card"><div class="brand-cat">Publishing</div><div class="brand-name">Zondervan / HarperCollins</div><div class="brand-val">Title Sponsor</div></div>
-      <div class="brand-card"><div class="brand-cat">Publishing</div><div class="brand-name">Thomas Nelson</div><div class="brand-val">Presenting Partner</div></div>
-      <div class="brand-card"><div class="brand-cat">Coffee / Food</div><div class="brand-name">Starbucks</div><div class="brand-val">Community Partner</div></div>
       <div class="brand-card"><div class="brand-cat">Streaming</div><div class="brand-name">Spotify</div><div class="brand-val">Digital Sponsor</div></div>
       <div class="brand-card"><div class="brand-cat">Tech</div><div class="brand-name">Amazon</div><div class="brand-val">Title Sponsor</div></div>
-      <div class="brand-card"><div class="brand-cat">Food Delivery</div><div class="brand-name">Uber Eats</div><div class="brand-val">Digital Sponsor</div></div>
+      <div class="brand-card"><div class="brand-cat">Publishing</div><div class="brand-name">Zondervan</div><div class="brand-val">Title Sponsor</div></div>
+      <div class="brand-card"><div class="brand-cat">Publishing</div><div class="brand-name">Thomas Nelson</div><div class="brand-val">Presenting Partner</div></div>
+      <div class="brand-card"><div class="brand-cat">Lifestyle</div><div class="brand-name">Hallmark Channel</div><div class="brand-val">Presenting Partner</div></div>
+      <div class="brand-card"><div class="brand-cat">Home Care</div><div class="brand-name">Care.com</div><div class="brand-val">Community Partner</div></div>
+      <div class="brand-card"><div class="brand-cat">Banking</div><div class="brand-name">Navy Federal C.U.</div><div class="brand-val">Community Partner</div></div>
+      <div class="brand-card"><div class="brand-cat">Coffee</div><div class="brand-name">Starbucks</div><div class="brand-val">Community Partner</div></div>
+      <div class="brand-card"><div class="brand-cat">Beauty</div><div class="brand-name">Mary Kay</div><div class="brand-val">Community Partner</div></div>
+      <div class="brand-card"><div class="brand-cat">Grocery</div><div class="brand-name">Whole Foods</div><div class="brand-val">Digital Sponsor</div></div>
+      <div class="brand-card"><div class="brand-cat">Delivery</div><div class="brand-name">Uber Eats</div><div class="brand-val">Digital Sponsor</div></div>
+      <div class="brand-card"><div class="brand-cat">Media</div><div class="brand-name">TV One</div><div class="brand-val">Community Partner</div></div>
     </div>
   </div>
   <div class="card">
-    <div class="card-title">📧 Brand Pitch Email Template</div>
-    <div class="pitch"><p id="pitch-email-text">Subject: Partnership Opportunity — Sister Elaine Gary's Prayer Ministry (180+ Loyal Members, 5× Weekly Touchpoint)
+    <div class="card-title">📧 Brand Pitch Template</div>
+    <div class="pitch"><p id="pitch-email-text">Subject: Partnership Opportunity — Sister Elaine Gary's Prayer Ministry
 
 Dear [Brand Partnership Team],
 
-My name is Sister Elaine Gary. Since 2018 — every weekday, without a single exception — I have personally written and delivered a morning prayer to 180+ engaged members via WhatsApp. That's over 1,800 consecutive weekday messages of documented, trusted ministry.
+My name is Sister Elaine Gary. Since 2018, every weekday without a single exception, I have personally written and delivered a morning prayer to 180+ engaged members via WhatsApp.
 
-My audience is faith-motivated adults aged 30 and older, predominantly women, who read my message every morning as part of their daily routine. Studies show faith consumers are among the most brand-loyal customers in America — and I have their attention first thing every morning, five days a week.
+My audience is faith-motivated adults aged 30+, predominantly women, who read my message every morning. I'd love to explore a sponsorship partnership with [Brand].
 
-I'd love to explore a [Tier Name] sponsorship partnership ($X/year) with [Brand]. In return, your brand reaches a warm, trusting, engaged audience at the highest-attention moment of their day.
-
-Could we connect for a 15-minute call this week?
+Could we connect for a 15-minute call?
 
 With blessings,
-Sister Elaine Gary
-Prayer Ministry · New Orleans, Louisiana
+Sister Elaine Gary · New Orleans
 contact@akiradigital.net</p></div>
     <button class="btn bo bs mt8" onclick="copyEmail()">📋 Copy Email</button>
   </div>
-  <div class="card">
-    <div class="card-title">💰 6 Revenue Streams to $1M</div>
-    <div class="tlitem"><div class="tldot">1</div><div><div class="tltitle">Brand Sponsorships <span class="badge ba" style="margin-left:6px">Primary</span></div><div class="tldesc">5 sponsors avg $10K = $50K yr 1 → 20 sponsors avg $15K = $300K yr 2</div></div></div>
-    <div class="tlitem"><div class="tldot">2</div><div><div class="tltitle">Podcast &amp; Audio Ad Revenue</div><div class="tldesc">10K listeners × $25 CPM × 260 episodes = $65K/yr</div></div></div>
-    <div class="tlitem"><div class="tldot">3</div><div><div class="tltitle">Premium Prayer Subscription</div><div class="tldesc">1,000 subscribers × $10/mo = $120K/yr</div></div></div>
-    <div class="tlitem"><div class="tldot">4</div><div><div class="tltitle">Social Media Brand Deals</div><div class="tldesc">Sponsored posts on Instagram/Facebook = $2K–$10K per post at scale</div></div></div>
-    <div class="tlitem"><div class="tldot">5</div><div><div class="tltitle">Prayer Journal &amp; Book</div><div class="tldesc">5,000 copies × $25 = $125K + publishing advance</div></div></div>
-    <div class="tlitem"><div class="tldot">6</div><div><div class="tltitle">Corporate Wellness Speaking</div><div class="tldesc">Companies pay $5K–$25K for faith &amp; wellness keynotes. 20 events/yr = $200K</div></div></div>
-  </div>
-  <div class="card">
-    <div class="card-title">📅 90-Day Brand Launch Roadmap</div>
-    <div class="ritem"><div class="rmn">Days 1–7</div><div class="rdes">Build media kit: headshot, bio, audience stats, engagement proof, 3 testimonials</div></div>
-    <div class="ritem"><div class="rmn">Days 8–14</div><div class="rdes">Launch Instagram + Facebook. Invite 180 WhatsApp members to follow all platforms.</div></div>
-    <div class="ritem"><div class="rmn">Days 15–21</div><div class="rdes">Research brand partnership contacts at first 10 target brands. Find the right email.</div></div>
-    <div class="ritem"><div class="rmn">Days 22–30</div><div class="rdes">Send 10 pitch emails. Follow up within 48 hrs. Close first Ministry Supporter ($1K).</div></div>
-    <div class="ritem"><div class="rmn">Days 31–60</div><div class="rdes">Close first Digital Sponsor ($2.5K). Launch podcast. Reach 5,000 social followers.</div></div>
-    <div class="ritem" style="border-bottom:none"><div class="rmn">Days 61–90</div><div class="rdes">Close first Community Partner ($5K). Pitch first Presenting Partner. Circle at 250 members.</div></div>
-  </div>
 </div>
-<!-- DAILY LOG -->
+
+<!-- DAILY TAB -->
 <div class="tab" id="tab-daily">
   <div class="sh mt8"><h2 style="color:var(--amber)">📋 Daily Command Center</h2></div>
   <div class="card">
     <div class="card-title">💰 Log Revenue Earned Today</div>
     <div class="row gap10">
       <input id="rev-amount" type="number" placeholder="Amount in dollars" style="flex:1">
-      <select id="rev-source" style="flex:1.2;font-size:14px"><option>Brand Sponsorship</option><option>Podcast Ad Revenue</option><option>Subscription</option><option>Social Media Deal</option><option>Speaking Fee</option><option>Prayer Book Sale</option><option>Live Event</option><option>Donation</option><option>Other</option></select>
+      <select id="rev-source" style="flex:1.2;font-size:14px"><option>Brand Sponsorship</option><option>Podcast Ad Revenue</option><option>Subscription</option><option>Social Media Deal</option><option>Speaking Fee</option><option>Prayer Book Sale</option><option>Donation</option><option>Other</option></select>
     </div>
     <button class="btn bg bw mt8" onclick="logRevenue()">💰 Add to Revenue Tracker</button>
     <div id="rev-log" style="margin-top:10px"></div>
   </div>
   <div class="card">
     <div class="card-title">🔥 Streak &amp; Stats</div>
-    <div class="streak" style="margin-bottom:12px"><span style="font-size:22px">🔥</span><span class="snum2" id="daily-streak">0</span><span class="stxt">consecutive days of faithfulness</span></div>
+    <div class="streak" style="margin-bottom:12px"><span style="font-size:22px">🔥</span><span class="snum2" id="daily-streak">0</span><span class="stxt">consecutive days</span></div>
     <div class="pbar"><div class="pfill" id="rev-pbar" style="width:0%"></div></div>
-    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:5px"><span>$0 earned</span><span id="rev-pct2">0%</span><span>$1,000,000 goal</span></div>
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:5px"><span>$0</span><span id="rev-pct2">0%</span><span>$1M goal</span></div>
     <div class="revdisp" style="padding:14px 0 0"><div class="revamt" id="daily-revenue">$0</div><div class="revlbl">Total Revenue Logged</div></div>
   </div>
   <div class="card"><div class="card-title">⚡ 3 Non-Negotiables — Every Weekday</div><div id="daily-tasks-core"></div></div>
@@ -443,22 +465,23 @@ contact@akiradigital.net</p></div>
   <div class="card"><div class="card-title">🌱 This Month's Growth Mission</div><div id="monthly-mission"></div></div>
   <div class="card">
     <div class="card-title">🗺️ 12-Month Roadmap to $1M</div>
-    <div class="ritem"><div class="rmn">Month 1</div><div class="rdes">Media kit complete · Instagram + Facebook launched · Circle at 200 members</div></div>
-    <div class="ritem"><div class="rmn">Month 2</div><div class="rdes">First 10 brand pitch emails sent · First Ministry Supporter signed ($1K)</div></div>
-    <div class="ritem"><div class="rmn">Month 3</div><div class="rdes">First Digital Sponsor signed ($2.5K) · Podcast launched · 5K social followers</div></div>
-    <div class="ritem"><div class="rmn">Month 4</div><div class="rdes">First Community Partner ($5K) · Presenting Partner pitched · YouTube growing</div></div>
-    <div class="ritem"><div class="rmn">Month 5</div><div class="rdes">First Presenting Partner signed ($10K) · Premium subscription launched</div></div>
-    <div class="ritem"><div class="rmn">Month 6</div><div class="rdes">Title Sponsor pursued ($25K) · 3 active sponsors · $50K+ total revenue</div></div>
-    <div class="ritem"><div class="rmn">Month 7</div><div class="rdes">Title Sponsor signed · Prayer journal launched · 25K social followers</div></div>
-    <div class="ritem"><div class="rmn">Month 8</div><div class="rdes">Book deal inquiry · Podcast at 5K listeners · First speaking booking</div></div>
-    <div class="ritem"><div class="rmn">Month 9</div><div class="rdes">National media outreach · 10 active brand sponsors · $300K+ total revenue</div></div>
-    <div class="ritem"><div class="rmn">Month 10</div><div class="rdes">Speaking circuit active ($5K–$10K/event) · Podcast ad revenue flowing</div></div>
-    <div class="ritem"><div class="rmn">Month 11</div><div class="rdes">Book deal signed · 100K social reach · $700K+ total revenue</div></div>
-    <div class="ritem" style="border-bottom:none"><div class="rmn" style="color:#4ade80">Month 12</div><div class="rdes"><strong style="color:#4ade80">Full sponsor roster · Speaking in demand · $1,000,000 milestone 🎉</strong></div></div>
+    <div class="ritem"><div class="rmn">Month 1</div><div class="rdes">Media kit · Instagram launched · Circle at 200</div></div>
+    <div class="ritem"><div class="rmn">Month 2</div><div class="rdes">First 10 pitches · First Supporter signed ($1K)</div></div>
+    <div class="ritem"><div class="rmn">Month 3</div><div class="rdes">First Digital Sponsor ($2.5K) · Podcast launched</div></div>
+    <div class="ritem"><div class="rmn">Month 4</div><div class="rdes">Community Partner ($5K) · YouTube growing</div></div>
+    <div class="ritem"><div class="rmn">Month 5</div><div class="rdes">Presenting Partner ($10K) · Subscription launched</div></div>
+    <div class="ritem"><div class="rmn">Month 6</div><div class="rdes">Title Sponsor pursued ($25K) · $50K+ revenue</div></div>
+    <div class="ritem"><div class="rmn">Month 7</div><div class="rdes">Title Sponsor signed · Prayer journal launched</div></div>
+    <div class="ritem"><div class="rmn">Month 8</div><div class="rdes">Book deal inquiry · Podcast at 5K listeners</div></div>
+    <div class="ritem"><div class="rmn">Month 9</div><div class="rdes">National media · 10 sponsors · $300K+</div></div>
+    <div class="ritem"><div class="rmn">Month 10</div><div class="rdes">Speaking circuit ($5K–$10K/event)</div></div>
+    <div class="ritem"><div class="rmn">Month 11</div><div class="rdes">Book deal signed · $700K+</div></div>
+    <div class="ritem" style="border-bottom:none"><div class="rmn" style="color:#4ade80">Month 12</div><div class="rdes"><strong style="color:#4ade80">$1,000,000 milestone 🎉</strong></div></div>
   </div>
 </div>
 
-<nav class="bnav">
+<!-- NAV -->
+<nav class="bnav" role="navigation">
   <button class="nbtn active" data-tab="home" onclick="switchTab('home')"><span class="ni">🏠</span><span class="nl">Home</span></button>
   <button class="nbtn" data-tab="prayers" onclick="switchTab('prayers')"><span class="ni">📖</span><span class="nl">Prayers</span></button>
   <button class="nbtn" data-tab="circle" onclick="switchTab('circle')"><span class="ni">👥</span><span class="nl">Circle</span></button>
@@ -470,8 +493,18 @@ contact@akiradigital.net</p></div>
 </div>
 
 <!-- MODALS -->
-<div class="mover" id="modal-contact"><div class="msheet"><div class="mhandle"></div><div id="contact-modal-content"></div><div class="row gap10 mt8"><button class="btn bo flex1" onclick="closeModal('modal-contact')">Close</button><button class="btn bw" id="delete-contact-btn" style="background:rgba(220,38,38,.18);border:1px solid rgba(248,113,113,.35);color:#f87171;flex:1" onclick="deleteContact()">🗑️ Remove from Circle</button></div></div></div>
-<div class="mover" id="modal-add">
+<div class="mover" id="modal-contact" onclick="if(event.target===this)closeModal('modal-contact')">
+  <div class="msheet">
+    <div class="mhandle"></div>
+    <div id="contact-modal-content"></div>
+    <div class="row gap10 mt8">
+      <button class="btn bo flex1" onclick="closeModal('modal-contact')">Close</button>
+      <button class="btn flex1" id="delete-contact-btn" style="background:rgba(220,38,38,.18);border:1px solid rgba(248,113,113,.35);color:#f87171" onclick="deleteContact()">🗑️ Remove</button>
+    </div>
+  </div>
+</div>
+
+<div class="mover" id="modal-add" onclick="if(event.target===this)closeModal('modal-add')">
   <div class="msheet">
     <div class="mhandle"></div>
     <h2 style="color:var(--amber);margin-bottom:16px">Add to Prayer Circle</h2>
@@ -480,315 +513,410 @@ contact@akiradigital.net</p></div>
     <label>Phone (optional)</label><input id="add-phone" type="tel" placeholder="+1 504 555 0000" style="margin-bottom:10px">
     <label>Platforms</label>
     <div class="row gap10" style="flex-wrap:wrap;margin-bottom:10px">
-      <label style="display:flex;align-items:center;gap:5px;margin:0"><input type="checkbox" id="plt-wa" value="WhatsApp"> WhatsApp</label>
-      <label style="display:flex;align-items:center;gap:5px;margin:0"><input type="checkbox" id="plt-txt" value="Text"> Text</label>
-      <label style="display:flex;align-items:center;gap:5px;margin:0"><input type="checkbox" id="plt-em" value="Email"> Email</label>
-      <label style="display:flex;align-items:center;gap:5px;margin:0"><input type="checkbox" id="plt-fb" value="Facebook"> Facebook</label>
+      <label style="display:flex;align-items:center;gap:5px;margin:0;color:var(--sub);font-size:13px"><input type="checkbox" id="plt-wa"> WhatsApp</label>
+      <label style="display:flex;align-items:center;gap:5px;margin:0;color:var(--sub);font-size:13px"><input type="checkbox" id="plt-txt"> Text</label>
+      <label style="display:flex;align-items:center;gap:5px;margin:0;color:var(--sub);font-size:13px"><input type="checkbox" id="plt-em"> Email</label>
     </div>
-    <label>Personal Notes</label>
-    <textarea id="add-notes" placeholder="Any personal info, prayer requests, how they found you..." style="margin-bottom:14px"></textarea>
-    <div class="row gap10"><button class="btn bg flex1" onclick="saveNewContact()">💾 Add to Circle</button><button class="btn bo" onclick="closeModal('modal-add')">Cancel</button></div>
+    <label>Notes</label>
+    <textarea id="add-notes" placeholder="Prayer requests, how they found you..." style="margin-bottom:14px"></textarea>
+    <div class="row gap10">
+      <button class="btn bg flex1" onclick="saveNewContact()">💾 Add to Circle</button>
+      <button class="btn bo" onclick="closeModal('modal-add')">Cancel</button>
+    </div>
   </div>
 </div>
-<div class="mover" id="modal-steps"><div class="msheet"><div class="mhandle"></div><div id="steps-content"></div><button class="btn bo bw mt8" onclick="closeModal('modal-steps')">Got It ✓</button></div></div>
-<div class="mover" id="modal-settings">
+
+<div class="mover" id="modal-steps" onclick="if(event.target===this)closeModal('modal-steps')">
+  <div class="msheet"><div class="mhandle"></div><div id="steps-content"></div><button class="btn bo bw mt8" onclick="closeModal('modal-steps')">Got It ✓</button></div>
+</div>
+
+<div class="mover" id="modal-settings" onclick="if(event.target===this)closeModal('modal-settings')">
   <div class="msheet">
     <div class="mhandle"></div>
     <h2 style="color:var(--amber);margin-bottom:16px">⚙️ Settings</h2>
-    <div class="alert ai2" style="margin-bottom:14px">To use the AI prayer generator and ministry assistant, enter your free Anthropic API key below. Get yours at console.anthropic.com — it's free to start.</div>
+    <div class="alert ai2" style="margin-bottom:14px">Enter your Anthropic API key to unlock AI prayer generation. Get yours free at console.anthropic.com</div>
     <label>Anthropic API Key</label><input id="settings-apikey" type="password" placeholder="sk-ant-..." style="margin-bottom:14px">
     <label>Your Name</label><input id="settings-name" type="text" placeholder="Sister Elaine Gary" style="margin-bottom:14px">
-    <label>Ministry Name</label><input id="settings-ministry" type="text" placeholder="Sister Elaine's Prayer Ministry" style="margin-bottom:14px">
     <button class="btn bg bw" onclick="saveSettings()">💾 Save Settings</button>
-    <div class="div"></div>
-    <div style="font-size:12px;color:var(--muted);text-align:center">Your API key is stored only on this device and never shared.</div>
-    <div class="div"></div>
-    <h2 style="color:var(--amber);margin-bottom:10px;font-size:16px">📊 Data Management</h2>
-    <div class="row gap10"><button class="btn bo bs flex1" onclick="exportData()">📤 Export Data</button><button class="btn bo bs flex1" style="color:#f87171;border-color:rgba(248,113,113,.3)" onclick="clearData()">🗑️ Reset All</button></div>
+    <div class="divider"></div>
+    <div style="font-size:12px;color:var(--muted);text-align:center">API key stored only on this device. Never shared.</div>
+    <div class="divider"></div>
+    <div class="row gap10">
+      <button class="btn bo bs flex1" onclick="exportData()">📤 Export Data</button>
+      <button class="btn bo bs flex1" style="color:#f87171;border-color:rgba(248,113,113,.3)" onclick="clearData()">🗑️ Reset All</button>
+    </div>
     <button class="btn bo bw mt8" onclick="closeModal('modal-settings')">Close</button>
   </div>
 </div>
-<div id="toast"></div>
+
+<div id="toast" role="status" aria-live="polite"></div>
 <script>
+'use strict';
 const EMOJIS=['🙏','❤️','🔥','🙌','💬','👁️','⬜'];
 const EMOJI_LABELS=['Praying','Heart','Fire','Amen','Replied','Read','None'];
 const GOAL=1000000;
-function daysAgo(n){const d=new Date();d.setDate(d.getDate()-n);return d.toISOString().split('T')[0];}
-const SEED_CONTACTS=[
-  {id:'c1',name:'Mother Celestine Broussard',location:'Uptown, NOLA',phone:'',platforms:['WhatsApp'],notes:'First member of the circle. Prayer warrior. Always responds with a scripture reference.',added:'2024-01-01',lastResponse:daysAgo(1)},
-  {id:'c2',name:'Deacon Louis Tureaud',location:'Tremé, NOLA',phone:'',platforms:['WhatsApp'],notes:'Shares every prayer with his Sunday school class of 45 people.',added:'2024-01-01',lastResponse:daysAgo(3)},
-  {id:'c3',name:'Sister Josephine Melancon',location:'Metairie, LA',phone:'',platforms:['WhatsApp','Text'],notes:'Battling health challenges. Prayers mean everything to her family.',added:'2024-01-01',lastResponse:daysAgo(0)},
+function daysAgo(n){var d=new Date();d.setDate(d.getDate()-n);return d.toISOString().split('T')[0];}
+var SEED_CONTACTS=[
+  {id:'c1',name:'Mother Celestine Broussard',location:'Uptown, NOLA',phone:'',platforms:['WhatsApp'],notes:'First member. Prayer warrior. Always responds with scripture.',added:'2024-01-01',lastResponse:daysAgo(1)},
+  {id:'c2',name:'Deacon Louis Tureaud',location:'Tremé, NOLA',phone:'',platforms:['WhatsApp'],notes:'Shares every prayer with his Sunday school class of 45.',added:'2024-01-01',lastResponse:daysAgo(3)},
+  {id:'c3',name:'Sister Josephine Melancon',location:'Metairie, LA',phone:'',platforms:['WhatsApp','Text'],notes:'Battling health challenges.',added:'2024-01-01',lastResponse:daysAgo(0)},
   {id:'c4',name:'Brother Calvin Fontenot',location:'Seventh Ward, NOLA',phone:'',platforms:['WhatsApp'],notes:'Jazz musician. Shares the prayer at evening rehearsals.',added:'2024-01-01',lastResponse:daysAgo(7)},
-  {id:'c5',name:'Evangelist Rosa Arceneaux',location:'Gentilly, NOLA',phone:'',platforms:['WhatsApp'],notes:'Ministry leader who forwards to her own congregation of 200+.',added:'2024-01-01',lastResponse:daysAgo(2)},
-  {id:'c6',name:'Pastor James Thibodaux',location:'Mid-City, NOLA',phone:'',platforms:['WhatsApp','Email'],notes:'Well-connected pastor. Could introduce you to brand partnership contacts.',added:'2024-01-01',lastResponse:daysAgo(5)},
-  {id:'c7',name:'Mother Marie Doucet',location:'Algiers, NOLA',phone:'',platforms:['WhatsApp'],notes:'Age 84. Calls every Friday to personally say the prayer blessed her week.',added:'2024-01-01',lastResponse:daysAgo(1)},
-  {id:'c8',name:'Elder Samuel Batiste',location:'Marrero, LA',phone:'',platforms:['WhatsApp'],notes:'Deacon board chair. Printing prayers for shut-ins.',added:'2024-01-01',lastResponse:daysAgo(16)},
-  {id:'c9',name:'Sister Dorothy Guidry',location:'Kenner, LA',phone:'',platforms:['Text'],notes:'Registered nurse. Reads the prayer on her morning commute.',added:'2024-01-01',lastResponse:daysAgo(9)},
-  {id:'c10',name:'Minister Paul Comeaux',location:'Eastover, NOLA',phone:'',platforms:['WhatsApp'],notes:'Radio host. Has mentioned reading the prayer on-air to his listeners.',added:'2024-01-01',lastResponse:daysAgo(3)},
-  {id:'c11',name:'Prophetess Clara Labat',location:'Gentilly, NOLA',phone:'',platforms:['WhatsApp'],notes:'Prayer intercessor. Responds every single morning without fail.',added:'2024-01-01',lastResponse:daysAgo(0)},
-  {id:'c12',name:'Deacon Thomas Boudreaux',location:'Chalmette, LA',phone:'',platforms:['WhatsApp','Text'],notes:'Sends the prayer to his hospital chaplaincy group.',added:'2024-01-01',lastResponse:daysAgo(21)},
-  {id:'c13',name:'Sister Grace Mouton',location:'Harvey, LA',phone:'',platforms:['WhatsApp'],notes:'Schoolteacher. Uses the prayer for morning devotion with her class.',added:'2024-01-01',lastResponse:daysAgo(4)},
-  {id:'c14',name:'Elder Henry Hebert',location:'Slidell, LA',phone:'',platforms:['WhatsApp'],notes:'Missionary currently serving in Haiti.',added:'2024-01-01',lastResponse:daysAgo(6)},
-  {id:'c15',name:'Mother Patricia Celestin',location:'New Orleans East',phone:'',platforms:['WhatsApp'],notes:'Founding member. Forwards every prayer to a group of 80 women.',added:'2024-01-01',lastResponse:daysAgo(2)},
+  {id:'c5',name:'Evangelist Rosa Arceneaux',location:'Gentilly, NOLA',phone:'',platforms:['WhatsApp'],notes:'Forwards to her congregation of 200+.',added:'2024-01-01',lastResponse:daysAgo(2)},
+  {id:'c6',name:'Pastor James Thibodaux',location:'Mid-City, NOLA',phone:'',platforms:['WhatsApp','Email'],notes:'Well-connected pastor.',added:'2024-01-01',lastResponse:daysAgo(5)},
+  {id:'c7',name:'Mother Marie Doucet',location:'Algiers, NOLA',phone:'',platforms:['WhatsApp'],notes:'Age 84. Calls every Friday.',added:'2024-01-01',lastResponse:daysAgo(1)},
+  {id:'c8',name:'Elder Samuel Batiste',location:'Marrero, LA',phone:'',platforms:['WhatsApp'],notes:'Printing prayers for shut-ins.',added:'2024-01-01',lastResponse:daysAgo(16)},
+  {id:'c9',name:'Sister Dorothy Guidry',location:'Kenner, LA',phone:'',platforms:['Text'],notes:'Registered nurse. Reads on her morning commute.',added:'2024-01-01',lastResponse:daysAgo(9)},
+  {id:'c10',name:'Minister Paul Comeaux',location:'Eastover, NOLA',phone:'',platforms:['WhatsApp'],notes:'Radio host. Mentions the prayer on-air.',added:'2024-01-01',lastResponse:daysAgo(3)},
+  {id:'c11',name:'Prophetess Clara Labat',location:'Gentilly, NOLA',phone:'',platforms:['WhatsApp'],notes:'Prayer intercessor. Responds every morning.',added:'2024-01-01',lastResponse:daysAgo(0)},
+  {id:'c12',name:'Deacon Thomas Boudreaux',location:'Chalmette, LA',phone:'',platforms:['WhatsApp','Text'],notes:'Sends to his hospital chaplaincy group.',added:'2024-01-01',lastResponse:daysAgo(21)},
+  {id:'c13',name:'Sister Grace Mouton',location:'Harvey, LA',phone:'',platforms:['WhatsApp'],notes:'Schoolteacher. Uses for morning devotion.',added:'2024-01-01',lastResponse:daysAgo(4)},
+  {id:'c14',name:'Elder Henry Hebert',location:'Slidell, LA',phone:'',platforms:['WhatsApp'],notes:'Missionary serving in Haiti.',added:'2024-01-01',lastResponse:daysAgo(6)},
+  {id:'c15',name:'Mother Patricia Celestin',location:'New Orleans East',phone:'',platforms:['WhatsApp'],notes:'Forwards every prayer to a group of 80 women.',added:'2024-01-01',lastResponse:daysAgo(2)},
 ];
-let contacts=[],prayers=[],engagements={},revenue=0,revenueLog=[],streak=0,lastActive=null,tasks={},platforms={},livePlans=[];
+var contacts=[],prayers=[],engagements={},revenue=0,revenueLog=[],streak=0,lastActive=null,tasks={},platforms={},livePlans=[];
 function loadState(){
   try{
-    const c=localStorage.getItem('elaine_contacts');contacts=c?JSON.parse(c):SEED_CONTACTS.map(x=>({...x}));
-    const p=localStorage.getItem('elaine_prayers');prayers=p?JSON.parse(p):[];
-    const e=localStorage.getItem('elaine_engagements');engagements=e?JSON.parse(e):{};
-    const r=localStorage.getItem('elaine_revenue');revenue=r?parseFloat(r):0;
-    const rl=localStorage.getItem('elaine_revlog');revenueLog=rl?JSON.parse(rl):[];
-    const s=localStorage.getItem('elaine_streak');streak=s?parseInt(s):0;
-    const la=localStorage.getItem('elaine_lastactive');lastActive=la||null;
-    const t=localStorage.getItem('elaine_tasks');tasks=t?JSON.parse(t):{};
-    const pl=localStorage.getItem('elaine_platforms');platforms=pl?JSON.parse(pl):{whatsapp:true};
-    const lp=localStorage.getItem('elaine_liveplans');livePlans=lp?JSON.parse(lp):[];
-  }catch(err){contacts=SEED_CONTACTS.map(x=>({...x}));}
+    var c=localStorage.getItem('elaine_contacts');contacts=c?JSON.parse(c):SEED_CONTACTS.map(function(x){return Object.assign({},x);});
+    var p=localStorage.getItem('elaine_prayers');prayers=p?JSON.parse(p):[];
+    var e=localStorage.getItem('elaine_engagements');engagements=e?JSON.parse(e):{};
+    var r=localStorage.getItem('elaine_revenue');revenue=r?parseFloat(r):0;
+    var rl=localStorage.getItem('elaine_revlog');revenueLog=rl?JSON.parse(rl):[];
+    var s=localStorage.getItem('elaine_streak');streak=s?parseInt(s):0;
+    var la=localStorage.getItem('elaine_lastactive');lastActive=la||null;
+    var t=localStorage.getItem('elaine_tasks');tasks=t?JSON.parse(t):{};
+    var pl=localStorage.getItem('elaine_platforms');platforms=pl?JSON.parse(pl):{whatsapp:true};
+    var lp=localStorage.getItem('elaine_liveplans');livePlans=lp?JSON.parse(lp):[];
+  }catch(err){contacts=SEED_CONTACTS.map(function(x){return Object.assign({},x);});}
 }
 function save(k,v){try{localStorage.setItem(k,typeof v==='string'?v:JSON.stringify(v));}catch(e){}}
 function saveAll(){save('elaine_contacts',contacts);save('elaine_prayers',prayers);save('elaine_engagements',engagements);save('elaine_revenue',String(revenue));save('elaine_revlog',revenueLog);save('elaine_streak',String(streak));save('elaine_lastactive',lastActive||'');save('elaine_tasks',tasks);save('elaine_platforms',platforms);save('elaine_liveplans',livePlans);}
 function switchTab(name){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.nbtn').forEach(b=>b.classList.remove('active'));
-  const tab=document.getElementById('tab-'+name);if(tab)tab.classList.add('active');
-  const btn=document.querySelector(`.nbtn[data-tab="${name}"]`);if(btn)btn.classList.add('active');
-  if(name==='circle')renderCircle();if(name==='engage')renderEngage();if(name==='daily')renderDaily();
-  if(name==='home')renderHome();if(name==='business')renderBusiness();if(name==='prayers')renderPrayerArchive();
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.nbtn').forEach(function(b){b.classList.remove('active');});
+  var tab=document.getElementById('tab-'+name);if(tab)tab.classList.add('active');
+  var btn=document.querySelector('.nbtn[data-tab="'+name+'"]');if(btn)btn.classList.add('active');
+  if(name==='circle')renderCircle();
+  if(name==='engage')renderEngage();
+  if(name==='daily')renderDaily();
+  if(name==='home')renderHome();
+  if(name==='business')renderBusiness();
+  if(name==='prayers')renderPrayerArchive();
   if(name==='grow')renderGrow();
 }
 function fmtMoney(n){if(n>=1000000)return '$'+(n/1000000).toFixed(2)+'M';if(n>=1000)return '$'+(n/1000).toFixed(1)+'K';return '$'+n.toLocaleString();}
 function today(){return new Date().toISOString().split('T')[0];}
 function daysBetween(d1,d2){return Math.floor((new Date(d2)-new Date(d1))/(1000*60*60*24));}
 function daysSinceLastResponse(c){if(!c.lastResponse)return 999;return daysBetween(c.lastResponse,today());}
-function initials(n){return n.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();}
-function showToast(msg,color='var(--green)'){const t=document.getElementById('toast');t.textContent=msg;t.style.background=color;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);}
-function copyText(text,label='Copied!'){navigator.clipboard.writeText(text).then(()=>showToast('📋 '+label)).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('📋 '+label);});}
+function initials(n){return n.split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();}
+function showToast(msg,color){var t=document.getElementById('toast');t.textContent=msg;t.style.background=color||'var(--green)';t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2800);}
+function copyText(text,label){
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){showToast('📋 '+(label||'Copied!'));}).catch(function(){fallbackCopy(text,label);});
+  }else{fallbackCopy(text,label);}
+}
+function fallbackCopy(text,label){
+  var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.focus();ta.select();
+  try{document.execCommand('copy');showToast('📋 '+(label||'Copied!'));}catch(e){showToast('Copy failed — try long-press','#c8842a');}
+  document.body.removeChild(ta);
+}
 function getApiKey(){return localStorage.getItem('elaine_api_key')||localStorage.getItem('akira_akey')||'';}
 function getDaysSince2018(){return daysBetween('2018-01-01',today());}
-function getEngagementRate(){const te=engagements[today()]||{};const responded=Object.values(te).filter(e=>e&&e!=='⬜').length;if(!contacts.length)return '—';return Math.round((responded/contacts.length)*100)+'%';}
-function getSilentContacts(days=14){return contacts.filter(c=>daysSinceLastResponse(c)>=days);}
-function checkAndUpdateStreak(){const t=today();if(lastActive===t)return;const yesterday=daysAgo(1);if(lastActive===yesterday){streak++;}else if(lastActive&&lastActive!==t){streak=1;}else if(!lastActive){streak=1;}lastActive=t;saveAll();}
-function renderHome(){
+function getEngagementRate(){var te=engagements[today()]||{};var responded=Object.values(te).filter(function(e){return e&&e!=='⬜';}).length;if(!contacts.length)return '—';return Math.round((responded/contacts.length)*100)+'%';}
+function getSilentContacts(days){days=days||14;return contacts.filter(function(c){return daysSinceLastResponse(c)>=days;});}
+function checkAndUpdateStreak(){var t=today();if(lastActive===t)return;var yesterday=daysAgo(1);if(lastActive===yesterday){streak++;}else{streak=1;}lastActive=t;saveAll();}function renderHome(){
   checkAndUpdateStreak();
   document.getElementById('streaknum').textContent=streak;
-  document.getElementById('daily-streak').textContent=streak;
-  const days=getDaysSince2018();
-  document.getElementById('daycount').textContent=`${days.toLocaleString()} days of faithful daily prayer since 2018`;
+  var ds=document.getElementById('daily-streak');if(ds)ds.textContent=streak;
+  var days=getDaysSince2018();
+  document.getElementById('daycount').textContent=days.toLocaleString()+' days of faithful daily prayer since 2018';
   document.getElementById('stat-circle').textContent=contacts.length;
   document.getElementById('stat-prayers').textContent=prayers.length;
   document.getElementById('stat-engage').textContent=getEngagementRate();
-  const dayNames=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const dow=new Date().getDay();
-  const dayName=dayNames[dow];
-  const dayTasks={
-    0:{focus:'🙏 Rest & Renewal',desc:'Today is the Sabbath. Rest in the Lord. No ministry tasks today — you have given all week. Let God minister to you.'},
-    1:{focus:'📣 Brand Outreach Monday',desc:'Today\'s mission: research and contact one for-profit brand about a sponsorship partnership. Even one "yes" at the Digital Sponsor level = $2,500.'},
-    2:{focus:'🤝 Community Growth Tuesday',desc:'Today\'s mission: add 2 new people to your prayer circle.'},
-    3:{focus:'📱 Social Media Wednesday',desc:'Today\'s mission: post today\'s prayer on one social platform. Use the AI Post Generator in the Grow tab.'},
-    4:{focus:'💌 Sponsorship Thursday',desc:'Today\'s mission: send one brand pitch email. Use the template in the Business tab.'},
-    5:{focus:'🔴 Live Prayer Friday',desc:'Today is Live Prayer day! Host a 20-30 minute live session. This live content is what brands pay premium rates to sponsor.'},
-    6:{focus:'📈 Review & Plan Saturday',desc:'Today: review your week. Check engagement stats, update revenue, follow up on any outstanding pitches.'},
-  };
-  const task=dayTasks[dow];
-  document.getElementById('briefing-content').innerHTML=`<div style="margin-bottom:10px"><span class="badge ba">${dayName}'s Focus</span></div><div style="font-size:16px;font-weight:600;color:var(--cream);margin-bottom:8px">${task.focus}</div><div>${task.desc}</div><div class="div"></div><div style="font-size:12px;color:var(--muted)">📅 ${new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'})}</div>`;
-  const chatEl=document.getElementById('home-chat');
-  if(!chatEl.children.length){addChatMsg('home-chat','ai',`Good morning, Sister Elaine! 🕊️\n\nYou have faithfully blessed lives for ${days.toLocaleString()} days. Today is ${dayName} — ${task.focus}.\n\nYour prayer circle has ${contacts.length} members. ${getSilentContacts().length>0?`⚠️ ${getSilentContacts().length} members haven't responded in 14+ days.`:'🙌 Everyone in your circle has been engaged recently!'}\n\nHow can I help you today?`);}
+  var dayNames=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var dow=new Date().getDay();var dayName=dayNames[dow];
+  var dayTasks={0:{focus:'🙏 Rest & Renewal',desc:'Today is the Sabbath. Rest in the Lord. No ministry tasks today.'},1:{focus:'📣 Brand Outreach Monday',desc:'Today: contact one for-profit brand about a sponsorship. One yes at Digital Sponsor = $2,500.'},2:{focus:'🤝 Community Growth Tuesday',desc:'Today: add 2 new people to your prayer circle.'},3:{focus:'📱 Social Media Wednesday',desc:'Today: post your prayer on one social platform. Use AI Post Generator in Grow.'},4:{focus:'💌 Sponsorship Thursday',desc:'Today: send one brand pitch email or follow up on a pending one.'},5:{focus:'🔴 Live Prayer Friday',desc:'Host a live session — your highest-value sponsorship inventory.'},6:{focus:'📈 Review & Plan Saturday',desc:'Review your week. Check stats, update revenue, follow up on pitches.'}};
+  var task=dayTasks[dow];
+  document.getElementById('briefing-content').innerHTML='<div style="margin-bottom:10px"><span class="badge ba">'+dayName+'s Focus</span></div><div style="font-size:16px;font-weight:600;color:var(--cream);margin-bottom:8px">'+task.focus+'</div><div style="font-size:13px;color:var(--sub)">'+task.desc+'</div><div class="divider"></div><div style="font-size:12px;color:var(--muted)">📅 '+new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'})+'</div>';
+  var chatEl=document.getElementById('home-chat');
+  if(chatEl&&!chatEl.children.length){addChatMsg('home-chat','ai','Good morning, Sister Elaine! 🕊️\n\nYou have faithfully blessed lives for '+days.toLocaleString()+' days. Today is '+dayName+' — '+task.focus+'.\n\nYour prayer circle has '+contacts.length+' members. '+(getSilentContacts().length>0?'⚠️ '+getSilentContacts().length+' members haven\'t responded in 14+ days.':'🙌 Everyone in your circle has been engaged recently!')+' \n\nHow can I help you today?');}
   document.getElementById('biz-revenue').textContent=fmtMoney(revenue);
-  const pct=Math.min(100,(revenue/GOAL)*100);
+  var pct=Math.min(100,(revenue/GOAL)*100);
   document.getElementById('biz-pbar').style.width=pct+'%';
   document.getElementById('biz-pct').textContent=pct.toFixed(2)+'% of $1M';
 }
-async function callAI(messages,systemPrompt,maxTokens=1024){
-  const key=getApiKey();
-  if(!key){showToast('⚙️ Enter your API key in Settings first','#c8842a');return null;}
-  const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:maxTokens,system:systemPrompt,messages:messages})});
-  if(!resp.ok){const e=await resp.json();throw new Error(e.error?.message||'API error');}
-  const data=await resp.json();return data.content[0].text;
+function callAI(messages,systemPrompt,maxTokens){
+  var key=getApiKey();
+  if(!key){showToast('⚙️ Enter API key in Settings first','#c8842a');return Promise.reject(new Error('No API key'));}
+  return fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:maxTokens||1000,system:systemPrompt,messages:messages})})
+    .then(function(resp){if(!resp.ok){return resp.json().then(function(e){throw new Error(e.error&&e.error.message||'API error');});}return resp.json();})
+    .then(function(data){return data.content[0].text;});
 }
-async function generatePrayer(){
-  const tone=document.getElementById('prayer-tone').value;
-  const ctx=document.getElementById('prayer-context').value;
-  const btn=document.getElementById('genpray-btn');
+function generatePrayer(){
+  var tone=document.getElementById('prayer-tone').value;
+  var ctx=document.getElementById('prayer-context').value;
+  var btn=document.getElementById('genpray-btn');
   btn.innerHTML='<span class="spin"></span> Writing prayer...';btn.disabled=true;
-  try{
-    const system=`You are writing on behalf of Sister Elaine Gary, a prayer warrior and woman of deep faith from New Orleans, Louisiana who has faithfully sent morning prayers to her circle of 180+ people every weekday since 2018. You write in her voice: warm, wise, intimate, grounded in scripture, with the spiritual authority of a woman who has walked with God for over seven decades. Her prayers feel like a wise grandmother speaking directly to the heart. Always begin with a loving salutation to God. Always end with "In Jesus' name, Amen." Keep prayers between 150-250 words.`;
-    const userMsg=`Write a morning prayer for today with the theme of "${tone}"${ctx?` — specifically for: ${ctx}`:''}.  Make it feel personal, powerful, and deeply anointed. Today is ${new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'})}.`;
-    const text=await callAI([{role:'user',content:userMsg}],system,800);
-    if(!text)return;
-    document.getElementById('prayer-output').textContent=text;
-    document.getElementById('prayer-output-card').style.display='block';
-    document.getElementById('prayer-output-card').scrollIntoView({behavior:'smooth',block:'start'});
-    window._currentPrayer={text,tone,date:today()};
-  }catch(err){showToast('⚠️ '+err.message,'#c8842a');}
-  finally{btn.innerHTML='✨ Generate Today\'s Prayer';btn.disabled=false;}
+  var system='You are writing on behalf of Sister Elaine Gary, a prayer warrior from New Orleans who has sent morning prayers to 180+ people every weekday since 2018. Write in her voice: warm, wise, intimate, grounded in scripture. Always begin with a loving salutation to God. Always end with "In Jesus\' name, Amen." Keep prayers 150-250 words.';
+  var userMsg='Write a morning prayer with the theme of "'+tone+'"'+(ctx?' — specifically for: '+ctx:'')+'. Today is '+new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'})+'.';
+  callAI([{role:'user',content:userMsg}],system,800)
+    .then(function(text){document.getElementById('prayer-output').textContent=text;document.getElementById('prayer-output-card').style.display='block';window._currentPrayer={text:text,tone:tone,date:today()};})
+    .catch(function(err){showToast('⚠️ '+err.message,'#c8842a');})
+    .finally(function(){btn.innerHTML='✨ Generate Today\'s Prayer';btn.disabled=false;});
 }
-function copyPrayer(){const t=document.getElementById('prayer-output').textContent;if(!t){showToast('Generate a prayer first');return;}copyText(t,'Prayer copied!');}
-function sendWhatsApp(){const t=document.getElementById('prayer-output').textContent;if(!t){showToast('Generate a prayer first');return;}window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');}
-function savePrayer(){if(!window._currentPrayer){showToast('Generate a prayer first');return;}prayers.unshift({...window._currentPrayer,id:'p'+Date.now()});saveAll();renderPrayerArchive();showToast('🙏 Prayer saved!');checkAndUpdateStreak();document.getElementById('stat-prayers').textContent=prayers.length;}
-function copyManual(){const t=document.getElementById('manual-prayer').value.trim();if(!t){showToast('Write a prayer first');return;}copyText(t,'Prayer copied!');}
-function sendManualWhatsApp(){const t=document.getElementById('manual-prayer').value.trim();if(!t){showToast('Write a prayer first');return;}window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');}
-function saveManual(){const t=document.getElementById('manual-prayer').value.trim();if(!t){showToast('Write a prayer first');return;}prayers.unshift({text:t,tone:'Manual',date:today(),id:'p'+Date.now()});saveAll();renderPrayerArchive();showToast('🙏 Prayer saved!');checkAndUpdateStreak();document.getElementById('stat-prayers').textContent=prayers.length;}
+function copyPrayer(){var t=document.getElementById('prayer-output').textContent;if(!t){showToast('Generate a prayer first');return;}copyText(t,'Prayer copied!');}
+function sendWhatsApp(){var t=document.getElementById('prayer-output').textContent;if(!t){showToast('Generate a prayer first');return;}window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');}
+function savePrayer(){if(!window._currentPrayer){showToast('Generate a prayer first');return;}prayers.unshift(Object.assign({},window._currentPrayer,{id:'p'+Date.now()}));saveAll();renderPrayerArchive();showToast('🙏 Prayer saved!');document.getElementById('stat-prayers').textContent=prayers.length;}
+function copyManual(){var t=document.getElementById('manual-prayer').value.trim();if(!t){showToast('Write a prayer first');return;}copyText(t,'Prayer copied!');}
+function sendManualWhatsApp(){var t=document.getElementById('manual-prayer').value.trim();if(!t){showToast('Write a prayer first');return;}window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');}
+function saveManual(){var t=document.getElementById('manual-prayer').value.trim();if(!t){showToast('Write a prayer first');return;}prayers.unshift({text:t,tone:'Manual',date:today(),id:'p'+Date.now()});saveAll();renderPrayerArchive();showToast('🙏 Prayer saved!');document.getElementById('stat-prayers').textContent=prayers.length;}
 function renderPrayerArchive(){
-  const el=document.getElementById('prayer-archive');
+  var el=document.getElementById('prayer-archive');
   document.getElementById('prayer-count').textContent=prayers.length+' saved';
-  if(!prayers.length){el.innerHTML='<div style="font-size:13px;color:var(--muted);text-align:center;padding:20px 0">No prayers saved yet. Generate or write one above and tap Save. ✨</div>';return;}
-  el.innerHTML=prayers.slice(0,20).map((p,i)=>`<div style="padding:12px;background:rgba(50,23,96,.3);border:1px solid var(--border);border-radius:11px;margin-bottom:8px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px"><span class="badge ba">${p.tone||'Prayer'}</span><span style="font-size:11px;color:var(--muted)">${p.date||''}</span></div><div class="ptext" style="font-size:14px;max-height:80px;overflow:hidden">${p.text}</div><button class="btn bo bs mt8" onclick="copyText(prayers[${i}].text,'Prayer copied!')">📋 Copy</button></div>`).join('');
+  if(!prayers.length){el.innerHTML='<div style="font-size:13px;color:var(--muted);text-align:center;padding:20px 0">No prayers saved yet. ✨</div>';return;}
+  el.innerHTML=prayers.slice(0,20).map(function(p,i){return '<div style="padding:12px;background:rgba(50,23,96,.3);border:1px solid var(--border);border-radius:11px;margin-bottom:8px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px"><span class="badge ba">'+(p.tone||'Prayer')+'</span><span style="font-size:11px;color:var(--muted)">'+(p.date||'')+'</span></div><div class="ptext" style="font-size:14px;max-height:80px;overflow:hidden">'+p.text+'</div><button class="btn bo bs mt8" onclick="copyText(prayers['+i+'].text,\'Prayer copied!\')">📋 Copy</button></div>';}).join('');
 }
+var _activeContactId=null;
 function renderCircle(){
-  const q=(document.getElementById('circle-search')?.value||'').toLowerCase();
-  const filtered=contacts.filter(c=>c.name.toLowerCase().includes(q)||(c.location||'').toLowerCase().includes(q));
+  var q=(document.getElementById('circle-search')||{value:''}).value.toLowerCase();
+  var filtered=contacts.filter(function(c){return c.name.toLowerCase().includes(q)||(c.location||'').toLowerCase().includes(q);});
   document.getElementById('c-total').textContent=contacts.length;
-  document.getElementById('c-active').textContent=contacts.filter(c=>daysSinceLastResponse(c)<7).length;
+  document.getElementById('c-active').textContent=contacts.filter(function(c){return daysSinceLastResponse(c)<7;}).length;
   document.getElementById('c-silent').textContent=getSilentContacts().length;
-  const el=document.getElementById('circle-list');
+  var el=document.getElementById('circle-list');
   if(!filtered.length){el.innerHTML='<div style="text-align:center;padding:20px;color:var(--muted);font-size:13px">No members found.</div>';return;}
-  el.innerHTML=filtered.map(c=>{
-    const days=daysSinceLastResponse(c);
-    let dayBadge=days>=14?`<span class="badge br">${days}d silent</span>`:days>=7?`<span class="badge ba">${days}d</span>`:days<=1?`<span class="badge bg2">Active</span>`:`<span class="badge bp">${days}d ago</span>`;
-    const plats=(c.platforms||[]).map(p=>`<span class="ptag">${p}</span>`).join('');
-    return `<div class="citem" style="position:relative">
-      <div style="display:flex;align-items:center;gap:11px;flex:1;cursor:pointer" onclick="openContact('${c.id}')">
-        <div class="cav">${initials(c.name)}</div>
-        <div class="cinfo"><div class="cname">${c.name}</div><div class="cmeta">${c.location||'New Orleans'} ${plats}</div></div>
-        ${dayBadge}
-      </div>
-      <button onclick="quickDelete('${c.id}','${c.name.replace(/'/g,"&#39;")}')" style="background:rgba(220,38,38,.18);border:1px solid rgba(248,113,113,.28);color:#f87171;border-radius:8px;padding:6px 9px;font-size:16px;cursor:pointer;margin-left:8px;flex-shrink:0;line-height:1" title="Remove from circle">🗑️</button>
-    </div>`;
+  el.innerHTML=filtered.map(function(c){
+    var days=daysSinceLastResponse(c);
+    var badge=days>=14?'<span class="badge br">'+days+'d silent</span>':days>=7?'<span class="badge ba">'+days+'d</span>':days<=1?'<span class="badge bg2">Active</span>':'<span class="badge bp">'+days+'d ago</span>';
+    var plats=(c.platforms||[]).map(function(p){return '<span class="ptag">'+p+'</span>';}).join('');
+    var safeName=c.name.replace(/'/g,'&#39;');
+    return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">'
+      +'<button class="citem" style="flex:1;min-width:0" onclick="openContact(\''+c.id+'\')">'  
+      +'<div class="cav">'+initials(c.name)+'</div>'
+      +'<div class="cinfo"><div class="cname">'+c.name+'</div><div class="cmeta">'+(c.location||'New Orleans')+' '+plats+'</div></div>'
+      +badge
+      +'</button>'
+      +'<button onclick="quickDelete(\''+c.id+'\',\''+safeName+'\')" style="background:rgba(220,38,38,.18);border:1px solid rgba(248,113,113,.28);color:#f87171;border-radius:8px;padding:8px 10px;font-size:16px;touch-action:manipulation;cursor:pointer;-webkit-appearance:none;flex-shrink:0;min-height:44px;">🗑️</button>'
+      +'</div>';
   }).join('');
-}
-let _activeContactId = null;
-function deleteContact(){
-  const c=contacts.find(x=>x.id===_activeContactId);
-  if(!c)return;
-  if(!confirm(`Remove "${c.name}" from your prayer circle?\n\nThis cannot be undone.`))return;
-  contacts=contacts.filter(x=>x.id!==_activeContactId);
-  Object.keys(engagements).forEach(date=>{delete engagements[date][_activeContactId];});
-  saveAll();closeModal('modal-contact');renderCircle();
-  showToast('🗑️ '+c.name.split(' ')[0]+' removed from your circle');
-}
-function openContact(id){
+}function openContact(id){
   _activeContactId=id;
-  const c=contacts.find(x=>x.id===id);if(!c)return;
-  const days=daysSinceLastResponse(c);
-  const el=document.getElementById('contact-modal-content');
-  const checkIn=`Hello ${c.name.split(' ')[1]||c.name}! 🙏 I've been thinking about you and wanted to reach out personally. How are you doing? You've been in my prayers. Have you been receiving my morning prayers? I send them every weekday and I want to make sure they're still reaching you. Sending love and blessings your way! — Sister Elaine`;
-  el.innerHTML=`<div style="text-align:center;margin-bottom:18px"><div class="cav" style="width:64px;height:64px;font-size:26px;margin:0 auto 10px">${initials(c.name)}</div><h2 style="color:var(--amber)">${c.name}</h2><div style="font-size:13px;color:var(--muted);margin-top:3px">${c.location||''}</div><div style="margin-top:8px">${(c.platforms||[]).map(p=>`<span class="ptag">${p}</span>`).join('')}</div></div>${c.notes?`<div class="alert ai2" style="margin-bottom:12px">📝 ${c.notes}</div>`:''}<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px"><div class="scard"><div class="snum">${days>998?'—':days}</div><div class="slbl">Days Since Response</div></div><div class="scard"><div class="snum" style="font-size:14px">${c.lastResponse||'—'}</div><div class="slbl">Last Responded</div></div></div>${days>=14?`<div class="card-title" style="margin-bottom:8px">💬 Check-In Message Ready</div><div class="pitch" style="margin-bottom:10px"><p>"${checkIn}"</p></div><button class="btn bg bs" onclick="copyText('${checkIn.replace(/'/g,"&#39;")}','Message copied!')">📋 Copy Message</button>`:`<div class="alert as">✅ ${c.name.split(' ')[0]} has been active within the last ${days} day${days!==1?'s':''}.</div>`}`;
+  var c=contacts.find(function(x){return x.id===id;});if(!c)return;
+  var days=daysSinceLastResponse(c);
+  var el=document.getElementById('contact-modal-content');
+  var checkIn='Hello '+(c.name.split(' ')[1]||c.name)+'! 🙏 I\'ve been thinking about you. How are you doing? Have you been receiving my morning prayers? Sending love — Sister Elaine';
+  el.innerHTML='<div style="text-align:center;margin-bottom:18px"><div class="cav" style="width:64px;height:64px;font-size:26px;margin:0 auto 10px">'+initials(c.name)+'</div><h2 style="color:var(--amber)">'+c.name+'</h2><div style="font-size:13px;color:var(--muted);margin-top:3px">'+(c.location||'')+'</div></div>'+(c.notes?'<div class="alert ai2" style="margin-bottom:12px">📝 '+c.notes+'</div>':'')+'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px"><div class="scard"><div class="snum">'+(days>998?'—':days)+'</div><div class="slbl">Days Since Response</div></div><div class="scard"><div class="snum" style="font-size:14px">'+(c.lastResponse||'—')+'</div><div class="slbl">Last Responded</div></div></div>'+(days>=14?'<div class="card-title" style="margin-bottom:8px">💬 Check-In Message</div><div class="pitch"><p>'+checkIn+'</p></div><button class="btn bg bs" onclick="copyText(\'' + checkIn.replace(/'/g, "&#39;") + '\',\'Copied!\')">📋 Copy Message</button>':'<div class="alert as">✅ '+c.name.split(' ')[0]+' active within '+(days<=1?'1 day':days+' days')+'.</div>');
   openModal('modal-contact');
 }
-function quickDelete(id, name){
-  if(!confirm(`Remove "${name}" from your prayer circle?\n\nThis cannot be undone.`))return;
-  contacts=contacts.filter(x=>x.id!==id);
-  Object.keys(engagements).forEach(date=>{if(engagements[date])delete engagements[date][id];});
-  saveAll();renderCircle();
-  showToast('🗑️ '+name.split(' ')[0]+' removed from your circle');
+function deleteContact(){
+  var c=contacts.find(function(x){return x.id===_activeContactId;});if(!c)return;
+  if(!confirm('Remove "'+c.name+'" from your circle?'))return;
+  contacts=contacts.filter(function(x){return x.id!==_activeContactId;});
+  Object.keys(engagements).forEach(function(date){if(engagements[date])delete engagements[date][_activeContactId];});
+  saveAll();closeModal('modal-contact');renderCircle();
+  showToast('🗑️ '+c.name.split(' ')[0]+' removed');
 }
-function openAddContact(){['add-name','add-location','add-phone','add-notes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});['wa','txt','em','fb'].forEach(id=>{const el=document.getElementById('plt-'+id);if(el)el.checked=false;});openModal('modal-add');}
-function saveNewContact(){const name=document.getElementById('add-name').value.trim();if(!name){showToast('⚠️ Name is required','#c8842a');return;}const plats=[];if(document.getElementById('plt-wa').checked)plats.push('WhatsApp');if(document.getElementById('plt-txt').checked)plats.push('Text');if(document.getElementById('plt-em').checked)plats.push('Email');if(document.getElementById('plt-fb').checked)plats.push('Facebook');contacts.push({id:'c'+Date.now(),name,location:document.getElementById('add-location').value.trim(),phone:document.getElementById('add-phone').value.trim(),platforms:plats.length?plats:['WhatsApp'],notes:document.getElementById('add-notes').value.trim(),added:today(),lastResponse:null});saveAll();closeModal('modal-add');renderCircle();showToast('🙏 '+name+' added to your circle!');}function renderEngage(){
-  const t=today();
+function quickDelete(id,name){
+  if(!confirm('Remove "'+name+'" from your circle?'))return;
+  contacts=contacts.filter(function(x){return x.id!==id;});
+  Object.keys(engagements).forEach(function(date){if(engagements[date])delete engagements[date][id];});
+  saveAll();renderCircle();showToast('🗑️ '+name.split(' ')[0]+' removed');
+}
+function openAddContact(){
+  ['add-name','add-location','add-phone','add-notes'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+  ['plt-wa','plt-txt','plt-em'].forEach(function(id){var el=document.getElementById(id);if(el)el.checked=false;});
+  openModal('modal-add');
+}
+function saveNewContact(){
+  var name=document.getElementById('add-name').value.trim();
+  if(!name){showToast('⚠️ Name is required','#c8842a');return;}
+  var plats=[];
+  if(document.getElementById('plt-wa').checked)plats.push('WhatsApp');
+  if(document.getElementById('plt-txt').checked)plats.push('Text');
+  if(document.getElementById('plt-em').checked)plats.push('Email');
+  contacts.push({id:'c'+Date.now(),name:name,location:document.getElementById('add-location').value.trim(),phone:document.getElementById('add-phone').value.trim(),platforms:plats.length?plats:['WhatsApp'],notes:document.getElementById('add-notes').value.trim(),added:today(),lastResponse:null});
+  saveAll();closeModal('modal-add');renderCircle();showToast('🙏 '+name+' added to your circle!');
+}
+function renderEngage(){
+  var t=today();
   document.getElementById('today-date-badge').textContent=new Date().toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
-  const todayEngs=engagements[t]||{};
-  const logged=Object.keys(todayEngs).length;
-  const responded=Object.values(todayEngs).filter(e=>e&&e!=='⬜').length;
-  const rate=contacts.length?Math.round((responded/contacts.length)*100)+'%':'—';
-  const silent=getSilentContacts().length;
-  document.getElementById('e-today').textContent=logged;document.getElementById('e-rate').textContent=rate;document.getElementById('e-silent').textContent=silent;document.getElementById('stat-engage').textContent=rate;
-  const silentEl=document.getElementById('silent-alerts-section');
-  const silentList=getSilentContacts();
-  if(silentList.length){silentEl.innerHTML=`<div class="card" style="border-color:rgba(248,113,113,.3)"><div class="card-title" style="color:#f87171">⚠️ ${silentList.length} Member${silentList.length>1?'s':''} Need Care (14+ days)</div>${silentList.map(c=>{const days=daysSinceLastResponse(c);const msg=`Hello ${c.name.split(' ')[1]||c.name}! 🙏 Checking in on you with love — I haven't heard from you in a while and you've been on my heart. How are you? Praying for you daily. — Sister Elaine`;return `<div class="citem" style="margin-bottom:6px"><div class="cav" style="background:rgba(220,38,38,.2);color:#f87171">${initials(c.name)}</div><div class="cinfo"><div class="cname">${c.name}</div><div class="cmeta">${days} days since last response</div></div><button class="btn bo bs" style="color:#f87171;border-color:rgba(248,113,113,.3);font-size:11px;padding:6px 8px" onclick="copyText('${msg.replace(/'/g,"&#39;")}','Message copied!')">📋 Copy</button></div>`;}).join('')}</div>`);}else{silentEl.innerHTML='';}
-  const el=document.getElementById('engage-list');
-  el.innerHTML=contacts.map(c=>{const sel=todayEngs[c.id]||'';const days=daysSinceLastResponse(c);return `<div class="erow"><div class="ertop"><div class="cav" style="width:32px;height:32px;font-size:12px">${initials(c.name)}</div><div class="ername">${c.name}</div><div class="erdays">${days>998?'new':days+'d'}</div></div><div class="egrid">${EMOJIS.map((em,i)=>`<button class="ebtn${sel===em?' sel':''}" onclick="logEngage('${c.id}','${em}')" title="${EMOJI_LABELS[i]}">${em}</button>`).join('')}</div></div>`;}).join('');
+  var todayEngs=engagements[t]||{};
+  var logged=Object.keys(todayEngs).length;
+  var responded=Object.values(todayEngs).filter(function(e){return e&&e!=='⬜';}).length;
+  var rate=contacts.length?Math.round((responded/contacts.length)*100)+'%':'—';
+  document.getElementById('e-today').textContent=logged;
+  document.getElementById('e-rate').textContent=rate;
+  document.getElementById('e-silent').textContent=getSilentContacts().length;
+  document.getElementById('stat-engage').textContent=rate;
+  var silentEl=document.getElementById('silent-alerts-section');
+  var silentList=getSilentContacts();
+  if(silentList.length){
+    silentEl.innerHTML='<div class="card" style="border-color:rgba(248,113,113,.3)"><div class="card-title" style="color:#f87171">⚠️ '+silentList.length+' Member'+(silentList.length>1?'s':'')+' Need Care (14+ days)</div>'+
+    silentList.map(function(c){
+      var days=daysSinceLastResponse(c);
+      var msg='Hello '+(c.name.split(' ')[1]||c.name)+'! 🙏 Checking in with love — you have been on my heart. How are you? Praying for you daily. — Sister Elaine';
+      return '<div style="display:flex;align-items:center;gap:8px;padding:8px;background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:6px"><div class="cav" style="background:rgba(220,38,38,.2);color:#f87171;width:36px;height:36px;font-size:13px">'+initials(c.name)+'</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:500">'+c.name+'</div><div style="font-size:11px;color:var(--muted)">'+days+'d silent</div></div><button class="btn bo bs" style="color:#f87171;border-color:rgba(248,113,113,.3);font-size:11px;white-space:nowrap" onclick="copyText(\''+ msg.replace(/'/g,"&#39;") +'\',\'Copied!\')">📋</button></div>';
+    }).join('')+'</div>';
+  }else{silentEl.innerHTML='';}
+  var el=document.getElementById('engage-list');
+  el.innerHTML=contacts.map(function(c){
+    var sel=todayEngs[c.id]||'';
+    var days=daysSinceLastResponse(c);
+    return '<div class="erow"><div class="ertop"><div class="cav" style="width:32px;height:32px;font-size:12px">'+initials(c.name)+'</div><div class="ername">'+c.name+'</div><div class="erdays">'+(days>998?'new':days+'d')+'</div></div><div class="egrid">'+
+    EMOJIS.map(function(em,i){return '<button class="ebtn'+(sel===em?' sel':'')+" onclick=\"logEngage('"+c.id+"','"+em+"')\" title=\""+EMOJI_LABELS[i]+"\">'+em+'</button>";}).join('')+
+    '</div></div>';
+  }).join('');
 }
-function logEngage(contactId,emoji){const t=today();if(!engagements[t])engagements[t]={};if(engagements[t][contactId]===emoji){delete engagements[t][contactId];}else{engagements[t][contactId]=emoji;if(emoji!=='⬜'&&emoji!=='👁️'){const c=contacts.find(x=>x.id===contactId);if(c)c.lastResponse=t;}}saveAll();renderEngage();}
-function renderGrow(){Object.keys(platforms).forEach(key=>{const el=document.getElementById('plt-'+key);if(el){if(platforms[key]){el.classList.add('done');el.textContent='✓';}else{el.classList.remove('done');el.textContent='';}}});renderLivePlans();}
-function togglePlatform(key){platforms[key]=!platforms[key];saveAll();const el=document.getElementById('plt-'+key);if(el){if(platforms[key]){el.classList.add('done');el.textContent='✓';}else{el.classList.remove('done');el.textContent='';} }}
-async function genSocialPost(){
-  const theme=document.getElementById('social-theme').value.trim()||'Faith and Morning Prayer';
-  const platform=document.getElementById('social-platform').value;
-  const btn=document.getElementById('social-btn');btn.innerHTML='<span class="spin"></span> Creating post...';btn.disabled=true;
-  try{const system=`You are a social media content writer for Sister Elaine Gary's Prayer Ministry. Sister Elaine is a faith leader from New Orleans who has sent morning prayers to 180+ people every weekday since 2018. Write social media content in her warm, faithful, grandmother-wisdom voice. Include relevant hashtags. Keep it authentic.`;
-  const text=await callAI([{role:'user',content:`Write a ${platform} post about today's prayer theme: "${theme}". Include 2-3 relevant hashtags. Make it engaging, faith-filled, and personal.`}],system,400);
-  if(!text)return;document.getElementById('social-text').textContent=text;document.getElementById('social-output').style.display='block';}
-  catch(err){showToast('⚠️ '+err.message,'#c8842a');}
-  finally{btn.innerHTML='✨ Generate Post';btn.disabled=false;}
+function logEngage(contactId,emoji){
+  var t=today();
+  if(!engagements[t])engagements[t]={};
+  if(engagements[t][contactId]===emoji){delete engagements[t][contactId];}
+  else{
+    engagements[t][contactId]=emoji;
+    if(emoji!=='⬜'&&emoji!=='👁️'){var c=contacts.find(function(x){return x.id===contactId;});if(c)c.lastResponse=t;}
+  }
+  saveAll();renderEngage();
+}
+function renderGrow(){
+  Object.keys(platforms).forEach(function(key){
+    var el=document.getElementById('plt-'+key);
+    if(el){if(platforms[key]){el.classList.add('done');el.textContent='✓';}else{el.classList.remove('done');el.textContent='';}
+  }});
+  renderLivePlans();
+}
+function togglePlatform(key){
+  platforms[key]=!platforms[key];saveAll();
+  var el=document.getElementById('plt-'+key);
+  if(el){if(platforms[key]){el.classList.add('done');el.textContent='✓';}else{el.classList.remove('done');el.textContent='';}}
+}
+function genSocialPost(){
+  var theme=document.getElementById('social-theme').value.trim()||'Faith and Morning Prayer';
+  var platform=document.getElementById('social-platform').value;
+  var btn=document.getElementById('social-btn');btn.innerHTML='<span class="spin"></span> Creating...';btn.disabled=true;
+  callAI([{role:'user',content:'Write a '+platform+' post about: "'+theme+'". Include 2-3 hashtags.'}],'You are a social media writer for Sister Elaine Gary\'s Prayer Ministry in New Orleans. Faith-filled, warm, authentic voice.',400)
+    .then(function(text){document.getElementById('social-text').textContent=text;document.getElementById('social-output').style.display='block';})
+    .catch(function(err){showToast('⚠️ '+err.message,'#c8842a');})
+    .finally(function(){btn.innerHTML='✨ Generate Post';btn.disabled=false;});
 }
 function copySocial(){copyText(document.getElementById('social-text').textContent,'Post copied!');}
-function planLive(){const dateVal=document.getElementById('live-date').value;if(!dateVal){showToast('Pick a date first','#c8842a');return;}const dateObj=new Date(dateVal+'T12:00:00');const formatted=dateObj.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});livePlans.unshift({date:dateVal,formatted,id:'lp'+Date.now()});saveAll();renderLivePlans();showToast('🔴 Live prayer planned for '+formatted);}
-function renderLivePlans(){const el=document.getElementById('live-plan-list');if(!livePlans.length){el.innerHTML='';return;}el.innerHTML=livePlans.slice(0,5).map(p=>`<div style="display:flex;align-items:center;gap:10px;padding:9px;background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:6px"><span style="font-size:18px">🔴</span><div style="flex:1;font-size:13px">${p.formatted}</div><span class="badge ba">Planned</span></div>`).join('');}
-function renderBusiness(){document.getElementById('biz-revenue').textContent=fmtMoney(revenue);const pct=Math.min(100,(revenue/GOAL)*100);document.getElementById('biz-pbar').style.width=pct+'%';document.getElementById('biz-pct').textContent=pct.toFixed(2)+'% of $1M';}
-function copyPitch(){const pitch=document.getElementById('pitch-email-text').textContent;copyText(pitch,'Email template copied!');}
-function copyEmail(){copyPitch();}
-const CORE_TASKS=[
-  {key:'write',icon:'✍️',title:"Write Today's Prayer",desc:'Generate or write your morning prayer in the Prayers tab.',steps:['1. Tap the 📖 Prayers tab','2. Select a theme','3. Tap Generate and wait','4. Read, edit, and Save\n\n💫 Your touch makes it anointed.']},
-  {key:'send',icon:'📤',title:"Send Prayer to Your Circle",desc:'Copy prayer and send via WhatsApp to all 180+ members.',steps:['1. Tap Copy on your prayer','2. Open WhatsApp','3. Paste and Send ✉️\n\n💫 As you send, whisper a blessing.']},
-  {key:'log',icon:'📊',title:"Log Today's Responses",desc:"Track who responded to today's prayer in the Engage tab.",steps:['1. Tap 📊 Engage tab','2. Tap the emoji for each person','3. Check the Need Care alerts\n\n💫 This data is your sponsorship proof.']}
-];
-const DAY_TASKS={
-  0:{icon:'🙏',title:'Rest & Renewal — Sabbath',desc:'No ministry tasks today. Rest, worship, receive.',steps:['1. Put down the work today','2. Let others bless you today\n\n💫 "Come to me, all who are weary." — Matthew 11:28']},
-  1:{icon:'📣',title:'Brand Outreach Monday',desc:'Contact one for-profit brand about a sponsorship.',steps:['1. Open 💼 Business tab','2. Find the 30 Target Brands','3. Pick one and send the pitch email\n\n💫 One yes = up to $25,000.']},
-  2:{icon:'🤝',title:'Community Growth Tuesday',desc:'Add 2 new people to your prayer circle today.',steps:['1. Think who needs morning prayer','2. Tap + in 👥 Circle tab','3. Add their info and send today\'s prayer\n\n💫 Every member grows your sponsorship proof.']},
-  3:{icon:'📱',title:'Social Media Wednesday',desc:"Post today's prayer on one social platform.",steps:['1. Open 📱 Grow tab','2. Enter your prayer theme','3. Generate, copy, and post\n\n💫 Your followers are your public proof of influence.']},
-  4:{icon:'💌',title:'Sponsorship Thursday',desc:'Send one brand pitch email or follow up today.',steps:['1. Open 💼 Business tab','2. Pick a brand from the list','3. Send the pitch email template\n\n💫 "No" just means "not yet."']},
-  5:{icon:'🔴',title:'Live Prayer Friday',desc:'Host a live prayer session — your highest-value sponsorship inventory.',steps:['1. Announce "Going live today!"','2. Go live at your set time','3. Read prayer, take requests, close with blessing\n\n💫 Brands pay premium to sponsor live events.']},
-  6:{icon:'📈',title:'Review & Plan Saturday',desc:"Review your week and plan next week.",steps:['1. Check engagement stats','2. Log any revenue earned','3. Plan next week\'s prayer themes\n\n💫 What gets measured gets grown.']}
-};
-const MONTHLY_MISSIONS=[
-  {month:1,title:'Build Your Media Kit',desc:'Take a professional photo. Write a 3-paragraph bio. Create a stats sheet: 180+ members, 7 years daily, 5× weekly touchpoint. This is what brands need before they say yes.'},
-  {month:2,title:'Send Your First 10 Brand Pitches',desc:'Email 10 brands from your target list. Start with the Digital Sponsor tier ($1,000–$2,500) — it\'s the easiest yes.'},
-  {month:3,title:'Close Your First Paid Sponsor',desc:'You need one yes. One brand. One check. Even $1,000 proves the model.'},
-  {month:4,title:'Launch Your Podcast',desc:'Record your first 5 episodes — each one is your daily morning prayer. Upload to Spotify free via Anchor.fm.'},
-  {month:5,title:'Close a Community Partner ($5K)',desc:'With your first sponsor testimonial and growing social presence, pitch a $5,000 Community Partner deal.'},
-  {month:6,title:'Pitch Your First Presenting Partner ($10K)',desc:'Six months of documented ministry. Make the $10K ask.'},
-  {month:7,title:'Close Your First Presenting Partner ($10K)',desc:'Follow up relentlessly. Your morning reach + live sessions justify this investment.'},
-  {month:8,title:'Pursue a Title Sponsor ($25K)',desc:'With 2-3 sponsors signed, you have credibility. Go after AARP, Target, or OWN Network.'},
-  {month:9,title:'Launch Premium Subscription',desc:'Offer $10/month for extended prayers, personal prayer requests, exclusive content.'},
-  {month:10,title:'First Speaking Booking',desc:'Reach out to women\'s conferences and corporate wellness events. A keynote can pay $5,000–$25,000.'},
-  {month:11,title:'Book Deal Inquiry',desc:'7 years of daily prayers is a manuscript. Contact Zondervan, HarperCollins, or Thomas Nelson.'},
-  {month:12,title:'$1M Milestone — Celebrate 🎉',desc:'Full sponsor roster. Podcast ad revenue. Premium subscriptions. Speaking bookings. You built a million-dollar ministry — one prayer at a time, Sister Elaine.'},
-];
+function planLive(){
+  var dateVal=document.getElementById('live-date').value;
+  if(!dateVal){showToast('Pick a date first','#c8842a');return;}
+  var dateObj=new Date(dateVal+'T12:00:00');
+  var formatted=dateObj.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+  livePlans.unshift({date:dateVal,formatted:formatted,id:'lp'+Date.now()});
+  saveAll();renderLivePlans();showToast('🔴 Live prayer planned for '+formatted);
+}
+function renderLivePlans(){
+  var el=document.getElementById('live-plan-list');if(!livePlans.length){el.innerHTML='';return;}
+  el.innerHTML=livePlans.slice(0,5).map(function(p){return '<div style="display:flex;align-items:center;gap:10px;padding:9px;background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:6px"><span style="font-size:18px">🔴</span><div style="flex:1;font-size:13px">'+p.formatted+'</div><span class="badge ba">Planned</span></div>';}).join('');
+}
+function renderBusiness(){
+  document.getElementById('biz-revenue').textContent=fmtMoney(revenue);
+  var pct=Math.min(100,(revenue/GOAL)*100);
+  document.getElementById('biz-pbar').style.width=pct+'%';
+  document.getElementById('biz-pct').textContent=pct.toFixed(2)+'% of $1M';
+}
+function copyEmail(){copyText(document.getElementById('pitch-email-text').textContent,'Email copied!');}var CORE_TASKS=[{key:'write',icon:'✍️',title:'Write Today\'s Prayer',desc:'Generate or write your morning prayer in the Prayers tab.'},{key:'send',icon:'📤',title:'Send Prayer to Your Circle',desc:'Copy and send via WhatsApp to all 180+ members.'},{key:'log',icon:'📊',title:'Log Today\'s Responses',desc:'Track who responded in the Engage tab.'}];
+var DAY_TASKS={0:{icon:'🙏',title:'Rest — Sabbath',desc:'No tasks today. Rest, worship, receive.'},1:{icon:'📣',title:'Brand Outreach Monday',desc:'Contact one for-profit brand about sponsorship.'},2:{icon:'🤝',title:'Community Growth Tuesday',desc:'Add 2 new people to your prayer circle.'},3:{icon:'📱',title:'Social Media Wednesday',desc:'Post today\'s prayer on one social platform.'},4:{icon:'💌',title:'Sponsorship Thursday',desc:'Send one brand pitch email.'},5:{icon:'🔴',title:'Live Prayer Friday',desc:'Host a live session.'},6:{icon:'📈',title:'Review Saturday',desc:'Review your week and log any revenue.'}};
+var MONTHLY_MISSIONS=[{month:1,title:'Build Your Media Kit',desc:'Photo, bio, stats. Brands need this before saying yes.'},{month:2,title:'Send First 10 Brand Pitches',desc:'Start with Digital Sponsor ($1K–$2.5K) — easiest yes.'},{month:3,title:'Close First Paid Sponsor',desc:'One yes. One brand. One check. Proves the model.'},{month:4,title:'Launch Your Podcast',desc:'Record 5 episodes. Upload to Anchor.fm (free).'},{month:5,title:'Close Community Partner ($5K)',desc:'With testimonials and social presence, pitch $5K.'},{month:6,title:'Pitch Presenting Partner ($10K)',desc:'Six months documented. Make the $10K ask.'},{month:7,title:'Close Presenting Partner ($10K)',desc:'Follow up. Your morning reach justifies this.'},{month:8,title:'Pursue Title Sponsor ($25K)',desc:'With 2-3 sponsors, go after AARP, Target, or OWN.'},{month:9,title:'Launch Premium Subscription',desc:'$10/month for extended prayers and personal requests.'},{month:10,title:'First Speaking Booking',desc:'Women\'s conferences pay $5K–$25K.'},{month:11,title:'Book Deal Inquiry',desc:'7 years of daily prayers is a manuscript. Contact Zondervan.'},{month:12,title:'$1M Milestone — Celebrate 🎉',desc:'You built a million-dollar ministry — one prayer at a time.'}];
 function renderDaily(){
   checkAndUpdateStreak();
-  document.getElementById('daily-streak').textContent=streak;
-  document.getElementById('daily-revenue').textContent=fmtMoney(revenue);
-  const pct=Math.min(100,(revenue/GOAL)*100);
-  document.getElementById('rev-pbar').style.width=pct+'%';
-  document.getElementById('rev-pct2').textContent=pct.toFixed(2)+'% of goal';
+  var ds=document.getElementById('daily-streak');if(ds)ds.textContent=streak;
+  var dr=document.getElementById('daily-revenue');if(dr)dr.textContent=fmtMoney(revenue);
+  var pct=Math.min(100,(revenue/GOAL)*100);
+  var rp=document.getElementById('rev-pbar');if(rp)rp.style.width=pct+'%';
+  var rp2=document.getElementById('rev-pct2');if(rp2)rp2.textContent=pct.toFixed(2)+'% of goal';
   renderRevLog();
-  const t=today();if(!tasks[t])tasks[t]={};
-  const coreEl=document.getElementById('daily-tasks-core');
-  coreEl.innerHTML=CORE_TASKS.map(task=>{const done=!!tasks[t][task.key];return `<div class="titem"><div class="tcheck${done?' done':''}" onclick="toggleTask('${task.key}')">${done?'✓':''}</div><div style="flex:1"><div class="ttitle">${task.icon} ${task.title}</div><div class="tdesc">${task.desc}</div></div><button class="btn bo bs" style="font-size:11px;padding:6px 8px;margin-left:6px;flex-shrink:0" onclick="openSteps('${task.key}','core')">📋 Steps</button></div>`;}).join('');
-  const dow=new Date().getDay();const dayTask=DAY_TASKS[dow];
-  document.getElementById('day-specific-title').textContent=`${dayTask.icon} ${dayTask.title}`;
-  const dayDone=!!tasks[t]['day'];
-  document.getElementById('daily-tasks-day').innerHTML=`<div class="titem"><div class="tcheck${dayDone?' done':''}" onclick="toggleTask('day')">${dayDone?'✓':''}</div><div style="flex:1"><div class="ttitle">${dayTask.icon} ${dayTask.title}</div><div class="tdesc">${dayTask.desc}</div></div><button class="btn bo bs" style="font-size:11px;padding:6px 8px;margin-left:6px;flex-shrink:0" onclick="openSteps('day','day')">📋 Steps</button></div>`;
-  const monthNum=new Date().getMonth()+1;const mission=MONTHLY_MISSIONS[Math.min(monthNum,12)-1];
-  document.getElementById('monthly-mission').innerHTML=`<div class="titem"><div><div class="ttitle">📅 Month ${mission.month}: ${mission.title}</div><div class="tdesc" style="margin-top:5px;line-height:1.6">${mission.desc}</div></div></div>`;
+  var t=today();if(!tasks[t])tasks[t]={};
+  var coreEl=document.getElementById('daily-tasks-core');
+  coreEl.innerHTML=CORE_TASKS.map(function(task){
+    var done=!!tasks[t][task.key];
+    return '<div class="titem"><button class="tcheck'+(done?' done':'')+" onclick=\"toggleTask('"+task.key+"')\">'+(done?'✓':'')+'</button><div style="flex:1"><div class="ttitle">'+task.icon+' '+task.title+'</div><div class="tdesc">'+task.desc+'</div></div></div>';
+  }).join('');
+  var dow=new Date().getDay();var dayTask=DAY_TASKS[dow];
+  document.getElementById('day-specific-title').textContent=dayTask.icon+' '+dayTask.title;
+  var dayDone=!!tasks[t]['day'];
+  document.getElementById('daily-tasks-day').innerHTML='<div class="titem"><button class="tcheck'+(dayDone?' done':'')+" onclick=\"toggleTask('day')\">'+(dayDone?'✓':'')+'</button><div style="flex:1"><div class="ttitle">'+dayTask.icon+' '+dayTask.title+'</div><div class="tdesc">'+dayTask.desc+'</div></div></div>';
+  var monthNum=new Date().getMonth()+1;var mission=MONTHLY_MISSIONS[Math.min(monthNum,12)-1];
+  document.getElementById('monthly-mission').innerHTML='<div class="titem"><div><div class="ttitle">📅 Month '+mission.month+': '+mission.title+'</div><div class="tdesc" style="margin-top:5px;line-height:1.6">'+mission.desc+'</div></div></div>';
 }
-function toggleTask(key){const t=today();if(!tasks[t])tasks[t]={};tasks[t][key]=!tasks[t][key];saveAll();checkAndUpdateStreak();const allDone=CORE_TASKS.every(c=>tasks[t][c.key]);if(allDone)showToast('🎉 All 3 non-negotiables done! Amazing, Sister Elaine!');renderDaily();}
-function openSteps(taskKey,type){let task;if(type==='core')task=CORE_TASKS.find(t=>t.key===taskKey);else if(type==='day'){const dow=new Date().getDay();task=DAY_TASKS[dow];}if(!task)return;document.getElementById('steps-content').innerHTML=`<h2 style="color:var(--amber);margin-bottom:14px">${task.icon||'📋'} ${task.title}</h2><div style="font-size:13px;line-height:2;color:var(--sub);white-space:pre-line">${task.steps.join('\n')}</div>`;openModal('modal-steps');}
-function logRevenue(){const amt=parseFloat(document.getElementById('rev-amount').value);const src=document.getElementById('rev-source').value;if(!amt||amt<=0){showToast('⚠️ Enter a valid amount','#c8842a');return;}revenue+=amt;revenueLog.unshift({amount:amt,source:src,date:today(),id:'r'+Date.now()});document.getElementById('rev-amount').value='';saveAll();renderDaily();renderBusiness();renderHome();showToast('💰 $'+amt.toLocaleString()+' logged! Total: '+fmtMoney(revenue));}
-function renderRevLog(){const el=document.getElementById('rev-log');if(!revenueLog.length){el.innerHTML='';return;}el.innerHTML=`<div style="margin-top:8px"><div class="card-title" style="font-size:14px;margin-bottom:8px">Recent Revenue</div>`+revenueLog.slice(0,8).map(r=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)"><span style="font-size:13px;color:var(--sub)">${r.source}</span><span style="font-size:13px;color:var(--amber);font-weight:600">+${fmtMoney(r.amount)}</span><span style="font-size:11px;color:var(--muted)">${r.date}</span></div>`).join('')+'</div>';}
-let homeChatHistory=[];
-function addChatMsg(containerId,role,text){const el=document.getElementById(containerId);const msg=document.createElement('div');msg.className='cmsg '+role;msg.style.whiteSpace='pre-wrap';msg.textContent=text;el.appendChild(msg);el.scrollTop=el.scrollHeight;}
-async function homeChat(){
-  const input=document.getElementById('home-input');const text=input.value.trim();if(!text)return;input.value='';
+function toggleTask(key){
+  var t=today();if(!tasks[t])tasks[t]={};
+  tasks[t][key]=!tasks[t][key];saveAll();checkAndUpdateStreak();
+  var allDone=CORE_TASKS.every(function(c){return tasks[t][c.key];});
+  if(allDone)showToast('🎉 All 3 non-negotiables done!');
+  renderDaily();
+}
+function logRevenue(){
+  var amt=parseFloat(document.getElementById('rev-amount').value);
+  var src=document.getElementById('rev-source').value;
+  if(!amt||amt<=0){showToast('⚠️ Enter a valid amount','#c8842a');return;}
+  revenue+=amt;revenueLog.unshift({amount:amt,source:src,date:today(),id:'r'+Date.now()});
+  document.getElementById('rev-amount').value='';
+  saveAll();renderDaily();renderBusiness();renderHome();
+  showToast('💰 $'+amt.toLocaleString()+' logged! Total: '+fmtMoney(revenue));
+}
+function renderRevLog(){
+  var el=document.getElementById('rev-log');if(!revenueLog.length){el.innerHTML='';return;}
+  el.innerHTML='<div style="margin-top:8px"><div class="card-title" style="font-size:14px;margin-bottom:8px">Recent Revenue</div>'+
+    revenueLog.slice(0,8).map(function(r){return '<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)"><span style="font-size:13px;color:var(--sub)">'+r.source+'</span><span style="font-size:13px;color:var(--amber);font-weight:600">+'+fmtMoney(r.amount)+'</span><span style="font-size:11px;color:var(--muted)">'+r.date+'</span></div>';}).join('')+'</div>';
+}
+var homeChatHistory=[];
+function addChatMsg(containerId,role,text){
+  var el=document.getElementById(containerId);
+  var msg=document.createElement('div');msg.className='cmsg '+role;msg.style.whiteSpace='pre-wrap';msg.textContent=text;
+  el.appendChild(msg);el.scrollTop=el.scrollHeight;
+}
+function homeChat(){
+  var input=document.getElementById('home-input');var text=input.value.trim();if(!text)return;input.value='';
   addChatMsg('home-chat','user',text);homeChatHistory.push({role:'user',content:text});
-  const sendBtn=document.getElementById('home-send');sendBtn.innerHTML='<span class="spin"></span>';sendBtn.disabled=true;
-  try{const system=`You are a helpful and faith-filled ministry assistant for Sister Elaine Gary's Prayer Ministry. Sister Elaine is a woman of deep faith from New Orleans, Louisiana who has been faithfully sending morning prayers to her circle of ${contacts.length} members every weekday since 2018. She is working toward $1,000,000 in ministry income through for-profit brand sponsorships, podcast advertising, premium subscriptions, social media brand deals, a prayer book, and corporate wellness speaking. She has earned $${revenue.toLocaleString()} so far. Her streak is ${streak} days. ${getSilentContacts().length} members haven't responded in 14+ days. Speak with warmth, faith, wisdom, and practical advice. Keep responses under 200 words.`;
-  const reply=await callAI(homeChatHistory.slice(-10),system,600);if(!reply)return;homeChatHistory.push({role:'assistant',content:reply});addChatMsg('home-chat','ai',reply);}
-  catch(err){addChatMsg('home-chat','ai','⚠️ '+err.message);}
-  finally{sendBtn.innerHTML='➤';sendBtn.disabled=false;}
+  var sendBtn=document.getElementById('home-send');sendBtn.innerHTML='<span class="spin"></span>';sendBtn.disabled=true;
+  var system='You are a helpful ministry assistant for Sister Elaine Gary. She is a faith leader from New Orleans with '+contacts.length+' prayer circle members, sending morning prayers since 2018. She has earned $'+revenue.toLocaleString()+' toward $1M. Respond warmly, concisely, under 150 words.';
+  callAI(homeChatHistory.slice(-10),system,600)
+    .then(function(reply){homeChatHistory.push({role:'assistant',content:reply});addChatMsg('home-chat','ai',reply);})
+    .catch(function(err){addChatMsg('home-chat','ai','⚠️ '+err.message);})
+    .finally(function(){sendBtn.innerHTML='➤';sendBtn.disabled=false;});
 }
 function homeQuick(q){document.getElementById('home-input').value=q;homeChat();}
-function openModal(id){document.getElementById(id).classList.add('active');}
-function closeModal(id){document.getElementById(id).classList.remove('active');}
-document.querySelectorAll('.mover').forEach(m=>{m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('active');});});
-function openSettings(){document.getElementById('settings-apikey').value=getApiKey();document.getElementById('settings-name').value=localStorage.getItem('elaine_name')||'Sister Elaine Gary';document.getElementById('settings-ministry').value=localStorage.getItem('elaine_ministry')||"Sister Elaine's Prayer Ministry";openModal('modal-settings');}
-function saveSettings(){const key=document.getElementById('settings-apikey').value.trim();const name=document.getElementById('settings-name').value.trim();const min=document.getElementById('settings-ministry').value.trim();if(key)localStorage.setItem('elaine_api_key',key);if(name)localStorage.setItem('elaine_name',name);if(min)localStorage.setItem('elaine_ministry',min);closeModal('modal-settings');showToast('✅ Settings saved!');}
-function exportData(){const data={contacts,prayers,engagements,revenue,revenueLog,streak,tasks,exportDate:new Date().toISOString()};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='sister-elaine-ministry-backup-'+today()+'.json';a.click();URL.revokeObjectURL(url);showToast('📤 Data exported!');}
-function clearData(){if(!confirm('⚠️ This will reset all data. Are you sure?'))return;['elaine_contacts','elaine_prayers','elaine_engagements','elaine_revenue','elaine_revlog','elaine_streak','elaine_lastactive','elaine_tasks','elaine_platforms','elaine_liveplans'].forEach(k=>localStorage.removeItem(k));loadState();showToast('Data reset. Reloading...');setTimeout(()=>location.reload(),1500);}
-loadState();renderHome();renderPrayerArchive();
-if(!getApiKey()){const sb=document.getElementById('settingsbtn');sb.style.animation='pulse-btn 2s ease-in-out infinite';const style=document.createElement('style');style.textContent='@keyframes pulse-btn{0%,100%{box-shadow:0 0 0 0 rgba(200,132,42,.4)}50%{box-shadow:0 0 0 8px rgba(200,132,42,0)}}';document.head.appendChild(style);}
+function openModal(id){var el=document.getElementById(id);if(el)el.classList.add('active');}
+function closeModal(id){var el=document.getElementById(id);if(el)el.classList.remove('active');}
+function openSettings(){
+  var key=document.getElementById('settings-apikey');if(key)key.value=getApiKey();
+  var nm=document.getElementById('settings-name');if(nm)nm.value=localStorage.getItem('elaine_name')||'Sister Elaine Gary';
+  openModal('modal-settings');
+}
+function saveSettings(){
+  var key=(document.getElementById('settings-apikey')||{value:''}).value.trim();
+  var name=(document.getElementById('settings-name')||{value:''}).value.trim();
+  if(key)localStorage.setItem('elaine_api_key',key);
+  if(name)localStorage.setItem('elaine_name',name);
+  closeModal('modal-settings');showToast('✅ Settings saved!');
+  if(key){var sb=document.getElementById('settingsbtn');if(sb)sb.style.animation='';}
+}
+function exportData(){
+  var data={contacts:contacts,prayers:prayers,engagements:engagements,revenue:revenue,revenueLog:revenueLog,streak:streak,exportDate:new Date().toISOString()};
+  var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='sister-elaine-backup-'+today()+'.json';a.click();URL.revokeObjectURL(url);showToast('📤 Data exported!');
+}
+function clearData(){
+  if(!confirm('⚠️ Reset all data?'))return;
+  ['elaine_contacts','elaine_prayers','elaine_engagements','elaine_revenue','elaine_revlog','elaine_streak','elaine_lastactive','elaine_tasks','elaine_platforms','elaine_liveplans'].forEach(function(k){localStorage.removeItem(k);});
+  loadState();showToast('Data reset. Reloading...');setTimeout(function(){location.reload();},1500);
+}
+// Init
+loadState();
+renderHome();
+renderPrayerArchive();
+if(!getApiKey()){
+  var sb=document.getElementById('settingsbtn');
+  if(sb){
+    sb.style.animation='pulse-btn 2s ease-in-out infinite';
+    var style=document.createElement('style');
+    style.textContent='@keyframes pulse-btn{0%,100%{box-shadow:0 0 0 0 rgba(200,132,42,.4)}50%{box-shadow:0 0 0 8px rgba(200,132,42,0)}}';
+    document.head.appendChild(style);
+  }
+}
 </script>
 </body>
-</html>
+                                                                                           </html>
