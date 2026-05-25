@@ -24,10 +24,9 @@ body{
   background:var(--night);color:var(--cream);
   font-family:'DM Sans',sans-serif;
   overflow:hidden;
-  position:fixed;width:100%;
-}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 60% at 15% 10%,rgba(74,36,144,.7) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 85% 90%,rgba(10,92,58,.35) 0%,transparent 55%),radial-gradient(ellipse 80% 80% at 50% 50%,rgba(28,15,58,1) 40%,transparent 100%);z-index:0;pointer-events:none}
-#app{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;max-width:500px;margin:0 auto;}
+  }
+
+#app{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:500px;bottom:0;display:flex;flex-direction:column;z-index:1;overflow:hidden;}
 .tab{
   flex:1;
   overflow-y:scroll;
@@ -908,6 +907,7 @@ function clearData(){
 loadState();
 renderHome();
 renderPrayerArchive();
+document.querySelectorAll('.nbtn[data-tab]').forEach(function(btn){btn.addEventListener('click',function(e){e.stopPropagation();switchTab(btn.dataset.tab);},{passive:true});btn.addEventListener('touchend',function(e){e.preventDefault();switchTab(btn.dataset.tab);},{passive:false});});
 if(!getApiKey()){
   var sb=document.getElementById('settingsbtn');
   if(sb){
