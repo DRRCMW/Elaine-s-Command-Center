@@ -130,6 +130,9 @@ label{font-size:12px;color:var(--muted);margin-bottom:5px;display:block}
 .brand-cat{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
 .brand-name{font-size:13px;font-weight:500;color:var(--cream)}
 .brand-val{font-size:11px;color:var(--amber);margin-top:2px}
+[onclick]{cursor:pointer;-webkit-tap-highlight-color:rgba(200,132,42,.15);}
+button{touch-action:manipulation;}
+.tcheck,.citem,.ebtn,.nbtn{touch-action:manipulation;}
 </style>
 </head>
 <body>
@@ -645,7 +648,7 @@ function renderCircle(){
     let dayBadge=days>=14?`<span class="badge br">${days}d silent</span>`:days>=7?`<span class="badge ba">${days}d</span>`:days<=1?`<span class="badge bg2">Active</span>`:`<span class="badge bp">${days}d ago</span>`;
     const plats=(c.platforms||[]).map(p=>`<span class="ptag">${p}</span>`).join('');
     return `<div class="citem" style="position:relative">
-      <div style="display:flex;align-items:center;gap:11px;flex:1" onclick="openContact('${c.id}')">
+      <div style="display:flex;align-items:center;gap:11px;flex:1;cursor:pointer" onclick="openContact('${c.id}')">
         <div class="cav">${initials(c.name)}</div>
         <div class="cinfo"><div class="cname">${c.name}</div><div class="cmeta">${c.location||'New Orleans'} ${plats}</div></div>
         ${dayBadge}
