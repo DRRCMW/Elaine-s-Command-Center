@@ -189,14 +189,14 @@ label{font-size:12px;color:var(--muted);margin-bottom:5px;display:block}
     <div class="card-title">🙏 Generate Morning Prayer</div>
     <label>Prayer Theme</label>
     <select id="prayer-tone" style="margin-bottom:10px">
-      <option value="Healing & Restoration">🌿 Healing &amp; Restoration</option>
-      <option value="Strength & Courage" selected>💪 Strength &amp; Courage</option>
-      <option value="Peace & Calm">☮️ Peace &amp; Calm</option>
-      <option value="Gratitude & Praise">🙌 Gratitude &amp; Praise</option>
-      <option value="Protection & Safety">🛡️ Protection &amp; Safety</option>
-      <option value="Provision & Blessing">🌟 Provision &amp; Blessing</option>
-      <option value="Faith & Trust">✨ Faith &amp; Trust</option>
-      <option value="Wisdom & Guidance">🕊️ Wisdom &amp; Guidance</option>
+      <option value="Healing &amp; Restoration">🌿 Healing &amp; Restoration</option>
+      <option value="Strength &amp; Courage" selected>💪 Strength &amp; Courage</option>
+      <option value="Peace &amp; Calm">☮️ Peace &amp; Calm</option>
+      <option value="Gratitude &amp; Praise">🙌 Gratitude &amp; Praise</option>
+      <option value="Protection &amp; Safety">🛡️ Protection &amp; Safety</option>
+      <option value="Provision &amp; Blessing">🌟 Provision &amp; Blessing</option>
+      <option value="Faith &amp; Trust">✨ Faith &amp; Trust</option>
+      <option value="Wisdom &amp; Guidance">🕊️ Wisdom &amp; Guidance</option>
     </select>
     <label>Additional Context (optional)</label>
     <input id="prayer-context" type="text" placeholder="e.g. Mothers, Monday encouragement, a member going through loss..." style="margin-bottom:12px">
@@ -271,7 +271,6 @@ label{font-size:12px;color:var(--muted);margin-bottom:5px;display:block}
     <div id="engage-list"></div>
   </div>
 </div>
-
 <!-- GROW -->
 <div class="tab" id="tab-grow">
   <div class="sh mt8"><h2 style="color:var(--amber)">📱 Grow Your Ministry</h2></div>
@@ -314,80 +313,35 @@ label{font-size:12px;color:var(--muted);margin-bottom:5px;display:block}
   </div>
   <div class="card">
     <div class="card-title">🔴 Live Prayer Planning</div>
-    <div class="titem" style="margin-bottom:7px">
-      <div style="font-size:28px">📅</div>
-      <div><div class="ttitle">Friday Live Prayer Sessions</div><div class="tdesc">Every Friday is your day for a live session. Keep it 20–30 minutes. This is what brand sponsors pay to be associated with.</div></div>
-    </div>
+    <div class="titem" style="margin-bottom:7px"><div style="font-size:28px">📅</div><div><div class="ttitle">Friday Live Prayer Sessions</div><div class="tdesc">Every Friday is your day for a live session. Keep it 20–30 minutes. This is what brand sponsors pay to be associated with.</div></div></div>
     <div class="alert ai2">💡 Tip: Brands pay premium rates to sponsor LIVE events. Your live sessions are your most valuable sponsorship inventory.</div>
-    <div class="row gap10 mt8">
-      <input id="live-date" type="date" style="flex:1">
-      <button class="btn bg bs" onclick="planLive()">Plan It</button>
-    </div>
+    <div class="row gap10 mt8"><input id="live-date" type="date" style="flex:1"><button class="btn bg bs" onclick="planLive()">Plan It</button></div>
     <div id="live-plan-list" style="margin-top:10px"></div>
   </div>
-  <div class="card">
-    <div class="card-title">📊 Hashtag Strategy</div>
-    <div style="font-size:13px;color:var(--sub);line-height:1.8">#SisterElaineGary #PrayerMinistry #MorningPrayer #PrayerWarrior #NewOrleans #FaithfulPrayer #PrayCircle #DailyPrayer #GodIsGood #PrayerWorks #Intercession #WomenOfFaith #BlackChurch #SundayPrayer #PrayerChangesThings #FaithContent #SpiritualWellness</div>
-  </div>
-</div>
-
-<!-- BUSINESS -->
-<div class="tab" id="tab-business">
+  <div class="card"><div class="card-title">📊 Hashtag Strategy</div><div style="font-size:13px;color:var(--sub);line-height:1.8">#SisterElaineGary #PrayerMinistry #MorningPrayer #PrayerWarrior #NewOrleans #FaithfulPrayer #PrayCircle #DailyPrayer #GodIsGood #PrayerWorks #Intercession #WomenOfFaith #BlackChurch #SundayPrayer #PrayerChangesThings #FaithContent #SpiritualWellness</div></div>
+</div><div class="tab" id="tab-business">
   <div class="sh mt8"><h2 style="color:var(--amber)">💼 Business &amp; Revenue</h2></div>
 
   <div class="card">
     <div class="card-title">🎯 Revenue Goal</div>
-    <div class="revdisp">
-      <div class="revamt" id="biz-revenue">$0</div>
-      <div class="revlbl">earned toward <strong style="color:var(--amber)">$1,000,000</strong> Year 1 Goal</div>
-    </div>
+    <div class="revdisp"><div class="revamt" id="biz-revenue">$0</div><div class="revlbl">earned toward <strong style="color:var(--amber)">$1,000,000</strong> Year 1 Goal</div></div>
     <div class="pbar" style="margin-bottom:8px"><div class="pfill" id="biz-pbar" style="width:0%"></div></div>
     <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted)"><span>$0</span><span id="biz-pct">0% of $1M</span><span>$1,000,000</span></div>
   </div>
-
   <div class="card">
     <div class="card-title">🌟 Your Sponsorship Value Proposition</div>
     <div class="alert as" style="margin-bottom:12px">📊 You have a documented, loyal, faith-motivated audience of 180+ people who open and read your message <strong>every single weekday morning</strong>. That is one of the highest engagement rates in media — 5× weekly direct touchpoints. Brands pay a premium for this.</div>
     <p style="margin-bottom:10px">Your audience profile for brand sponsors:</p>
-    <div style="font-size:13px;color:var(--sub);line-height:1.9">
-      ✅ <strong style="color:var(--cream)">Age 30–75+</strong> — multi-generational reach<br>
-      ✅ <strong style="color:var(--cream)">Faith-motivated</strong> — highly values-aligned purchasing behavior<br>
-      ✅ <strong style="color:var(--cream)">Predominantly women</strong> — controls 85% of household purchasing decisions<br>
-      ✅ <strong style="color:var(--cream)">New Orleans + national</strong> — diverse geographic reach<br>
-      ✅ <strong style="color:var(--cream)">5× per week touchpoint</strong> — morning routine, high attention window<br>
-      ✅ <strong style="color:var(--cream)">7 years of loyalty</strong> — not a trend, a relationship
-    </div>
+    <div style="font-size:13px;color:var(--sub);line-height:1.9">✅ <strong style="color:var(--cream)">Age 30–75+</strong> — multi-generational reach<br>✅ <strong style="color:var(--cream)">Faith-motivated</strong> — highly values-aligned purchasing behavior<br>✅ <strong style="color:var(--cream)">Predominantly women</strong> — controls 85% of household purchasing decisions<br>✅ <strong style="color:var(--cream)">New Orleans + national</strong> — diverse geographic reach<br>✅ <strong style="color:var(--cream)">5× per week touchpoint</strong> — morning routine, high attention window<br>✅ <strong style="color:var(--cream)">7 years of loyalty</strong> — not a trend, a relationship</div>
   </div>
-
   <div class="card">
     <div class="card-title">💎 Sponsorship Packages</div>
-    <div class="tier" style="border-color:rgba(240,164,40,.5)">
-      <div class="tn">👑 Title Sponsor</div>
-      <div class="tp">$25,000 / year</div>
-      <div class="tper">✓ "Today's prayer is brought to you by [Brand]" — in every weekday message<br>✓ Named sponsor of all Friday live prayer sessions<br>✓ Monthly co-created content post on all platforms<br>✓ Exclusive — only ONE Title Sponsor at a time<br>✓ Featured in all press and media materials<br>✓ Monthly impact call with Sister Elaine</div>
-    </div>
-    <div class="tier">
-      <div class="tn">🌟 Presenting Partner</div>
-      <div class="tp">$10,000 / year</div>
-      <div class="tper">✓ Brand mention in weekly prayer round-up to full circle<br>✓ Quarterly sponsored social media post (Instagram + Facebook)<br>✓ Logo and link in email newsletter footer<br>✓ Named in all ministry media kit materials<br>✓ Bi-annual strategy call</div>
-    </div>
-    <div class="tier">
-      <div class="tn">🤝 Community Brand Partner</div>
-      <div class="tp">$5,000 / year</div>
-      <div class="tper">✓ Monthly brand mention to prayer circle<br>✓ 2 sponsored social posts per year<br>✓ Newsletter feature once per quarter<br>✓ Certificate of partnership + logo placement</div>
-    </div>
-    <div class="tier">
-      <div class="tn">✨ Digital Sponsor</div>
-      <div class="tp">$2,500 / year</div>
-      <div class="tper">✓ Bi-monthly mention to prayer circle<br>✓ 1 sponsored social post per year<br>✓ Listed in ministry supporter directory</div>
-    </div>
-    <div class="tier" style="margin-bottom:0">
-      <div class="tn">💝 Ministry Supporter</div>
-      <div class="tp">$1,000 / year</div>
-      <div class="tper">✓ Annual thank-you shoutout<br>✓ Logo on ministry website<br>✓ Listed in supporter wall</div>
-    </div>
+    <div class="tier" style="border-color:rgba(240,164,40,.5)"><div class="tn">👑 Title Sponsor</div><div class="tp">$25,000 / year</div><div class="tper">✓ "Today's prayer is brought to you by [Brand]" — in every weekday message<br>✓ Named sponsor of all Friday live prayer sessions<br>✓ Monthly co-created content post on all platforms<br>✓ Exclusive — only ONE Title Sponsor at a time<br>✓ Featured in all press and media materials<br>✓ Monthly impact call with Sister Elaine</div></div>
+    <div class="tier"><div class="tn">🌟 Presenting Partner</div><div class="tp">$10,000 / year</div><div class="tper">✓ Brand mention in weekly prayer round-up to full circle<br>✓ Quarterly sponsored social media post<br>✓ Logo and link in email newsletter footer<br>✓ Named in all ministry media kit materials<br>✓ Bi-annual strategy call</div></div>
+    <div class="tier"><div class="tn">🤝 Community Brand Partner</div><div class="tp">$5,000 / year</div><div class="tper">✓ Monthly brand mention to prayer circle<br>✓ 2 sponsored social posts per year<br>✓ Newsletter feature once per quarter<br>✓ Certificate of partnership + logo placement</div></div>
+    <div class="tier"><div class="tn">✨ Digital Sponsor</div><div class="tp">$2,500 / year</div><div class="tper">✓ Bi-monthly mention to prayer circle<br>✓ 1 sponsored social post per year<br>✓ Listed in ministry supporter directory</div></div>
+    <div class="tier" style="margin-bottom:0"><div class="tn">💝 Ministry Supporter</div><div class="tp">$1,000 / year</div><div class="tper">✓ Annual thank-you shoutout<br>✓ Logo on ministry website<br>✓ Listed in supporter wall</div></div>
   </div>
-
   <div class="card">
     <div class="card-title">🎯 30 Target For-Profit Brands</div>
     <div class="brand-grid">
@@ -423,11 +377,9 @@ label{font-size:12px;color:var(--muted);margin-bottom:5px;display:block}
       <div class="brand-card"><div class="brand-cat">Food Delivery</div><div class="brand-name">Uber Eats</div><div class="brand-val">Digital Sponsor</div></div>
     </div>
   </div>
-
   <div class="card">
     <div class="card-title">📧 Brand Pitch Email Template</div>
-    <div class="pitch">
-      <p id="pitch-email-text">Subject: Partnership Opportunity — Sister Elaine Gary's Prayer Ministry (180+ Loyal Members, 5× Weekly Touchpoint)
+    <div class="pitch"><p id="pitch-email-text">Subject: Partnership Opportunity — Sister Elaine Gary's Prayer Ministry (180+ Loyal Members, 5× Weekly Touchpoint)
 
 Dear [Brand Partnership Team],
 
@@ -442,11 +394,9 @@ Could we connect for a 15-minute call this week?
 With blessings,
 Sister Elaine Gary
 Prayer Ministry · New Orleans, Louisiana
-contact@akiradigital.net</p>
-    </div>
+contact@akiradigital.net</p></div>
     <button class="btn bo bs mt8" onclick="copyEmail()">📋 Copy Email</button>
   </div>
-
   <div class="card">
     <div class="card-title">💰 6 Revenue Streams to $1M</div>
     <div class="tlitem"><div class="tldot">1</div><div><div class="tltitle">Brand Sponsorships <span class="badge ba" style="margin-left:6px">Primary</span></div><div class="tldesc">5 sponsors avg $10K = $50K yr 1 → 20 sponsors avg $15K = $300K yr 2</div></div></div>
@@ -456,7 +406,6 @@ contact@akiradigital.net</p>
     <div class="tlitem"><div class="tldot">5</div><div><div class="tltitle">Prayer Journal &amp; Book</div><div class="tldesc">5,000 copies × $25 = $125K + publishing advance</div></div></div>
     <div class="tlitem"><div class="tldot">6</div><div><div class="tltitle">Corporate Wellness Speaking</div><div class="tldesc">Companies pay $5K–$25K for faith &amp; wellness keynotes. 20 events/yr = $200K</div></div></div>
   </div>
-
   <div class="card">
     <div class="card-title">📅 90-Day Brand Launch Roadmap</div>
     <div class="ritem"><div class="rmn">Days 1–7</div><div class="rdes">Build media kit: headshot, bio, audience stats, engagement proof, 3 testimonials</div></div>
@@ -467,7 +416,6 @@ contact@akiradigital.net</p>
     <div class="ritem" style="border-bottom:none"><div class="rmn">Days 61–90</div><div class="rdes">Close first Community Partner ($5K). Pitch first Presenting Partner. Circle at 250 members.</div></div>
   </div>
 </div>
-
 <!-- DAILY LOG -->
 <div class="tab" id="tab-daily">
   <div class="sh mt8"><h2 style="color:var(--amber)">📋 Daily Command Center</h2></div>
@@ -475,28 +423,14 @@ contact@akiradigital.net</p>
     <div class="card-title">💰 Log Revenue Earned Today</div>
     <div class="row gap10">
       <input id="rev-amount" type="number" placeholder="Amount in dollars" style="flex:1">
-      <select id="rev-source" style="flex:1.2;font-size:14px">
-        <option>Brand Sponsorship</option>
-        <option>Podcast Ad Revenue</option>
-        <option>Subscription</option>
-        <option>Social Media Deal</option>
-        <option>Speaking Fee</option>
-        <option>Prayer Book Sale</option>
-        <option>Live Event</option>
-        <option>Donation</option>
-        <option>Other</option>
-      </select>
+      <select id="rev-source" style="flex:1.2;font-size:14px"><option>Brand Sponsorship</option><option>Podcast Ad Revenue</option><option>Subscription</option><option>Social Media Deal</option><option>Speaking Fee</option><option>Prayer Book Sale</option><option>Live Event</option><option>Donation</option><option>Other</option></select>
     </div>
     <button class="btn bg bw mt8" onclick="logRevenue()">💰 Add to Revenue Tracker</button>
     <div id="rev-log" style="margin-top:10px"></div>
   </div>
   <div class="card">
     <div class="card-title">🔥 Streak &amp; Stats</div>
-    <div class="streak" style="margin-bottom:12px">
-      <span style="font-size:22px">🔥</span>
-      <span class="snum2" id="daily-streak">0</span>
-      <span class="stxt">consecutive days of faithfulness</span>
-    </div>
+    <div class="streak" style="margin-bottom:12px"><span style="font-size:22px">🔥</span><span class="snum2" id="daily-streak">0</span><span class="stxt">consecutive days of faithfulness</span></div>
     <div class="pbar"><div class="pfill" id="rev-pbar" style="width:0%"></div></div>
     <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:5px"><span>$0 earned</span><span id="rev-pct2">0%</span><span>$1,000,000 goal</span></div>
     <div class="revdisp" style="padding:14px 0 0"><div class="revamt" id="daily-revenue">$0</div><div class="revlbl">Total Revenue Logged</div></div>
@@ -567,15 +501,11 @@ contact@akiradigital.net</p>
     <div style="font-size:12px;color:var(--muted);text-align:center">Your API key is stored only on this device and never shared.</div>
     <div class="div"></div>
     <h2 style="color:var(--amber);margin-bottom:10px;font-size:16px">📊 Data Management</h2>
-    <div class="row gap10">
-      <button class="btn bo bs flex1" onclick="exportData()">📤 Export Data</button>
-      <button class="btn bo bs flex1" style="color:#f87171;border-color:rgba(248,113,113,.3)" onclick="clearData()">🗑️ Reset All</button>
-    </div>
+    <div class="row gap10"><button class="btn bo bs flex1" onclick="exportData()">📤 Export Data</button><button class="btn bo bs flex1" style="color:#f87171;border-color:rgba(248,113,113,.3)" onclick="clearData()">🗑️ Reset All</button></div>
     <button class="btn bo bw mt8" onclick="closeModal('modal-settings')">Close</button>
   </div>
 </div>
 <div id="toast"></div>
-
 <script>
 const EMOJIS=['🙏','❤️','🔥','🙌','💬','👁️','⬜'];
 const EMOJI_LABELS=['Praying','Heart','Fire','Amen','Replied','Read','None'];
@@ -650,17 +580,17 @@ function renderHome(){
   const dayName=dayNames[dow];
   const dayTasks={
     0:{focus:'🙏 Rest & Renewal',desc:'Today is the Sabbath. Rest in the Lord. No ministry tasks today — you have given all week. Let God minister to you.'},
-    1:{focus:'📣 Brand Outreach Monday',desc:'Today\'s mission: research and contact one for-profit brand about a sponsorship partnership. Even one "yes" at the Digital Sponsor level = $2,500. Use the pitch in the Business tab.'},
-    2:{focus:'🤝 Community Growth Tuesday',desc:'Today\'s mission: add 2 new people to your prayer circle. Think about friends, family, coworkers, church members who need morning prayer.'},
-    3:{focus:'📱 Social Media Wednesday',desc:'Today\'s mission: post today\'s prayer on one social platform. Use the AI Post Generator in the Grow tab. Your social audience is your sponsorship proof.'},
-    4:{focus:'💌 Sponsorship Thursday',desc:'Today\'s mission: send one brand pitch email. Use the template in the Business tab. Follow up on any brands you\'ve already pitched.'},
+    1:{focus:'📣 Brand Outreach Monday',desc:'Today\'s mission: research and contact one for-profit brand about a sponsorship partnership. Even one "yes" at the Digital Sponsor level = $2,500.'},
+    2:{focus:'🤝 Community Growth Tuesday',desc:'Today\'s mission: add 2 new people to your prayer circle.'},
+    3:{focus:'📱 Social Media Wednesday',desc:'Today\'s mission: post today\'s prayer on one social platform. Use the AI Post Generator in the Grow tab.'},
+    4:{focus:'💌 Sponsorship Thursday',desc:'Today\'s mission: send one brand pitch email. Use the template in the Business tab.'},
     5:{focus:'🔴 Live Prayer Friday',desc:'Today is Live Prayer day! Host a 20-30 minute live session. This live content is what brands pay premium rates to sponsor.'},
-    6:{focus:'📈 Review & Plan Saturday',desc:'Today: review your week. Check engagement stats, update revenue, follow up on any outstanding pitches. Plan next week\'s content and outreach.'},
+    6:{focus:'📈 Review & Plan Saturday',desc:'Today: review your week. Check engagement stats, update revenue, follow up on any outstanding pitches.'},
   };
   const task=dayTasks[dow];
   document.getElementById('briefing-content').innerHTML=`<div style="margin-bottom:10px"><span class="badge ba">${dayName}'s Focus</span></div><div style="font-size:16px;font-weight:600;color:var(--cream);margin-bottom:8px">${task.focus}</div><div>${task.desc}</div><div class="div"></div><div style="font-size:12px;color:var(--muted)">📅 ${new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'})}</div>`;
   const chatEl=document.getElementById('home-chat');
-  if(!chatEl.children.length){addChatMsg('home-chat','ai',`Good morning, Sister Elaine! 🕊️\n\nYou have faithfully blessed lives for ${days.toLocaleString()} days. Today is ${dayName} — ${task.focus}.\n\nYour prayer circle has ${contacts.length} members. ${getSilentContacts().length>0?`⚠️ ${getSilentContacts().length} members haven't responded in 14+ days and may need a personal check-in.`:'🙌 Everyone in your circle has been engaged recently!'}\n\nHow can I help you today?`);}
+  if(!chatEl.children.length){addChatMsg('home-chat','ai',`Good morning, Sister Elaine! 🕊️\n\nYou have faithfully blessed lives for ${days.toLocaleString()} days. Today is ${dayName} — ${task.focus}.\n\nYour prayer circle has ${contacts.length} members. ${getSilentContacts().length>0?`⚠️ ${getSilentContacts().length} members haven't responded in 14+ days.`:'🙌 Everyone in your circle has been engaged recently!'}\n\nHow can I help you today?`);}
   document.getElementById('biz-revenue').textContent=fmtMoney(revenue);
   const pct=Math.min(100,(revenue/GOAL)*100);
   document.getElementById('biz-pbar').style.width=pct+'%';
@@ -673,7 +603,6 @@ async function callAI(messages,systemPrompt,maxTokens=1024){
   if(!resp.ok){const e=await resp.json();throw new Error(e.error?.message||'API error');}
   const data=await resp.json();return data.content[0].text;
 }
-let prayerHistory=[];
 async function generatePrayer(){
   const tone=document.getElementById('prayer-tone').value;
   const ctx=document.getElementById('prayer-context').value;
@@ -701,7 +630,7 @@ function renderPrayerArchive(){
   const el=document.getElementById('prayer-archive');
   document.getElementById('prayer-count').textContent=prayers.length+' saved';
   if(!prayers.length){el.innerHTML='<div style="font-size:13px;color:var(--muted);text-align:center;padding:20px 0">No prayers saved yet. Generate or write one above and tap Save. ✨</div>';return;}
-  el.innerHTML=prayers.slice(0,20).map((p,i)=>`<div style="padding:12px;background:rgba(50,23,96,.3);border:1px solid var(--border);border-radius:11px;margin-bottom:8px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px"><span class="badge ba">${p.tone||'Prayer'}</span><span style="font-size:11px;color:var(--muted)">${p.date||''}</span></div><div class="ptext" style="font-size:14px;max-height:80px;overflow:hidden;-webkit-line-clamp:4;display:-webkit-box;-webkit-box-orient:vertical">${p.text}</div><button class="btn bo bs mt8" onclick="copyText(prayers[${i}].text,'Prayer copied!')">📋 Copy</button></div>`).join('');
+  el.innerHTML=prayers.slice(0,20).map((p,i)=>`<div style="padding:12px;background:rgba(50,23,96,.3);border:1px solid var(--border);border-radius:11px;margin-bottom:8px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px"><span class="badge ba">${p.tone||'Prayer'}</span><span style="font-size:11px;color:var(--muted)">${p.date||''}</span></div><div class="ptext" style="font-size:14px;max-height:80px;overflow:hidden">${p.text}</div><button class="btn bo bs mt8" onclick="copyText(prayers[${i}].text,'Prayer copied!')">📋 Copy</button></div>`).join('');
 }
 function renderCircle(){
   const q=(document.getElementById('circle-search')?.value||'').toLowerCase();
@@ -731,7 +660,6 @@ function deleteContact(){
   if(!c)return;
   if(!confirm(`Remove "${c.name}" from your prayer circle?\n\nThis cannot be undone.`))return;
   contacts=contacts.filter(x=>x.id!==_activeContactId);
-  // Also remove their engagement history
   Object.keys(engagements).forEach(date=>{delete engagements[date][_activeContactId];});
   saveAll();closeModal('modal-contact');renderCircle();
   showToast('🗑️ '+c.name.split(' ')[0]+' removed from your circle');
@@ -753,8 +681,7 @@ function quickDelete(id, name){
   showToast('🗑️ '+name.split(' ')[0]+' removed from your circle');
 }
 function openAddContact(){['add-name','add-location','add-phone','add-notes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});['wa','txt','em','fb'].forEach(id=>{const el=document.getElementById('plt-'+id);if(el)el.checked=false;});openModal('modal-add');}
-function saveNewContact(){const name=document.getElementById('add-name').value.trim();if(!name){showToast('⚠️ Name is required','#c8842a');return;}const plats=[];if(document.getElementById('plt-wa').checked)plats.push('WhatsApp');if(document.getElementById('plt-txt').checked)plats.push('Text');if(document.getElementById('plt-em').checked)plats.push('Email');if(document.getElementById('plt-fb').checked)plats.push('Facebook');contacts.push({id:'c'+Date.now(),name,location:document.getElementById('add-location').value.trim(),phone:document.getElementById('add-phone').value.trim(),platforms:plats.length?plats:['WhatsApp'],notes:document.getElementById('add-notes').value.trim(),added:today(),lastResponse:null});saveAll();closeModal('modal-add');renderCircle();showToast('🙏 '+name+' added to your circle!');}
-function renderEngage(){
+function saveNewContact(){const name=document.getElementById('add-name').value.trim();if(!name){showToast('⚠️ Name is required','#c8842a');return;}const plats=[];if(document.getElementById('plt-wa').checked)plats.push('WhatsApp');if(document.getElementById('plt-txt').checked)plats.push('Text');if(document.getElementById('plt-em').checked)plats.push('Email');if(document.getElementById('plt-fb').checked)plats.push('Facebook');contacts.push({id:'c'+Date.now(),name,location:document.getElementById('add-location').value.trim(),phone:document.getElementById('add-phone').value.trim(),platforms:plats.length?plats:['WhatsApp'],notes:document.getElementById('add-notes').value.trim(),added:today(),lastResponse:null});saveAll();closeModal('modal-add');renderCircle();showToast('🙏 '+name+' added to your circle!');}function renderEngage(){
   const t=today();
   document.getElementById('today-date-badge').textContent=new Date().toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
   const todayEngs=engagements[t]||{};
@@ -765,7 +692,7 @@ function renderEngage(){
   document.getElementById('e-today').textContent=logged;document.getElementById('e-rate').textContent=rate;document.getElementById('e-silent').textContent=silent;document.getElementById('stat-engage').textContent=rate;
   const silentEl=document.getElementById('silent-alerts-section');
   const silentList=getSilentContacts();
-  if(silentList.length){silentEl.innerHTML=`<div class="card" style="border-color:rgba(248,113,113,.3)"><div class="card-title" style="color:#f87171">⚠️ ${silentList.length} Member${silentList.length>1?'s':''} Need Care (14+ days)</div>${silentList.map(c=>{const days=daysSinceLastResponse(c);const msg=`Hello ${c.name.split(' ')[1]||c.name}! 🙏 Checking in on you with love — I haven't heard from you in a while and you've been on my heart. How are you? Praying for you daily. — Sister Elaine`;return `<div class="citem" style="margin-bottom:6px"><div class="cav" style="background:rgba(220,38,38,.2);color:#f87171">${initials(c.name)}</div><div class="cinfo"><div class="cname">${c.name}</div><div class="cmeta">${days} days since last response</div></div><button class="btn bo bs" style="color:#f87171;border-color:rgba(248,113,113,.3);font-size:11px;padding:6px 8px" onclick="copyText('${msg.replace(/'/g,"&#39;")}','Message copied!')">📋 Copy</button></div>`;}).join('')}</div>`;}else{silentEl.innerHTML='';}
+  if(silentList.length){silentEl.innerHTML=`<div class="card" style="border-color:rgba(248,113,113,.3)"><div class="card-title" style="color:#f87171">⚠️ ${silentList.length} Member${silentList.length>1?'s':''} Need Care (14+ days)</div>${silentList.map(c=>{const days=daysSinceLastResponse(c);const msg=`Hello ${c.name.split(' ')[1]||c.name}! 🙏 Checking in on you with love — I haven't heard from you in a while and you've been on my heart. How are you? Praying for you daily. — Sister Elaine`;return `<div class="citem" style="margin-bottom:6px"><div class="cav" style="background:rgba(220,38,38,.2);color:#f87171">${initials(c.name)}</div><div class="cinfo"><div class="cname">${c.name}</div><div class="cmeta">${days} days since last response</div></div><button class="btn bo bs" style="color:#f87171;border-color:rgba(248,113,113,.3);font-size:11px;padding:6px 8px" onclick="copyText('${msg.replace(/'/g,"&#39;")}','Message copied!')">📋 Copy</button></div>`;}).join('')}</div>`);}else{silentEl.innerHTML='';}
   const el=document.getElementById('engage-list');
   el.innerHTML=contacts.map(c=>{const sel=todayEngs[c.id]||'';const days=daysSinceLastResponse(c);return `<div class="erow"><div class="ertop"><div class="cav" style="width:32px;height:32px;font-size:12px">${initials(c.name)}</div><div class="ername">${c.name}</div><div class="erdays">${days>998?'new':days+'d'}</div></div><div class="egrid">${EMOJIS.map((em,i)=>`<button class="ebtn${sel===em?' sel':''}" onclick="logEngage('${c.id}','${em}')" title="${EMOJI_LABELS[i]}">${em}</button>`).join('')}</div></div>`;}).join('');
 }
@@ -789,32 +716,32 @@ function renderBusiness(){document.getElementById('biz-revenue').textContent=fmt
 function copyPitch(){const pitch=document.getElementById('pitch-email-text').textContent;copyText(pitch,'Email template copied!');}
 function copyEmail(){copyPitch();}
 const CORE_TASKS=[
-  {key:'write',icon:'✍️',title:"Write Today's Prayer",desc:'Generate or write your morning prayer in the Prayers tab.',steps:['1. Tap the 📖 Prayers tab at the bottom','2. Select a theme from the dropdown','3. Add any special context (optional)','4. Tap "Generate Today\'s Prayer" and wait','5. Read and edit as the Spirit leads','6. Tap "Save" to archive it\n\n💫 The AI gives you a beautiful starting place — your touch makes it anointed.']},
-  {key:'send',icon:'📤',title:"Send Prayer to Your Circle",desc:'Copy prayer and send via WhatsApp to all 180+ members.',steps:['1. Tap "Copy" on your prayer in the Prayers tab','2. Open WhatsApp on your phone','3. Go to your prayer broadcast list or group','4. Paste the prayer (hold down, tap Paste)','5. Review and tap Send ✉️\n\n💫 As you send, whisper: "Lord, let every word reach every heart exactly as it needs to."']},
-  {key:'log',icon:'📊',title:"Log Today's Responses",desc:"Track who responded to today's prayer in the Engage tab.",steps:['1. Tap the 📊 Engage tab','2. Scroll through your circle list','3. Tap the emoji that matches each person\'s response','4. Check the "Need Care" alerts at the top\n\n💫 This data is your ministry proof. Sponsors pay for documented engagement.']}
+  {key:'write',icon:'✍️',title:"Write Today's Prayer",desc:'Generate or write your morning prayer in the Prayers tab.',steps:['1. Tap the 📖 Prayers tab','2. Select a theme','3. Tap Generate and wait','4. Read, edit, and Save\n\n💫 Your touch makes it anointed.']},
+  {key:'send',icon:'📤',title:"Send Prayer to Your Circle",desc:'Copy prayer and send via WhatsApp to all 180+ members.',steps:['1. Tap Copy on your prayer','2. Open WhatsApp','3. Paste and Send ✉️\n\n💫 As you send, whisper a blessing.']},
+  {key:'log',icon:'📊',title:"Log Today's Responses",desc:"Track who responded to today's prayer in the Engage tab.",steps:['1. Tap 📊 Engage tab','2. Tap the emoji for each person','3. Check the Need Care alerts\n\n💫 This data is your sponsorship proof.']}
 ];
 const DAY_TASKS={
-  0:{icon:'🙏',title:'Rest & Renewal — Sabbath',desc:'No ministry tasks today. Rest, worship, receive.',steps:['1. Put down the work today','2. Attend church or spend time in personal worship','3. Let others bless you today','4. Journal what God is doing in your ministry\n\n💫 "Come to me, all you who are weary and burdened, and I will give you rest." — Matthew 11:28']},
-  1:{icon:'📣',title:'Brand Outreach Monday',desc:'Contact one for-profit brand about a sponsorship partnership.',steps:['1. Open the 💼 Business tab','2. Find the "30 Target For-Profit Brands" section','3. Pick one brand you haven\'t contacted yet','4. Find the brand partnership contact email online','5. Customize and send the pitch email template','6. Note the date you sent it for follow-up\n\n💫 One yes at the Digital Sponsor level = $2,500. One yes at the Title level = $25,000.']},
-  2:{icon:'🤝',title:'Community Growth Tuesday',desc:'Add 2 new people to your prayer circle today.',steps:['1. Think: who in your life needs morning prayer?','2. Text or call them personally','3. When they say yes, tap "+" in the 👥 Circle tab','4. Add their name and info','5. Send today\'s prayer immediately as a welcome\n\n💫 Every person you add grows your engagement numbers that sponsors want to see.']},
-  3:{icon:'📱',title:'Social Media Wednesday',desc:"Post today's prayer on one social platform.",steps:['1. Open the 📱 Grow tab','2. Enter today\'s prayer theme','3. Pick your platform and tap Generate','4. Copy the post and publish it','5. Check back and reply to comments\n\n💫 Your social following is your public proof of influence. Brands look at follower counts.']},
-  4:{icon:'💌',title:'Sponsorship Thursday',desc:'Send one brand pitch email or follow up today.',steps:['1. Open the 💼 Business tab','2. Find the "30 Target For-Profit Brands" list','3. Pick a brand or follow up on one already pitched','4. Customize and send the email template','5. Log in your notes\n\n💫 "No" just means "not yet." Keep building relationships.']},
-  5:{icon:'🔴',title:'Live Prayer Friday',desc:'Host a live prayer session — your highest-value sponsorship inventory.',steps:['1. Announce to your circle: "Going live today at [time]!"','2. Have today\'s prayer ready','3. Go live and open with a welcome','4. Read the prayer slowly and powerfully','5. Take 2-3 prayer requests','6. Close with a blessing\n\n💫 Brands pay premium rates to sponsor live events. Document your viewer counts.']},
-  6:{icon:'📈',title:'Review & Plan Saturday',desc:"Review your week. Check stats, update revenue, plan next week.",steps:['1. Review engagement rate in the Engage tab','2. Log any revenue earned this week','3. Note any brands that haven\'t responded — follow up Monday','4. Plan next week\'s prayer themes','5. Identify your #1 goal for next week\n\n💫 What gets measured gets managed. What gets managed gets grown.']}
+  0:{icon:'🙏',title:'Rest & Renewal — Sabbath',desc:'No ministry tasks today. Rest, worship, receive.',steps:['1. Put down the work today','2. Let others bless you today\n\n💫 "Come to me, all who are weary." — Matthew 11:28']},
+  1:{icon:'📣',title:'Brand Outreach Monday',desc:'Contact one for-profit brand about a sponsorship.',steps:['1. Open 💼 Business tab','2. Find the 30 Target Brands','3. Pick one and send the pitch email\n\n💫 One yes = up to $25,000.']},
+  2:{icon:'🤝',title:'Community Growth Tuesday',desc:'Add 2 new people to your prayer circle today.',steps:['1. Think who needs morning prayer','2. Tap + in 👥 Circle tab','3. Add their info and send today\'s prayer\n\n💫 Every member grows your sponsorship proof.']},
+  3:{icon:'📱',title:'Social Media Wednesday',desc:"Post today's prayer on one social platform.",steps:['1. Open 📱 Grow tab','2. Enter your prayer theme','3. Generate, copy, and post\n\n💫 Your followers are your public proof of influence.']},
+  4:{icon:'💌',title:'Sponsorship Thursday',desc:'Send one brand pitch email or follow up today.',steps:['1. Open 💼 Business tab','2. Pick a brand from the list','3. Send the pitch email template\n\n💫 "No" just means "not yet."']},
+  5:{icon:'🔴',title:'Live Prayer Friday',desc:'Host a live prayer session — your highest-value sponsorship inventory.',steps:['1. Announce "Going live today!"','2. Go live at your set time','3. Read prayer, take requests, close with blessing\n\n💫 Brands pay premium to sponsor live events.']},
+  6:{icon:'📈',title:'Review & Plan Saturday',desc:"Review your week and plan next week.",steps:['1. Check engagement stats','2. Log any revenue earned','3. Plan next week\'s prayer themes\n\n💫 What gets measured gets grown.']}
 };
 const MONTHLY_MISSIONS=[
-  {month:1,title:'Build Your Media Kit',desc:'Take a professional photo. Write a 3-paragraph ministry bio. Create a one-page stats sheet: 180+ members, 7 years daily, 5× weekly touchpoint, engagement rate. This is what brands need before they say yes.'},
-  {month:2,title:'Send Your First 10 Brand Pitches',desc:'Email 10 brands from your target list. Start with the Digital Sponsor tier ($1,000–$2,500) — it\'s the easiest yes. Track every response.'},
-  {month:3,title:'Close Your First Paid Sponsor',desc:'You need one yes. One brand. One check. Even $1,000 proves the model. Follow up on every pitch from month 2.'},
-  {month:4,title:'Launch Your Podcast',desc:'Record your first 5 episodes — each one is your daily morning prayer. Upload to Spotify and Apple Podcasts free via Anchor.fm. Podcast listeners = premium ad rates.'},
-  {month:5,title:'Close a Community Partner ($5K)',desc:'With your first sponsor testimonial and growing social presence, pitch a $5,000 Community Partner deal. You now have proof it works.'},
-  {month:6,title:'Pitch Your First Presenting Partner ($10K)',desc:'Six months of documented, consistent ministry. Your media kit is polished. Your first sponsor validates you. Make the $10K ask.'},
-  {month:7,title:'Close Your First Presenting Partner ($10K)',desc:'This is the month you close $10,000 in a single deal. Follow up relentlessly. Your morning reach + live sessions justify this investment.'},
-  {month:8,title:'Pursue a Title Sponsor ($25K)',desc:'With 2-3 sponsors already signed, you have credibility. Go after the big one. AARP, Target, or OWN Network could change everything.'},
-  {month:9,title:'Launch Premium Subscription',desc:'Offer a premium tier — $10/month for extended prayers, personal prayer requests, exclusive content. Target 200 subscribers = $2,000/month.'},
-  {month:10,title:'First Speaking Booking',desc:'Reach out to women\'s conferences, corporate wellness events, and faith organizations. A single keynote can pay $5,000–$25,000.'},
-  {month:11,title:'Book Deal Inquiry',desc:'7 years of daily prayers is a manuscript. Contact Zondervan, HarperCollins, or Thomas Nelson. Your brand + audience makes this a real proposal.'},
-  {month:12,title:'$1M Milestone — Celebrate 🎉',desc:'Full sponsor roster. Podcast ad revenue. Premium subscriptions. Speaking bookings. Book deal. You built a million-dollar ministry — one prayer at a time, Sister Elaine.'},
+  {month:1,title:'Build Your Media Kit',desc:'Take a professional photo. Write a 3-paragraph bio. Create a stats sheet: 180+ members, 7 years daily, 5× weekly touchpoint. This is what brands need before they say yes.'},
+  {month:2,title:'Send Your First 10 Brand Pitches',desc:'Email 10 brands from your target list. Start with the Digital Sponsor tier ($1,000–$2,500) — it\'s the easiest yes.'},
+  {month:3,title:'Close Your First Paid Sponsor',desc:'You need one yes. One brand. One check. Even $1,000 proves the model.'},
+  {month:4,title:'Launch Your Podcast',desc:'Record your first 5 episodes — each one is your daily morning prayer. Upload to Spotify free via Anchor.fm.'},
+  {month:5,title:'Close a Community Partner ($5K)',desc:'With your first sponsor testimonial and growing social presence, pitch a $5,000 Community Partner deal.'},
+  {month:6,title:'Pitch Your First Presenting Partner ($10K)',desc:'Six months of documented ministry. Make the $10K ask.'},
+  {month:7,title:'Close Your First Presenting Partner ($10K)',desc:'Follow up relentlessly. Your morning reach + live sessions justify this investment.'},
+  {month:8,title:'Pursue a Title Sponsor ($25K)',desc:'With 2-3 sponsors signed, you have credibility. Go after AARP, Target, or OWN Network.'},
+  {month:9,title:'Launch Premium Subscription',desc:'Offer $10/month for extended prayers, personal prayer requests, exclusive content.'},
+  {month:10,title:'First Speaking Booking',desc:'Reach out to women\'s conferences and corporate wellness events. A keynote can pay $5,000–$25,000.'},
+  {month:11,title:'Book Deal Inquiry',desc:'7 years of daily prayers is a manuscript. Contact Zondervan, HarperCollins, or Thomas Nelson.'},
+  {month:12,title:'$1M Milestone — Celebrate 🎉',desc:'Full sponsor roster. Podcast ad revenue. Premium subscriptions. Speaking bookings. You built a million-dollar ministry — one prayer at a time, Sister Elaine.'},
 ];
 function renderDaily(){
   checkAndUpdateStreak();
@@ -844,7 +771,7 @@ async function homeChat(){
   const input=document.getElementById('home-input');const text=input.value.trim();if(!text)return;input.value='';
   addChatMsg('home-chat','user',text);homeChatHistory.push({role:'user',content:text});
   const sendBtn=document.getElementById('home-send');sendBtn.innerHTML='<span class="spin"></span>';sendBtn.disabled=true;
-  try{const system=`You are a helpful and faith-filled ministry assistant for Sister Elaine Gary's Prayer Ministry. Sister Elaine is a woman of deep faith from New Orleans, Louisiana who has been faithfully sending morning prayers to her circle of ${contacts.length} members every weekday since 2018 — that's ${getDaysSince2018()} consecutive days of faithful daily prayer. She is working toward her goal of $1,000,000 in ministry income in her first year through for-profit brand sponsorships (5 tiers from $1K to $25K/year), podcast advertising, premium subscriptions, social media brand deals, a prayer book, and corporate wellness speaking engagements. She has earned $${revenue.toLocaleString()} toward that goal so far. Her streak is ${streak} days. ${getSilentContacts().length} members haven't responded in 14+ days. Speak with warmth, faith, wisdom, and practical advice. Keep responses under 200 words.`;
+  try{const system=`You are a helpful and faith-filled ministry assistant for Sister Elaine Gary's Prayer Ministry. Sister Elaine is a woman of deep faith from New Orleans, Louisiana who has been faithfully sending morning prayers to her circle of ${contacts.length} members every weekday since 2018. She is working toward $1,000,000 in ministry income through for-profit brand sponsorships, podcast advertising, premium subscriptions, social media brand deals, a prayer book, and corporate wellness speaking. She has earned $${revenue.toLocaleString()} so far. Her streak is ${streak} days. ${getSilentContacts().length} members haven't responded in 14+ days. Speak with warmth, faith, wisdom, and practical advice. Keep responses under 200 words.`;
   const reply=await callAI(homeChatHistory.slice(-10),system,600);if(!reply)return;homeChatHistory.push({role:'assistant',content:reply});addChatMsg('home-chat','ai',reply);}
   catch(err){addChatMsg('home-chat','ai','⚠️ '+err.message);}
   finally{sendBtn.innerHTML='➤';sendBtn.disabled=false;}
