@@ -57,7 +57,7 @@ button,.btn{
   background:transparent;border:none;padding:6px 2px;
   color:var(--muted);transition:color .2s;
   min-height:44px;
-  touch-action:manipulation;cursor:pointer;
+  touch-action:manipulation;cursor:pointer;text-decoration:none;
 }
 .nbtn .ni{font-size:22px;line-height:1.1;}
 .nbtn .nl{font-size:9px;font-weight:500;letter-spacing:.4px;text-transform:uppercase}
@@ -68,7 +68,7 @@ h1{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;line-he
 h2{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400}
 p{font-size:13px;line-height:1.65;color:var(--sub)}
 .btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;
   padding:11px 18px;border-radius:10px;border:none;
   font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
   transition:all .2s;text-decoration:none;
@@ -254,12 +254,12 @@ label{font-size:12px;color:var(--muted);margin-bottom:5px;display:block}
   <div class="card">
     <div class="card-title">⚡ Quick Actions</div>
     <div class="row gap10" style="flex-wrap:wrap">
-      <button class="btn bg bs flex1" onclick="switchTab('prayers')">✍️ Write Prayer</button>
-      <button class="btn bg bs flex1" onclick="switchTab('engage')">📊 Log Responses</button>
+      <a class="btn bg bs flex1" href="#prayers">✍️ Write Prayer</a>
+      <a class="btn bg bs flex1" href="#engage">📊 Log Responses</a>
     </div>
     <div class="row gap10 mt8" style="flex-wrap:wrap">
-      <button class="btn bo bs flex1" onclick="switchTab('daily')">📋 Daily Log</button>
-      <button class="btn bo bs flex1" onclick="switchTab('business')">💼 Revenue</button>
+      <a class="btn bo bs flex1" href="#daily">📋 Daily Log</a>
+      <a class="btn bo bs flex1" href="#business">💼 Revenue</a>
     </div>
   </div>
 </div>
@@ -481,13 +481,13 @@ contact@akiradigital.net</p></div>
 
 <!-- NAV -->
 <nav class="bnav" role="navigation">
-  <button class="nbtn active" data-tab="home" onclick="switchTab('home')"><span class="ni">🏠</span><span class="nl">Home</span></button>
-  <button class="nbtn" data-tab="prayers" onclick="switchTab('prayers')"><span class="ni">📖</span><span class="nl">Prayers</span></button>
-  <button class="nbtn" data-tab="circle" onclick="switchTab('circle')"><span class="ni">👥</span><span class="nl">Circle</span></button>
-  <button class="nbtn" data-tab="engage" onclick="switchTab('engage')"><span class="ni">📊</span><span class="nl">Engage</span></button>
-  <button class="nbtn" data-tab="grow" onclick="switchTab('grow')"><span class="ni">📱</span><span class="nl">Grow</span></button>
-  <button class="nbtn" data-tab="business" onclick="switchTab('business')"><span class="ni">💼</span><span class="nl">Business</span></button>
-  <button class="nbtn" data-tab="daily" onclick="switchTab('daily')"><span class="ni">📋</span><span class="nl">Daily</span></button>
+  <a class="nbtn active" data-tab="home" href="#home"><span class="ni">🏠</span><span class="nl">Home</span></a>
+  <a class="nbtn" data-tab="prayers" href="#prayers"><span class="ni">📖</span><span class="nl">Prayers</span></a>
+  <a class="nbtn" data-tab="circle" href="#circle"><span class="ni">👥</span><span class="nl">Circle</span></a>
+  <a class="nbtn" data-tab="engage" href="#engage"><span class="ni">📊</span><span class="nl">Engage</span></a>
+  <a class="nbtn" data-tab="grow" href="#grow"><span class="ni">📱</span><span class="nl">Grow</span></a>
+  <a class="nbtn" data-tab="business" href="#business"><span class="ni">💼</span><span class="nl">Business</span></a>
+  <a class="nbtn" data-tab="daily" href="#daily"><span class="ni">📋</span><span class="nl">Daily</span></a>
 </nav>
 </div>
 
@@ -903,20 +903,16 @@ function clearData(){
   ['elaine_contacts','elaine_prayers','elaine_engagements','elaine_revenue','elaine_revlog','elaine_streak','elaine_lastactive','elaine_tasks','elaine_platforms','elaine_liveplans'].forEach(function(k){localStorage.removeItem(k);});
   loadState();showToast('Data reset. Reloading...');setTimeout(function(){location.reload();},1500);
 }
-// Init
+// Anchor + hashchange navigation (works on ALL mobile)
 loadState();
-renderHome();
 renderPrayerArchive();
-document.querySelectorAll('.nbtn[data-tab]').forEach(function(btn){btn.addEventListener('click',function(e){e.stopPropagation();switchTab(btn.dataset.tab);},{passive:true});btn.addEventListener('touchend',function(e){e.preventDefault();switchTab(btn.dataset.tab);},{passive:false});});
-if(!getApiKey()){
-  var sb=document.getElementById('settingsbtn');
-  if(sb){
-    sb.style.animation='pulse-btn 2s ease-in-out infinite';
-    var style=document.createElement('style');
-    style.textContent='@keyframes pulse-btn{0%,100%{box-shadow:0 0 0 0 rgba(200,132,42,.4)}50%{box-shadow:0 0 0 8px rgba(200,132,42,0)}}';
-    document.head.appendChild(style);
-  }
+function handleHash(){
+  var h=(location.hash||'').replace(/^#/,'');
+  if(!h)h='home';
+  switchTab(h);
 }
+window.addEventListener('hashchange',handleHash,false);
+handleHash();
 </script>
 </body>
                                                                                            </html>
