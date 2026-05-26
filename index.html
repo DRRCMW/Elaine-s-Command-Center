@@ -34,6 +34,7 @@ body{
   padding:14px 14px calc(var(--nav) + env(safe-area-inset-bottom,16px) + 14px);
   display:none;
 }
+.tab:target{display:block}
 .tab.active{display:block}
 .bnav{
   position:fixed;bottom:0;left:50%;transform:translateX(-50%);
@@ -254,12 +255,12 @@ label{font-size:12px;color:var(--muted);margin-bottom:5px;display:block}
   <div class="card">
     <div class="card-title">⚡ Quick Actions</div>
     <div class="row gap10" style="flex-wrap:wrap">
-      <a class="btn bg bs flex1" href="#prayers">✍️ Write Prayer</a>
-      <a class="btn bg bs flex1" href="#engage">📊 Log Responses</a>
+      <a class="btn bg bs flex1" href="#tab-prayers">✍️ Write Prayer</a>
+      <a class="btn bg bs flex1" href="#tab-engage">📊 Log Responses</a>
     </div>
     <div class="row gap10 mt8" style="flex-wrap:wrap">
-      <a class="btn bo bs flex1" href="#daily">📋 Daily Log</a>
-      <a class="btn bo bs flex1" href="#business">💼 Revenue</a>
+      <a class="btn bo bs flex1" href="#tab-daily">📋 Daily Log</a>
+      <a class="btn bo bs flex1" href="#tab-business">💼 Revenue</a>
     </div>
   </div>
 </div>
@@ -481,13 +482,13 @@ contact@akiradigital.net</p></div>
 
 <!-- NAV -->
 <nav class="bnav" role="navigation">
-  <a class="nbtn active" data-tab="home" href="#home"><span class="ni">🏠</span><span class="nl">Home</span></a>
-  <a class="nbtn" data-tab="prayers" href="#prayers"><span class="ni">📖</span><span class="nl">Prayers</span></a>
-  <a class="nbtn" data-tab="circle" href="#circle"><span class="ni">👥</span><span class="nl">Circle</span></a>
-  <a class="nbtn" data-tab="engage" href="#engage"><span class="ni">📊</span><span class="nl">Engage</span></a>
-  <a class="nbtn" data-tab="grow" href="#grow"><span class="ni">📱</span><span class="nl">Grow</span></a>
-  <a class="nbtn" data-tab="business" href="#business"><span class="ni">💼</span><span class="nl">Business</span></a>
-  <a class="nbtn" data-tab="daily" href="#daily"><span class="ni">📋</span><span class="nl">Daily</span></a>
+  <a class="nbtn active" data-tab="home" href="#tab-home"><span class="ni">🏠</span><span class="nl">Home</span></a>
+  <a class="nbtn" data-tab="prayers" href="#tab-prayers"><span class="ni">📖</span><span class="nl">Prayers</span></a>
+  <a class="nbtn" data-tab="circle" href="#tab-circle"><span class="ni">👥</span><span class="nl">Circle</span></a>
+  <a class="nbtn" data-tab="engage" href="#tab-engage"><span class="ni">📊</span><span class="nl">Engage</span></a>
+  <a class="nbtn" data-tab="grow" href="#tab-grow"><span class="ni">📱</span><span class="nl">Grow</span></a>
+  <a class="nbtn" data-tab="business" href="#tab-business"><span class="ni">💼</span><span class="nl">Business</span></a>
+  <a class="nbtn" data-tab="daily" href="#tab-daily"><span class="ni">📋</span><span class="nl">Daily</span></a>
 </nav>
 </div>
 
@@ -589,19 +590,7 @@ function loadState(){
 }
 function save(k,v){try{localStorage.setItem(k,typeof v==='string'?v:JSON.stringify(v));}catch(e){}}
 function saveAll(){save('elaine_contacts',contacts);save('elaine_prayers',prayers);save('elaine_engagements',engagements);save('elaine_revenue',String(revenue));save('elaine_revlog',revenueLog);save('elaine_streak',String(streak));save('elaine_lastactive',lastActive||'');save('elaine_tasks',tasks);save('elaine_platforms',platforms);save('elaine_liveplans',livePlans);}
-function switchTab(name){
-  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
-  document.querySelectorAll('.nbtn').forEach(function(b){b.classList.remove('active');});
-  var tab=document.getElementById('tab-'+name);if(tab)tab.classList.add('active');
-  var btn=document.querySelector('.nbtn[data-tab="'+name+'"]');if(btn)btn.classList.add('active');
-  if(name==='circle')renderCircle();
-  if(name==='engage')renderEngage();
-  if(name==='daily')renderDaily();
-  if(name==='home')renderHome();
-  if(name==='business')renderBusiness();
-  if(name==='prayers')renderPrayerArchive();
-  if(name==='grow')renderGrow();
-}
+function switchTab(n){location.hash='#tab-'+n;}
 function fmtMoney(n){if(n>=1000000)return '$'+(n/1000000).toFixed(2)+'M';if(n>=1000)return '$'+(n/1000).toFixed(1)+'K';return '$'+n.toLocaleString();}
 function today(){return new Date().toISOString().split('T')[0];}
 function daysBetween(d1,d2){return Math.floor((new Date(d2)-new Date(d1))/(1000*60*60*24));}
@@ -903,15 +892,25 @@ function clearData(){
   ['elaine_contacts','elaine_prayers','elaine_engagements','elaine_revenue','elaine_revlog','elaine_streak','elaine_lastactive','elaine_tasks','elaine_platforms','elaine_liveplans'].forEach(function(k){localStorage.removeItem(k);});
   loadState();showToast('Data reset. Reloading...');setTimeout(function(){location.reload();},1500);
 }
-// Anchor + hashchange navigation (works on ALL mobile)
+// CSS :target shows tabs. hashchange renders dynamic content. Works on ALL browsers.
 loadState();
 renderPrayerArchive();
 function handleHash(){
-  var h=(location.hash||'').replace(/^#/,'');
-  if(!h)h='home';
-  switchTab(h);
+  var raw=(location.hash||'').replace(/^#/,'');
+  var h=raw.replace(/^tab-/,'')||'home';
+  document.querySelectorAll('.nbtn').forEach(function(a){a.classList.toggle('active',a.dataset.tab===h);});
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  var el=document.getElementById('tab-'+h);if(el)el.classList.add('active');
+  if(h==='home')renderHome();
+  else if(h==='circle')renderCircle();
+  else if(h==='engage')renderEngage();
+  else if(h==='daily')renderDaily();
+  else if(h==='business')renderBusiness();
+  else if(h==='prayers')renderPrayerArchive();
+  else if(h==='grow')renderGrow();
 }
 window.addEventListener('hashchange',handleHash,false);
+if(!location.hash||location.hash==='#'){history.replaceState(null,'','#tab-home');}
 handleHash();
 </script>
 </body>
