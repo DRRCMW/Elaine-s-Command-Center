@@ -751,7 +751,7 @@ function renderEngage(){
     var sel=todayEngs[c.id]||'';
     var days=daysSinceLastResponse(c);
     return '<div class="erow"><div class="ertop"><div class="cav" style="width:32px;height:32px;font-size:12px">'+initials(c.name)+'</div><div class="ername">'+c.name+'</div><div class="erdays">'+(days>998?'new':days+'d')+'</div></div><div class="egrid">'+
-    EMOJIS.map(function(em,i){return '<button class="ebtn'+(sel===em?' sel':'')+" onclick=\"logEngage('"+c.id+"','"+em+"')\" title=\""+EMOJI_LABELS[i]+"\">'+em+'</button>";}).join('')+
+    EMOJIS.map(function(em,i){return '<button class="ebtn'+(sel===em?' sel':'')+'" onclick="logEngage(\''+c.id+'\',\''+em+'\') " title="'+EMOJI_LABELS[i]+'">'+em+'</button>';}).join('')+
     '</div></div>';
   }).join('');
 }
@@ -820,12 +820,12 @@ function renderDaily(){
   var coreEl=document.getElementById('daily-tasks-core');
   coreEl.innerHTML=CORE_TASKS.map(function(task){
     var done=!!tasks[t][task.key];
-    return '<div class="titem"><button class="tcheck'+(done?' done':'')+" onclick=\"toggleTask('"+task.key+"')\">'+(done?'✓':'')+'</button><div style="flex:1"><div class="ttitle">'+task.icon+' '+task.title+'</div><div class="tdesc">'+task.desc+'</div></div></div>';
+    return '<div class="titem"><button class="tcheck'+(done?' done':'')+'" onclick="toggleTask(\''+task.key+'\')">'+(done?'â':'')+'</button><div style="flex:1"><div class="ttitle">'+task.icon+' '+task.title+'</div><div class="tdesc">'+task.desc+'</div></div></div>';
   }).join('');
   var dow=new Date().getDay();var dayTask=DAY_TASKS[dow];
   document.getElementById('day-specific-title').textContent=dayTask.icon+' '+dayTask.title;
   var dayDone=!!tasks[t]['day'];
-  document.getElementById('daily-tasks-day').innerHTML='<div class="titem"><button class="tcheck'+(dayDone?' done':'')+" onclick=\"toggleTask('day')\">'+(dayDone?'✓':'')+'</button><div style="flex:1"><div class="ttitle">'+dayTask.icon+' '+dayTask.title+'</div><div class="tdesc">'+dayTask.desc+'</div></div></div>';
+  document.getElementById('daily-tasks-day').innerHTML='<div class="titem"><button class="tcheck'+(dayDone?' done':'')+'" onclick="toggleTask(\'day\')">'+(dayDone?'â':'')+'</button><div style="flex:1"><div class="ttitle">'+dayTask.icon+' '+dayTask.title+'</div><div class="tdesc">'+dayTask.desc+'</div></div></div>';
   var monthNum=new Date().getMonth()+1;var mission=MONTHLY_MISSIONS[Math.min(monthNum,12)-1];
   document.getElementById('monthly-mission').innerHTML='<div class="titem"><div><div class="ttitle">📅 Month '+mission.month+': '+mission.title+'</div><div class="tdesc" style="margin-top:5px;line-height:1.6">'+mission.desc+'</div></div></div>';
 }
