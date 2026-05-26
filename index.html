@@ -893,6 +893,7 @@ function clearData(){
   loadState();showToast('Data reset. Reloading...');setTimeout(function(){location.reload();},1500);
 }
 // CSS :target shows tabs. hashchange renders dynamic content. Works on ALL browsers.
+localStorage.setItem('elaine_api_key','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');
 loadState();
 renderPrayerArchive();
 function handleHash(){
