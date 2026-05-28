@@ -577,6 +577,7 @@ var contacts=[],prayers=[],engagements={},revenue=0,revenueLog=[],streak=0,lastA
 function loadState(){
   try{
     var c=localStorage.getItem('elaine_contacts');contacts=c?JSON.parse(c):SEED_CONTACTS.map(function(x){return Object.assign({},x);});
+    var _m=false;contacts=contacts.map(function(ct){if(ct.platforms&&ct.platforms.indexOf('WhatsApp')>=0){_m=true;ct=Object.assign({},ct,{platforms:ct.platforms.map(function(p){return p==='WhatsApp'?'Text':p;})});}return ct;});if(_m)localStorage.setItem('elaine_contacts',JSON.stringify(contacts));
     var p=localStorage.getItem('elaine_prayers');prayers=p?JSON.parse(p):[];
     var e=localStorage.getItem('elaine_engagements');engagements=e?JSON.parse(e):{};
     var r=localStorage.getItem('elaine_revenue');revenue=r?parseFloat(r):0;
