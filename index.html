@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#1c0f3a">
-<title>Sister Elaine's Prayer Ministry</title>
+<title>Sister G's Prayer Ministry</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -222,13 +222,13 @@ label{font-size:12px;color:var(--muted);margin-bottom:5px;display:block}
 <!-- HOME TAB -->
 <div class="tab active" id="tab-home">
   <div class="greet">
-    <div class="gname">🕊️ Sister Elaine Gary</div>
+    <div class="gname">🕊️ Sister G</div>
     <div class="gsub" id="daycount">Faithfully blessing lives since 2018</div>
   </div>
   <div class="streak">
     <span style="font-size:20px">🔥</span>
     <span class="snum2" id="streaknum">0</span>
-    <span class="stxt">day streak · keep it going, Sister Elaine!</span>
+    <span class="stxt">day streak · keep it going, Sister G!</span>
   </div>
   <div class="stats3">
     <div class="scard"><div class="snum" id="stat-circle">0</div><div class="slbl">Circle</div></div>
@@ -424,18 +424,18 @@ label{font-size:12px;color:var(--muted);margin-bottom:5px;display:block}
   </div>
   <div class="card">
     <div class="card-title">📧 Brand Pitch Template</div>
-    <div class="pitch"><p id="pitch-email-text">Subject: Partnership Opportunity — Sister Elaine Gary's Prayer Ministry
+    <div class="pitch"><p id="pitch-email-text">Subject: Partnership Opportunity — Sister G's Prayer Ministry
 
 Dear [Brand Partnership Team],
 
-My name is Sister Elaine Gary. Since 2018, every weekday without a single exception, I have personally written and delivered a morning prayer to 180+ engaged members via text message.
+I lead Sister G's Prayer Ministry. Since 2018, every weekday without a single exception, I have personally written and delivered a morning prayer to 180+ engaged members via text message.
 
 My audience is faith-motivated adults aged 30+, predominantly women, who read my message every morning. I'd love to explore a sponsorship partnership with [Brand].
 
 Could we connect for a 15-minute call?
 
 With blessings,
-Sister Elaine Gary · New Orleans
+Sister G · New Orleans
 contact@akiradigital.net</p></div>
     <button class="btn bo bs mt8" onclick="copyEmail()">📋 Copy Email</button>
   </div>
@@ -536,7 +536,7 @@ contact@akiradigital.net</p></div>
     <h2 style="color:var(--amber);margin-bottom:16px">⚙️ Settings</h2>
     <div class="alert ai2" style="margin-bottom:14px">Enter your Anthropic API key to unlock AI prayer generation. Get yours free at console.anthropic.com</div>
     <label>Anthropic API Key</label><input id="settings-apikey" type="password" placeholder="sk-ant-..." style="margin-bottom:14px">
-    <label>Your Name</label><input id="settings-name" type="text" placeholder="Sister Elaine Gary" style="margin-bottom:14px">
+    <label>Your Name</label><input id="settings-name" type="text" placeholder="Sister G" style="margin-bottom:14px">
     <button class="btn bg bw" onclick="saveSettings()">💾 Save Settings</button>
     <div class="divider"></div>
     <div style="font-size:12px;color:var(--muted);text-align:center">API key stored only on this device. Never shared.</div>
@@ -628,7 +628,7 @@ function checkAndUpdateStreak(){var t=today();if(lastActive===t)return;var yeste
   var task=dayTasks[dow];
   document.getElementById('briefing-content').innerHTML='<div style="margin-bottom:10px"><span class="badge ba">'+dayName+'s Focus</span></div><div style="font-size:16px;font-weight:600;color:var(--cream);margin-bottom:8px">'+task.focus+'</div><div style="font-size:13px;color:var(--sub)">'+task.desc+'</div><div class="divider"></div><div style="font-size:12px;color:var(--muted)">📅 '+new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'})+'</div>';
   var chatEl=document.getElementById('home-chat');
-  if(chatEl&&!chatEl.children.length){addChatMsg('home-chat','ai','Good morning, Sister Elaine! 🕊️\n\nYou have faithfully blessed lives for '+days.toLocaleString()+' days. Today is '+dayName+' — '+task.focus+'.\n\nYour prayer circle has '+contacts.length+' members. '+(getSilentContacts().length>0?'⚠️ '+getSilentContacts().length+' members haven\'t responded in 14+ days.':'🙌 Everyone in your circle has been engaged recently!')+' \n\nHow can I help you today?');}
+  if(chatEl&&!chatEl.children.length){addChatMsg('home-chat','ai','Good morning, Sister G! 🕊️\n\nYou have faithfully blessed lives for '+days.toLocaleString()+' days. Today is '+dayName+' — '+task.focus+'.\n\nYour prayer circle has '+contacts.length+' members. '+(getSilentContacts().length>0?'⚠️ '+getSilentContacts().length+' members haven\'t responded in 14+ days.':'🙌 Everyone in your circle has been engaged recently!')+' \n\nHow can I help you today?');}
   document.getElementById('biz-revenue').textContent=fmtMoney(revenue);
   var pct=Math.min(100,(revenue/GOAL)*100);
   document.getElementById('biz-pbar').style.width=pct+'%';
@@ -646,7 +646,7 @@ function generatePrayer(){
   var ctx=document.getElementById('prayer-context').value;
   var btn=document.getElementById('genpray-btn');
   btn.innerHTML='<span class="spin"></span> Writing prayer...';btn.disabled=true;
-  var system='You are writing on behalf of Sister Elaine Gary, a prayer warrior from New Orleans who has sent morning prayers to 180+ people every weekday since 2018. Write in her voice: warm, wise, intimate, grounded in scripture. Always begin with a loving salutation to God. Always end with "In Jesus\' name, Amen." Keep prayers 150-250 words.';
+  var system='You are writing on behalf of Sister G, a prayer warrior from New Orleans who has sent morning prayers to 180+ people every weekday since 2018. Write in her voice: warm, wise, intimate, grounded in scripture. Always begin with a loving salutation to God. Always end with "In Jesus\' name, Amen." Keep prayers 150-250 words.';
   var userMsg='Write a morning prayer with the theme of "'+tone+'"'+(ctx?' — specifically for: '+ctx:'')+'. Today is '+new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'})+'.';
   callAI([{role:'user',content:userMsg}],system,800)
     .then(function(text){document.getElementById('prayer-output').textContent=text;document.getElementById('prayer-output-card').style.display='block';window._currentPrayer={text:text,tone:tone,date:today()};})
@@ -693,7 +693,7 @@ function renderCircle(){
   var c=contacts.find(function(x){return x.id===id;});if(!c)return;
   var days=daysSinceLastResponse(c);
   var el=document.getElementById('contact-modal-content');
-  var checkIn='Hello '+(c.name.split(' ')[1]||c.name)+'! 🙏 I\'ve been thinking about you. How are you doing? Have you been receiving my morning prayers? Sending love — Sister Elaine';
+  var checkIn='Hello '+(c.name.split(' ')[1]||c.name)+'! 🙏 I\'ve been thinking about you. How are you doing? Have you been receiving my morning prayers? Sending love — Sister G';
   el.innerHTML='<div style="text-align:center;margin-bottom:18px"><div class="cav" style="width:64px;height:64px;font-size:26px;margin:0 auto 10px">'+initials(c.name)+'</div><h2 style="color:var(--amber)">'+c.name+'</h2><div style="font-size:13px;color:var(--muted);margin-top:3px">'+(c.location||'')+'</div></div>'+(c.notes?'<div class="alert ai2" style="margin-bottom:12px">📝 '+c.notes+'</div>':'')+'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px"><div class="scard"><div class="snum">'+(days>998?'—':days)+'</div><div class="slbl">Days Since Response</div></div><div class="scard"><div class="snum" style="font-size:14px">'+(c.lastResponse||'—')+'</div><div class="slbl">Last Responded</div></div></div>'+(days>=14?'<div class="card-title" style="margin-bottom:8px">💬 Check-In Message</div><div class="pitch"><p>'+checkIn+'</p></div><button class="btn bg bs" onclick="copyText(\'' + checkIn.replace(/'/g, "&#39;") + '\',\'Copied!\')">📋 Copy Message</button>':'<div class="alert as">✅ '+c.name.split(' ')[0]+' active within '+(days<=1?'1 day':days+' days')+'.</div>');
   openModal('modal-contact');
 }
@@ -743,7 +743,7 @@ function renderEngage(){
     silentEl.innerHTML='<div class="card" style="border-color:rgba(248,113,113,.3)"><div class="card-title" style="color:#f87171">⚠️ '+silentList.length+' Member'+(silentList.length>1?'s':'')+' Need Care (14+ days)</div>'+
     silentList.map(function(c){
       var days=daysSinceLastResponse(c);
-      var msg='Hello '+(c.name.split(' ')[1]||c.name)+'! 🙏 Checking in with love — you have been on my heart. How are you? Praying for you daily. — Sister Elaine';
+      var msg='Hello '+(c.name.split(' ')[1]||c.name)+'! 🙏 Checking in with love — you have been on my heart. How are you? Praying for you daily. — Sister G';
       return '<div style="display:flex;align-items:center;gap:8px;padding:8px;background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:6px"><div class="cav" style="background:rgba(220,38,38,.2);color:#f87171;width:36px;height:36px;font-size:13px">'+initials(c.name)+'</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:500">'+c.name+'</div><div style="font-size:11px;color:var(--muted)">'+days+'d silent</div></div><button class="btn bo bs" style="color:#f87171;border-color:rgba(248,113,113,.3);font-size:11px;white-space:nowrap" onclick="copyText(\''+ msg.replace(/'/g,"&#39;") +'\',\'Copied!\')">📋</button></div>';
     }).join('')+'</div>';
   }else{silentEl.innerHTML='';}
@@ -782,7 +782,7 @@ function genSocialPost(){
   var theme=document.getElementById('social-theme').value.trim()||'Faith and Morning Prayer';
   var platform=document.getElementById('social-platform').value;
   var btn=document.getElementById('social-btn');btn.innerHTML='<span class="spin"></span> Creating...';btn.disabled=true;
-  callAI([{role:'user',content:'Write a '+platform+' post about: "'+theme+'". Include 2-3 hashtags.'}],'You are a social media writer for Sister Elaine Gary\'s Prayer Ministry in New Orleans. Faith-filled, warm, authentic voice.',400)
+  callAI([{role:'user',content:'Write a '+platform+' post about: "'+theme+'". Include 2-3 hashtags.'}],'You are a social media writer for Sister G\'s Prayer Ministry in New Orleans. Faith-filled, warm, authentic voice.',400)
     .then(function(text){document.getElementById('social-text').textContent=text;document.getElementById('social-output').style.display='block';})
     .catch(function(err){showToast('⚠️ '+err.message,'#c8842a');})
     .finally(function(){btn.innerHTML='✨ Generate Post';btn.disabled=false;});
@@ -861,7 +861,7 @@ function homeChat(){
   var input=document.getElementById('home-input');var text=input.value.trim();if(!text)return;input.value='';
   addChatMsg('home-chat','user',text);homeChatHistory.push({role:'user',content:text});
   var sendBtn=document.getElementById('home-send');sendBtn.innerHTML='<span class="spin"></span>';sendBtn.disabled=true;
-  var system='You are a helpful ministry assistant for Sister Elaine Gary. She is a faith leader from New Orleans with '+contacts.length+' prayer circle members, sending morning prayers since 2018. She has earned $'+revenue.toLocaleString()+' toward $1M. Respond warmly, concisely, under 150 words.';
+  var system='You are a helpful ministry assistant for Sister G, a faith leader from New Orleans with '+contacts.length+' prayer circle members, sending morning prayers since 2018. She has earned $'+revenue.toLocaleString()+' toward $1M. Respond warmly, concisely, under 150 words.';
   callAI(homeChatHistory.slice(-10),system,600)
     .then(function(reply){homeChatHistory.push({role:'assistant',content:reply});addChatMsg('home-chat','ai',reply);})
     .catch(function(err){addChatMsg('home-chat','ai','⚠️ '+err.message);})
@@ -872,7 +872,7 @@ function openModal(id){var el=document.getElementById(id);if(el)el.classList.add
 function closeModal(id){var el=document.getElementById(id);if(el)el.classList.remove('active');}
 function openSettings(){
   var key=document.getElementById('settings-apikey');if(key)key.value=getApiKey();
-  var nm=document.getElementById('settings-name');if(nm)nm.value=localStorage.getItem('elaine_name')||'Sister Elaine Gary';
+  var nm=document.getElementById('settings-name');if(nm)nm.value=localStorage.getItem('elaine_name')||'Sister G';
   openModal('modal-settings');
 }
 function saveSettings(){
@@ -886,7 +886,7 @@ function saveSettings(){
 function exportData(){
   var data={contacts:contacts,prayers:prayers,engagements:engagements,revenue:revenue,revenueLog:revenueLog,streak:streak,exportDate:new Date().toISOString()};
   var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-  var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='sister-elaine-backup-'+today()+'.json';a.click();URL.revokeObjectURL(url);showToast('📤 Data exported!');
+  var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='sister-g-backup-'+today()+'.json';a.click();URL.revokeObjectURL(url);showToast('📤 Data exported!');
 }
 function clearData(){
   if(!confirm('⚠️ Reset all data?'))return;
@@ -912,7 +912,7 @@ function handleHash(){
   else if(h==='grow')renderGrow();
 }
 window.addEventListener('hashchange',handleHash,false);
-if(!location.hash||location.hash==='#'){history.replaceState(null,'','#tab-home');}
+if(!location.hash||location.hash==='#'){try{history.replaceState(null,'','#tab-home');}catch(e){}}
 handleHash();
 </script>
 </body>
